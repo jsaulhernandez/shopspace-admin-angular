@@ -1,10 +1,16 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import {
+    HttpClient,
+    HttpErrorResponse,
+    HttpHeaders,
+    HttpParams,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, throwError } from 'rxjs';
 
-import { environment } from 'src/environments/environment';
+import { OptionRequest } from 'src/app/data/api/OptionRequest';
+import { ResponseAdmin } from 'src/app/data/api/ResponseAdmin';
 
-import { ResponseAdmin } from '../../interface/ResponseAdmin';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root',
@@ -14,10 +20,7 @@ export class AdminApiService {
 
     constructor(private httpClient: HttpClient) {}
 
-    get<T extends Object>(
-        path: string,
-        params?: Object
-    ): Observable<ResponseAdmin<T>> {
+    get<T extends Object>(req: OptionRequest<T>): Observable<ResponseAdmin<T>> {
         const httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json',
@@ -25,18 +28,17 @@ export class AdminApiService {
                 Pragma: 'no-cache',
             }),
             observe: 'response' as 'body',
-            params: new HttpParams(params),
+            params: new HttpParams(req.params),
         };
 
-        return this.httpClient.get(`${this.URL}/${path}`, httpOptions).pipe(
+        return this.httpClient.get(`${this.URL}/${req.path}`, httpOptions).pipe(
             map((response: any) => this.ResponseData(response)),
             catchError(this.handleError)
         );
     }
 
     post<T extends Object>(
-        path: string,
-        model: T
+        req: OptionRequest<T>
     ): Observable<ResponseAdmin<T>> {
         const httpOptions = {
             headers: new HttpHeaders({
@@ -46,16 +48,31 @@ export class AdminApiService {
         };
 
         return this.httpClient
-            .post(`${this.URL}/${path}`, model, httpOptions)
+            .post(`${this.URL}/${req.path}`, req.data, httpOptions)
             .pipe(
                 map((response: any) => this.ResponseData(response)),
                 catchError(this.handleError)
             );
     }
 
-    put<T extends Object>(
-        path: string,
-        model: T
+    put<T extends Object>(req: OptionRequest<T>): Observable<ResponseAdmin<T>> {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+            }),
+            observe: 'response' as 'body',
+        };
+
+        return this.httpClient
+            .put(`${this.URL}/${req.path}`, req.data, httpOptions)
+            .pipe(
+                map((response: any) => this.ResponseData(response)),
+                catchError(this.handleError)
+            );
+    }
+
+    delete<T extends Object>(
+        req: OptionRequest<T>
     ): Observable<ResponseAdmin<T>> {
         const httpOptions = {
             headers: new HttpHeaders({
@@ -65,25 +82,11 @@ export class AdminApiService {
         };
 
         return this.httpClient
-            .put(`${this.URL}/${path}`, model, httpOptions)
+            .delete(`${this.URL}/${req.path}`, httpOptions)
             .pipe(
                 map((response: any) => this.ResponseData(response)),
                 catchError(this.handleError)
             );
-    }
-
-    delete<T extends Object>(path: string): Observable<ResponseAdmin<T>> {
-        const httpOptions = {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json',
-            }),
-            observe: 'response' as 'body',
-        };
-
-        return this.httpClient.delete(`${this.URL}/${path}`, httpOptions).pipe(
-            map((response: any) => this.ResponseData(response)),
-            catchError(this.handleError)
-        );
     }
 
     private ResponseData(response: any) {
@@ -91,8 +94,8 @@ export class AdminApiService {
         return response;
     }
 
-    private handleError(error: any) {
+    private handleError(error: HttpErrorResponse) {
         console.log('[Error] ', error);
-        return throwError(() => new Error(error));
+        return throwError(() => error.error.response || 'Ocurrio un error');
     }
 }
