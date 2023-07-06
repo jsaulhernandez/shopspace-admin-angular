@@ -1,0 +1,22 @@
+<button
+    nz-button
+    [nzType]="type"
+    (click)="onClick()"
+    [nzLoading]="isLoading"
+    [nzDanger]="isDanger"
+    [disabled]="isDisabled"
+>
+    <span
+        nz-icon
+        [nzType]="prefix"
+        [nzTheme]="themeIcon"
+        *ngIf="prefix !== ''"
+    ></span>
+    {{ buttonText }}
+    <span
+        nz-icon
+        [nzType]="suffix"
+        [nzTheme]="themeIcon"
+        *ngIf="prefix !== ''"
+    ></span>
+</button>
