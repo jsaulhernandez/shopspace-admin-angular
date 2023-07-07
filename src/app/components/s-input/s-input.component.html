@@ -1,1 +1,17 @@
-<p>s-input works!</p>
+<input
+    nz-input
+    placeholder="large size"
+    nzSize="large"
+    *ngIf="!isFormControl"
+    class="SInputComponent"
+/>
+
+<nz-input-group
+    [nzPrefixIcon]="prefix"
+    [nzSuffix]="suffix"
+    nzSize="large"
+    *ngIf="isFormControl"
+    class="SInputComponent"
+>
+    <input [type]="typeInput" nz-input [placeholder]="placeHolder" />
+</nz-input-group>
