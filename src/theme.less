@@ -1,0 +1,28 @@
+// -------- import official less file -----------
+@import "../node_modules/ng-zorro-antd/ng-zorro-antd.less";
+
+// -------- override less var -----------
+@primary-color: #013422;
+@layout-sider-background: #003c27;
+@layout-trigger-background: #03603f;
+@menu-dark-bg: #003c27;
+@menu-dark-inline-submenu-bg: #013422;
+@menu-dark-item-active-bg: #03603f;
+@menu-dark-item-hover-bg: #03603f;
+
+.ant-menu-dark .ant-menu-submenu-title {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.ant-menu-dark .ant-menu-submenu-open,
+.ant-menu-dark .ant-menu-submenu-selected {
+    background-color: #03603f;
+
+    .ant-menu-submenu-title {
+        color: #fff;
+    }
+}
+
+.ant-menu-dark .ant-menu-submenu-title:hover {
+    background-color: #03603f;
+}

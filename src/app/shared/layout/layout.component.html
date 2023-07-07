@@ -1,0 +1,35 @@
+<nz-layout>
+    <nz-sider nzCollapsible nzWidth="200px">
+        <div class="logo"></div>
+        <ul nz-menu nzTheme="dark" nzMode="inline">
+            <li nz-menu-item>
+                <span nz-icon nzType="appstore" nzTheme="outline"></span>
+                <span>Categorías</span>
+            </li>
+            <!-- <li nz-submenu nzTitle="User" nzIcon="user">
+                <ul>
+                    <li nz-menu-item>Tom</li>
+                    <li nz-menu-item>Bill</li>
+                    <li nz-menu-item>Alex</li>
+                </ul>
+            </li> -->
+        </ul>
+    </nz-sider>
+
+    <nz-layout>
+        <nz-header class="header">
+            <ul nz-menu nzMode="horizontal" class="header-menu">
+                <span nz-icon nzType="logout" nzTheme="outline"></span>
+                <li nz-menu-item>Cerrar sesión</li>
+            </ul>
+        </nz-header>
+        <nz-content>
+            <nz-breadcrumb>
+                <nz-breadcrumb-item>User</nz-breadcrumb-item>
+                <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
+            </nz-breadcrumb>
+            <div class="inner-content">Bill is a cat.</div>
+        </nz-content>
+        <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer>
+    </nz-layout>
+</nz-layout>
