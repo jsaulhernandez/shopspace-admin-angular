@@ -10,8 +10,10 @@ import { NZ_I18N, es_ES } from 'ng-zorro-antd/i18n';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { AuthModule } from './pages/auth/auth.module';
 import { SharedModule } from './shared/shared.module';
 import { CategoryModule } from './pages/category/category.module';
+import { BrandModule } from './pages/brand/brand.module';
 
 registerLocaleData(en);
 
@@ -22,8 +24,10 @@ registerLocaleData(en);
         BrowserAnimationsModule,
         AppRoutingModule,
         HttpClientModule,
+        AuthModule,
         SharedModule,
         CategoryModule,
+        BrandModule,
     ],
     providers: [{ provide: NZ_I18N, useValue: es_ES }],
     bootstrap: [AppComponent],
