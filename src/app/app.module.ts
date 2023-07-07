@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { registerLocaleData } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import en from '@angular/common/locales/es';
@@ -20,6 +21,7 @@ registerLocaleData(en);
         BrowserModule,
         BrowserAnimationsModule,
         AppRoutingModule,
+        HttpClientModule,
         SharedModule,
         CategoryModule,
     ],
