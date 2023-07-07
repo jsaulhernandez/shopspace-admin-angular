@@ -17,6 +17,11 @@ nz-header {
     padding: 0;
     display: flex;
     justify-content: flex-end;
+
+    .user-name {
+        display: inline-block;
+        font-weight: 700;
+    }
 }
 
 nz-content {

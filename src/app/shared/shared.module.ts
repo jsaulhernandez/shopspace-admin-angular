@@ -10,13 +10,18 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 
 import {
     AppstoreOutline,
+    ContactsOutline,
     LogoutOutline,
 } from '@ant-design/icons-angular/icons';
 
 import { LayoutComponent } from './layout/layout.component';
 import { SpinComponent } from './spin/spin.component';
 
-const icons: IconDefinition[] = [AppstoreOutline, LogoutOutline];
+const icons: IconDefinition[] = [
+    AppstoreOutline,
+    ContactsOutline,
+    LogoutOutline,
+];
 
 @NgModule({
     declarations: [LayoutComponent, SpinComponent],

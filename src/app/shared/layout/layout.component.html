@@ -9,7 +9,7 @@
                 >
             </li>
             <li nz-menu-item>
-                <span nz-icon nzType="appstore" nzTheme="outline"></span>
+                <span nz-icon nzType="contacts" nzTheme="outline"></span>
                 <span><a [routerLink]="['/admin/brand']">Marcas</a></span>
             </li>
             <!-- <li nz-submenu nzTitle="User" nzIcon="user">
@@ -25,8 +25,11 @@
     <nz-layout>
         <nz-header class="header">
             <ul nz-menu nzMode="horizontal" class="header-menu">
-                <span nz-icon nzType="logout" nzTheme="outline"></span>
-                <li nz-menu-item>Cerrar sesión</li>
+                <li class="user-name">Devjs</li>
+                <li nz-menu-item>
+                    <span nz-icon nzType="logout" nzTheme="outline"></span>
+                    Cerrar sesión
+                </li>
             </ul>
         </nz-header>
         <nz-content>
