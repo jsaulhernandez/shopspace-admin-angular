@@ -22,6 +22,7 @@ export class SButtonComponent {
     @Input() prefix: string = '';
     @Input() suffix: string = '';
     @Input() themeIcon: ThemeTypeIcon = 'outline';
+    @Input() additionalClass: string = '';
 
     constructor() {}
 
