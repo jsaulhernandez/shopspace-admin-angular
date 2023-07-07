@@ -1,1 +1,345 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+$primary-color: #013422;
+$secondary-color: #ffffff;
+$tertiary-color: #f7f7f9;
+
+$primary-text-color: #013a26;
+$secondary-text-color: #2f2f2f;
+$tertiary-text-color: #5d5d5f;
+$quaternary-text-color: #ffffff;
+
+:root {
+    --primary-color: #{$primary-color};
+    --secondary-color: #{$secondary-color};
+    --tertiary-color: #{$tertiary-color};
+
+    --primary-text-color: #{$primary-text-color};
+    --secondary-text-color: #{$secondary-text-color};
+    --tertiary-text-color: #{$tertiary-text-color};
+    --quaternary-text-color: #{$quaternary-text-color};
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif !important;
+
+    /*FIREFOX*/
+    scrollbar-width: auto;
+    scrollbar-color: var(--secondary-text-color) var(--tertiary-color);
+}
+
+#root {
+    overflow: hidden;
+}
+
+/*CHROME, EDGE AND SAFARI*/
+*::-webkit-scrollbar {
+    width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+    background-color: var(--tertiary-color);
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    border: 3px solid var(--tertiary-color);
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.relative {
+    position: relative;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.flex-column-reverse {
+    flex-direction: column-reverse;
+}
+
+.flex-row-reverse {
+    flex-direction: row-reverse;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.justify-start {
+    justify-content: start;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.justify-end {
+    justify-content: end;
+}
+
+.items-start {
+    align-items: start;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.items-end {
+    align-items: end;
+}
+
+.wp-100 {
+    width: 100%;
+}
+
+.wp-50 {
+    width: 50%;
+}
+
+.wp-25 {
+    width: 25%;
+}
+
+.p-5 {
+    padding: 50px;
+}
+
+.p-4 {
+    padding: 40px;
+}
+
+.p-3 {
+    padding: 30px;
+}
+
+.p-2 {
+    padding: 20px;
+}
+
+.p-1 {
+    padding: 10px;
+}
+
+.pt-5 {
+    padding-top: 50px;
+}
+
+.pt-4 {
+    padding-top: 40px;
+}
+
+.pt-3 {
+    padding-top: 30px;
+}
+
+.pt-2 {
+    padding-top: 20px;
+}
+
+.pt-1 {
+    padding-top: 10px;
+}
+
+.pr-5 {
+    padding-right: 50px;
+}
+
+.pr-4 {
+    padding-right: 40px;
+}
+
+.pr-3 {
+    padding-right: 30px;
+}
+
+.pr-2 {
+    padding-right: 20px;
+}
+
+.pr-1 {
+    padding-right: 10px;
+}
+
+.pb-5 {
+    padding-bottom: 50px;
+}
+
+.pb-4 {
+    padding-bottom: 40px;
+}
+
+.pb-3 {
+    padding-bottom: 30px;
+}
+
+.pb-2 {
+    padding-bottom: 20px;
+}
+
+.pb-1 {
+    padding-bottom: 10px;
+}
+
+.pl-5 {
+    padding-left: 50px;
+}
+
+.pl-4 {
+    padding-left: 40px;
+}
+
+.pl-3 {
+    padding-left: 30px;
+}
+
+.pl-2 {
+    padding-left: 20px;
+}
+
+.pl-1 {
+    padding-left: 10px;
+}
+
+.m-5 {
+    margin: 50px;
+}
+
+.m-4 {
+    margin: 40px;
+}
+
+.m-3 {
+    margin: 30px;
+}
+
+.m-2 {
+    margin: 20px;
+}
+
+.m-1 {
+    margin: 10px;
+}
+
+.mt-5 {
+    margin-top: 50px;
+}
+
+.mt-4 {
+    margin-top: 40px;
+}
+
+.mt-3 {
+    margin-top: 30px;
+}
+
+.mt-2 {
+    margin-top: 20px;
+}
+
+.mt-1 {
+    margin-top: 10px;
+}
+
+.mr-5 {
+    margin-right: 50px;
+}
+
+.mr-4 {
+    margin-right: 40px;
+}
+
+.mr-3 {
+    margin-right: 30px;
+}
+
+.mr-2 {
+    margin-right: 20px;
+}
+
+.mr-1 {
+    margin-right: 10px;
+}
+
+.mb-5 {
+    margin-bottom: 50px;
+}
+
+.mb-4 {
+    margin-bottom: 40px;
+}
+
+.mb-3 {
+    margin-bottom: 30px;
+}
+
+.mb-2 {
+    margin-bottom: 20px;
+}
+
+.mb-1 {
+    margin-bottom: 10px;
+}
+
+.ml-5 {
+    margin-left: 50px;
+}
+
+.ml-4 {
+    margin-left: 40px;
+}
+
+.ml-3 {
+    margin-left: 30px;
+}
+
+.ml-2 {
+    margin-left: 20px;
+}
+
+.ml-1 {
+    margin-left: 10px;
+}
+
+.g-20 {
+    gap: 20px;
+}
+
+.g-15 {
+    gap: 15px;
+}
+
+.g-10 {
+    gap: 10px;
+}
+
+.g-5 {
+    gap: 5px;
+}
