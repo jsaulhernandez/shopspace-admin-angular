@@ -8,7 +8,9 @@ import { NZ_I18N, es_ES } from 'ng-zorro-antd/i18n';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { SharedModule } from './shared/shared.module';
+import { CategoryModule } from './pages/category/category.module';
 
 registerLocaleData(en);
 
@@ -19,6 +21,7 @@ registerLocaleData(en);
         BrowserAnimationsModule,
         AppRoutingModule,
         SharedModule,
+        CategoryModule,
     ],
     providers: [{ provide: NZ_I18N, useValue: es_ES }],
     bootstrap: [AppComponent],
