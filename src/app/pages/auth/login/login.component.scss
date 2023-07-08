@@ -1,7 +1,29 @@
+@use "../../../../_mixins.scss" as *;
+
 .LogIn {
     min-height: 100vh;
+
+    @include smallMobile {
+        padding: 10%;
+    }
 }
 
 .LogIn_form-content {
-    width: 25%;
+    width: 30%;
+
+    @include smallMobile {
+        width: 100%;
+    }
+
+    @include mobile {
+        width: 50%;
+    }
+
+    @include tablet {
+        width: 40%;
+    }
+
+    @include large {
+        width: 30%;
+    }
 }

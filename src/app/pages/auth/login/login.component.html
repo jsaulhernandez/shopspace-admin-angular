@@ -1,53 +1,48 @@
-<div class="LogIn flex flex-row">
-    <div class="LogIn_form flex flex-column justify-center items-center wp-100">
-        <div
-            class="LogIn_form-content flex flex-column justify-center items-center ss-card"
+<div class="LogIn flex justify-center items-center">
+    <div class="LogIn_form-content justify-center items-center ss-card">
+        <app-s-text text="Hi, Welcome!" typeTextElement="h1" />
+        <app-s-text
+            text="Please, input your credentials!"
+            typeTextElement="span"
+            class="mb-2"
+        />
+
+        <form
+            nz-form
+            [formGroup]="validateForm"
+            (ngSubmit)="submitForm()"
+            class="wp-100"
+            nzLayout="vertical"
         >
-            <app-s-text text="Hi, Welcome!" typeTextElement="h1" />
-            <app-s-text
-                text="Please, input your credentials!"
-                typeTextElement="span"
-                class="mb-2"
-            />
+            <nz-form-item>
+                <nz-form-label>Email</nz-form-label>
+                <nz-form-control nzErrorTip="Please input your email address!">
+                    <app-s-input
+                        [isFormControl]="true"
+                        formControlName="userName"
+                        placeHolder="example@exampl.com"
+                        prefix="user"
+                    />
+                </nz-form-control>
+            </nz-form-item>
 
-            <form
-                nz-form
-                [formGroup]="validateForm"
-                (ngSubmit)="submitForm()"
-                class="wp-100"
-                nzLayout="vertical"
-            >
-                <nz-form-item>
-                    <nz-form-label>Email</nz-form-label>
-                    <nz-form-control
-                        nzErrorTip="Please input your email address!"
-                    >
-                        <app-s-input
-                            [isFormControl]="true"
-                            formControlName="userName"
-                            placeHolder="example@exampl.com"
-                            prefix="user"
-                        />
-                    </nz-form-control>
-                </nz-form-item>
+            <nz-form-item>
+                <nz-form-label>Password</nz-form-label>
+                <nz-form-control nzErrorTip="Please input your Password!">
+                    <app-s-input
+                        typeInput="password"
+                        [isFormControl]="true"
+                        formControlName="userName"
+                        placeHolder="type your password..."
+                        prefix="lock"
+                    />
+                </nz-form-control>
+            </nz-form-item>
 
-                <nz-form-item>
-                    <nz-form-label>Password</nz-form-label>
-                    <nz-form-control nzErrorTip="Please input your Password!">
-                        <app-s-input
-                            typeInput="password"
-                            [isFormControl]="true"
-                            formControlName="userName"
-                            placeHolder="type your password..."
-                            prefix="lock"
-                        />
-                    </nz-form-control>
-                </nz-form-item>
+            <app-s-button text="Login" additionalClass="wp-100" />
+        </form>
 
-                <app-s-button text="Login" additionalClass="wp-100" />
-            </form>
-
-            <!-- <app-s-text
+        <!-- <app-s-text
                 text="You don't have an account?"
                 typeTextElement="span"
                 class="mt-2"
@@ -61,7 +56,6 @@
                     (btnClick)="onRedirectToSignIn()"
                 />
             </app-s-text> -->
-        </div>
     </div>
 
     <!-- <div class="LogIn_form-info">info</div> -->
