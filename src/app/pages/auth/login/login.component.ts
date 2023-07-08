@@ -1,10 +1,43 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import {
+    UntypedFormBuilder,
+    UntypedFormGroup,
+    Validators,
+} from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+    validateForm!: UntypedFormGroup;
 
+    submitForm(): void {
+        if (this.validateForm.valid) {
+            console.log('submit', this.validateForm.value);
+        } else {
+            Object.values(this.validateForm.controls).forEach((control) => {
+                if (control.invalid) {
+                    control.markAsDirty();
+                    control.updateValueAndValidity({ onlySelf: true });
+                }
+            });
+        }
+    }
+
+    constructor(private fb: UntypedFormBuilder, private router: Router) {}
+
+    ngOnInit(): void {
+        this.validateForm = this.fb.group({
+            userName: [null, [Validators.required]],
+            password: [null, [Validators.required]],
+            remember: [true],
+        });
+    }
+
+    onRedirectToSignIn() {
+        this.router.navigateByUrl('/sign-in');
+    }
 }
