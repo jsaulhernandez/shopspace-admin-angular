@@ -1,0 +1,33 @@
+$lg: 75em; // 1080 and hi-res laptops (1200px)
+$med: 62em; // hi-res tablets and low-res laptops (992px)
+$sm: 48em; // mobile and low-res tablets (768px)
+$xs: 36em; // mobile only (576px)
+
+$lg-max: 74.9988em; // 1080 and hi-res laptops (1199.98px)
+$med-max: 61.9988em; // hi-res tablets and low-res laptops (991.98px)
+$sm-max: 47.9988em; // mobile and low-res tablets (767.98px)
+$xs-max: 35.9988em; // mobile only (575.98px)
+
+@mixin mobile {
+    @media only screen and (max-width: $sm-max) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media only screen and (min-width: $sm) and (max-width: $med-max) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media only screen and (min-width: $med) and (max-width: $lg-max) {
+        @content;
+    }
+}
+
+@mixin large {
+    @media only screen and (min-width: $lg) {
+        @content;
+    }
+}
