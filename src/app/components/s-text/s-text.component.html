@@ -1,0 +1,96 @@
+<h1
+    (click)="onClick()"
+    nz-typography
+    [nzType]="typeText"
+    *ngIf="typeTextElement === 'h1'"
+    [ngClass]="!additionalClass ? 'STextComponent' : additionalClass"
+    [ngStyle]="{
+        color: getTextColor(),
+        fontWeight: getFontWeight()
+    }"
+>
+    {{ text }}
+</h1>
+
+<h2
+    (click)="onClick()"
+    nz-typography
+    [nzType]="typeText"
+    *ngIf="typeTextElement === 'h2'"
+    [ngClass]="!additionalClass ? 'STextComponent' : additionalClass"
+    [ngStyle]="{
+        color: getTextColor(),
+        fontWeight: getFontWeight()
+    }"
+>
+    {{ text }}
+</h2>
+
+<h3
+    (click)="onClick()"
+    nz-typography
+    [nzType]="typeText"
+    *ngIf="typeTextElement === 'h3'"
+    [ngClass]="!additionalClass ? 'STextComponent' : additionalClass"
+    [ngStyle]="{
+        color: getTextColor(),
+        fontWeight: getFontWeight()
+    }"
+>
+    {{ text }}
+</h3>
+
+<h4
+    (click)="onClick()"
+    nz-typography
+    [nzType]="typeText"
+    *ngIf="typeTextElement === 'h4'"
+    [ngClass]="!additionalClass ? 'STextComponent' : additionalClass"
+    [ngStyle]="{
+        color: getTextColor(),
+        fontWeight: getFontWeight()
+    }"
+>
+    {{ text }}
+</h4>
+
+<h5
+    (click)="onClick()"
+    nz-typography
+    [nzType]="typeText"
+    *ngIf="typeTextElement === 'h5'"
+    [ngClass]="!additionalClass ? 'STextComponent' : additionalClass"
+    [ngStyle]="{
+        color: getTextColor(),
+        fontWeight: getFontWeight()
+    }"
+>
+    {{ text }}
+</h5>
+
+<span
+    (click)="onClick()"
+    nz-typography
+    [nzType]="typeText"
+    *ngIf="typeTextElement === 'span'"
+    [ngClass]="!additionalClass ? 'STextComponent' : additionalClass"
+    [ngStyle]="{
+        color: getTextColor(),
+        fontWeight: getFontWeight()
+    }"
+    >{{ text }} <ng-content></ng-content
+></span>
+
+<p
+    (click)="onClick()"
+    nz-typography
+    [nzType]="typeText"
+    *ngIf="typeTextElement === 'p'"
+    [ngClass]="!additionalClass ? 'STextComponent' : additionalClass"
+    [ngStyle]="{
+        color: getTextColor(),
+        fontWeight: getFontWeight()
+    }"
+>
+    {{ text }}
+</p>
