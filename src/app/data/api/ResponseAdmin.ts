@@ -34,5 +34,5 @@ export interface ResponseAdmin<T extends Object> {
     status: string;
     statusCode: string;
     statusMessage: string;
-    response: T;
+    response: Page<T>;
 }

@@ -6,6 +6,7 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, throwError } from 'rxjs';
+import { CustomResponse } from 'src/app/data/api/CustomResponse';
 
 import { OptionRequest } from 'src/app/data/api/OptionRequest';
 import { ResponseAdmin } from 'src/app/data/api/ResponseAdmin';
@@ -20,7 +21,9 @@ export class AdminApiService {
 
     constructor(private httpClient: HttpClient) {}
 
-    get<T extends Object>(req: OptionRequest<T>): Observable<ResponseAdmin<T>> {
+    get<T extends Object>(
+        req: OptionRequest<T>
+    ): Observable<CustomResponse<T>> {
         const httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json',
@@ -32,14 +35,14 @@ export class AdminApiService {
         };
 
         return this.httpClient.get(`${this.URL}/${req.path}`, httpOptions).pipe(
-            map((response: any) => this.ResponseData(response)),
+            map((response: any) => this.ResponseData<T>(response)),
             catchError(this.handleError)
         );
     }
 
     post<T extends Object>(
         req: OptionRequest<T>
-    ): Observable<ResponseAdmin<T>> {
+    ): Observable<CustomResponse<T>> {
         const httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json',
@@ -50,12 +53,14 @@ export class AdminApiService {
         return this.httpClient
             .post(`${this.URL}/${req.path}`, req.data, httpOptions)
             .pipe(
-                map((response: any) => this.ResponseData(response)),
+                map((response: any) => this.ResponseData<T>(response)),
                 catchError(this.handleError)
             );
     }
 
-    put<T extends Object>(req: OptionRequest<T>): Observable<ResponseAdmin<T>> {
+    put<T extends Object>(
+        req: OptionRequest<T>
+    ): Observable<CustomResponse<T>> {
         const httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json',
@@ -66,14 +71,14 @@ export class AdminApiService {
         return this.httpClient
             .put(`${this.URL}/${req.path}`, req.data, httpOptions)
             .pipe(
-                map((response: any) => this.ResponseData(response)),
+                map((response: any) => this.ResponseData<T>(response)),
                 catchError(this.handleError)
             );
     }
 
     delete<T extends Object>(
         req: OptionRequest<T>
-    ): Observable<ResponseAdmin<T>> {
+    ): Observable<CustomResponse<T>> {
         const httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json',
@@ -84,14 +89,35 @@ export class AdminApiService {
         return this.httpClient
             .delete(`${this.URL}/${req.path}`, httpOptions)
             .pipe(
-                map((response: any) => this.ResponseData(response)),
+                map((response: any) => this.ResponseData<T>(response)),
                 catchError(this.handleError)
             );
     }
 
-    private ResponseData(response: any) {
-        console.log('response', response);
-        return response;
+    private ResponseData<M extends Object>(response: any): CustomResponse<M> {
+        const data: ResponseAdmin<M> = response.body as ResponseAdmin<M>;
+
+        if (['200', '201'].includes(data.statusCode)) {
+            return {
+                isError: false,
+                isSuccess: true,
+                message: data.statusMessage,
+                data: data.response.content,
+                page: {
+                    number: data.response.number,
+                    numberOfElements: data.response.numberOfElements,
+                    size: data.response.size,
+                    totalElements: data.response.totalElements,
+                    totalPages: data.response.totalPages,
+                },
+            };
+        } else {
+            return {
+                isError: true,
+                isSuccess: false,
+                message: data.statusMessage,
+            };
+        }
     }
 
     private handleError(error: HttpErrorResponse) {
