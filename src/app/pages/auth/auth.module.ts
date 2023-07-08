@@ -9,7 +9,6 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 
 import { LoginComponent } from './login/login.component';
-import { SignInComponent } from './sign-in/sign-in.component';
 
 import { SButtonComponent } from 'src/app/components/s-button/s-button.component';
 import { SInputComponent } from 'src/app/components/s-input/s-input.component';
@@ -18,7 +17,6 @@ import { STextComponent } from 'src/app/components/s-text/s-text.component';
 @NgModule({
     declarations: [
         LoginComponent,
-        SignInComponent,
         STextComponent,
         SButtonComponent,
         SInputComponent,
