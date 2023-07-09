@@ -1,19 +1,5 @@
-<nz-table #basicTable [nzData]="categories" [nzLoading]="isLoading">
-    <thead>
-        <tr>
-            <th *ngFor="let c of customHeader">{{ c.title }}</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let data of basicTable.data">
-            <td *ngFor="let c of customHeader">
-                <span *ngIf="c.dataIndex">{{
-                    getValueByKey(data, c.dataIndex)
-                }}</span>
-                <span *ngIf="c.render">
-                    <ng-container *ngComponentOutlet="c.render"></ng-container>
-                </span>
-            </td>
-        </tr>
-    </tbody>
-</nz-table>
+<app-s-table
+    [isLoading]="isLoading"
+    [header]="customHeader"
+    [data]="categories"
+/>

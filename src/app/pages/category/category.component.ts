@@ -1,14 +1,11 @@
-import { Component, OnInit, Type, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 
 import { CategoryService } from 'src/app/services/category.service';
 import { CategoryModel } from 'src/app/data/models/Category.interface';
+
 import { SButtonComponent } from 'src/app/components/s-button/s-button.component';
 
-interface CustomHeader<T extends Object> {
-    title: string;
-    dataIndex?: string;
-    render?: Type<any>;
-}
+import { CustomHeader } from 'src/app/utils/Components.util';
 
 @Component({
     selector: 'app-category',
@@ -21,7 +18,7 @@ export class CategoryComponent implements OnInit {
     isLoading: boolean = false;
     categories: CategoryModel[] = [];
 
-    customHeader: CustomHeader<CategoryModel>[] = [
+    customHeader: CustomHeader[] = [
         {
             title: 'Nombre',
             dataIndex: 'name',
@@ -54,9 +51,5 @@ export class CategoryComponent implements OnInit {
                 },
                 complete: () => (this.isLoading = false),
             });
-    }
-
-    getValueByKey(data: CategoryModel, key: string): any {
-        return data[key as keyof typeof data];
     }
 }
