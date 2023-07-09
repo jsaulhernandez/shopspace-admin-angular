@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { AdminApiService } from './core/admin-api.service';
-import { ResponseAdmin } from '../data/api/ResponseAdmin';
 import { OptionRequest } from '../data/api/OptionRequest';
+import { CustomResponse } from '../data/api/CustomResponse';
 
 @Injectable({
     providedIn: 'root',
@@ -13,7 +13,7 @@ export class CategoryService {
 
     public getAllCategories<T extends Object>(
         req: OptionRequest<T>
-    ): Observable<ResponseAdmin<T>> {
+    ): Observable<CustomResponse<T>> {
         return this.api.get<T>(req);
     }
 }
