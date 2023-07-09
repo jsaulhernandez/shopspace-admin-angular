@@ -5,7 +5,7 @@ import { CategoryModel } from 'src/app/data/models/Category.interface';
 
 import { SButtonComponent } from 'src/app/components/s-button/s-button.component';
 
-import { CustomHeader } from 'src/app/utils/Components.util';
+import { CustomHeader } from 'src/app/utils/components.util';
 
 @Component({
     selector: 'app-category',

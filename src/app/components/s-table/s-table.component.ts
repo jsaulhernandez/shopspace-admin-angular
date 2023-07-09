@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { CustomHeader } from 'src/app/utils/Components.util';
+import { CustomHeader } from 'src/app/utils/components.util';
 
 @Component({
     selector: 'app-s-table',
