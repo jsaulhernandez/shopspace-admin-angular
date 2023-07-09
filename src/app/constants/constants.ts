@@ -14,3 +14,10 @@ export declare type TypeTextElement =
     | 'span'
     | 'p';
 export declare type TypeText = 'secondary' | 'success' | 'warning' | 'danger';
+export declare type TypeElementTable =
+    | 'span'
+    | 'switch'
+    | 'radio'
+    | 'checkbox'
+    | 'select'
+    | 'actions';
