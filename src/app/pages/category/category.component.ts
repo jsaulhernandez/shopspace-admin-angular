@@ -3,6 +3,8 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CategoryService } from 'src/app/services/category.service';
 import { CategoryModel } from 'src/app/data/models/Category.interface';
 
+import { CustomPagination } from 'src/app/data/api/CustomResponse';
+
 import { CustomHeader } from 'src/app/utils/components.util';
 
 @Component({
@@ -15,6 +17,7 @@ export class CategoryComponent implements OnInit {
 
     isLoading: boolean = false;
     categories: CategoryModel[] = [];
+    pagination?: CustomPagination;
 
     customHeader: CustomHeader[] = [
         {
@@ -46,7 +49,10 @@ export class CategoryComponent implements OnInit {
                 path: 'category/paged',
             })
             .subscribe({
-                next: (c) => (this.categories = c.data || []),
+                next: (c) => {
+                    this.categories = c.data || [];
+                    this.pagination = c.page;
+                },
                 error: (e) => {
                     this.isLoading = false;
                     this.categories = [];
