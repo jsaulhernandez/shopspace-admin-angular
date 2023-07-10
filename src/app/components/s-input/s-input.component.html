@@ -11,7 +11,9 @@
     [nzSuffix]="suffix"
     nzSize="large"
     *ngIf="isInputGroup"
-    class="SInputComponent"
+    [ngClass]="
+        prefix || suffix ? 'SInputComponent' : 'SInputComponent_with-icon'
+    "
 >
     <input [type]="typeInput" nz-input [placeholder]="placeHolder" />
 </nz-input-group>
