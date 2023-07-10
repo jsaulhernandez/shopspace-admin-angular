@@ -5,6 +5,7 @@ import { CategoryModel } from 'src/app/data/models/Category.interface';
 
 import { CustomPagination } from 'src/app/data/api/CustomResponse';
 
+import { ModalActionsType, UserActions } from 'src/app/constants/constants';
 import { CustomHeader } from 'src/app/utils/components.util';
 
 @Component({
@@ -18,6 +19,13 @@ export class CategoryComponent implements OnInit {
     isLoading: boolean = false;
     categories: CategoryModel[] = [];
     pagination?: CustomPagination;
+
+    //modal
+    open: boolean = false;
+    typeModal: ModalActionsType = 'confirm';
+    textModal: string = '';
+    userAction: UserActions = 'save';
+    pivote?: CategoryModel;
 
     customHeader: CustomHeader[] = [
         {
@@ -96,6 +104,39 @@ export class CategoryComponent implements OnInit {
     }
 
     onDelete(data: CategoryModel) {
-        console.log('remove', data);
+        this.pivote = data;
+        this.textModal = '¿Estás seguro de eliminar el registro?';
+        this.typeModal = 'confirm';
+        this.userAction = 'delete';
+        this.open = true;
+    }
+
+    onCloseModal() {
+        this.open = false;
+    }
+
+    onConfirm() {
+        this.isLoading = true;
+        if (this.userAction === 'delete') {
+            this._categoryService
+                .deleteCategory({
+                    path: `category/${this.pivote?.id}`,
+                })
+                .subscribe({
+                    next: (c) => {
+                        this.textModal = 'Registro eliminado correctamente';
+                        this.typeModal = 'success';
+                        this.pivote = undefined;
+
+                        this.getCategories();
+                    },
+                    error: (e) => {
+                        this.isLoading = false;
+                        this.textModal = `Ocurrio un error al eliminar la categoría ${this.pivote?.name}`;
+                        this.typeModal = 'error';
+                    },
+                    complete: () => (this.isLoading = false),
+                });
+        }
     }
 }

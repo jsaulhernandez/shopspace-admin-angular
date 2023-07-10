@@ -7,3 +7,16 @@
     [size]="pagination?.size ?? 0"
     (changePagination)="onChangePagination($event)"
 />
+
+<app-s-toast />
+
+<app-s-modal-actions
+    [open]="open"
+    [type]="typeModal"
+    [title]="textModal"
+    (onClose)="onCloseModal()"
+    (onConfirm)="onConfirm()"
+    [isDanger]="userAction === 'delete' ? true : false"
+    [textConfirm]="userAction === 'delete' ? 'Sí, eliminar' : undefined"
+    [loading]="isLoading"
+/>

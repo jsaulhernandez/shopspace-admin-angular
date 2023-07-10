@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { SharedModule } from 'src/app/shared/shared.module';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 
@@ -17,6 +18,7 @@ import { ComponentsModule } from 'src/app/components/components.module';
         ComponentsModule,
         NzTableModule,
         NzSwitchModule,
+        SharedModule,
     ],
 })
 export class CategoryModule {}
