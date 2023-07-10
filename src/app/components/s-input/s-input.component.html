@@ -2,7 +2,7 @@
     nz-input
     [placeholder]="placeHolder"
     nzSize="large"
-    *ngIf="!isFormControl"
+    *ngIf="!isInputGroup"
     class="SInputComponent"
 />
 
@@ -10,7 +10,7 @@
     [nzPrefixIcon]="prefix"
     [nzSuffix]="suffix"
     nzSize="large"
-    *ngIf="isFormControl"
+    *ngIf="isInputGroup"
     class="SInputComponent"
 >
     <input [type]="typeInput" nz-input [placeholder]="placeHolder" />

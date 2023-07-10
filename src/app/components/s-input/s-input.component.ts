@@ -29,7 +29,7 @@ export class SInputComponent implements ControlValueAccessor {
     }
 
     @Input() typeInput: 'text' | 'password' = 'text';
-    @Input() isFormControl: boolean = false;
+    @Input() isInputGroup: boolean = false;
     @Input() placeHolder: string = '';
     @Input() prefix?: string;
     @Input() suffix?: string;
