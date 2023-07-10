@@ -31,7 +31,7 @@ export class AdminApiService {
                 Pragma: 'no-cache',
             }),
             observe: 'response' as 'body',
-            params: new HttpParams(req.params),
+            params: new HttpParams({ fromObject: req.params }),
         };
 
         return this.httpClient.get(`${this.URL}/${req.path}`, httpOptions).pipe(
@@ -104,7 +104,7 @@ export class AdminApiService {
                 message: data.statusMessage,
                 data: data.response.content,
                 page: {
-                    number: data.response.number,
+                    number: data.response.number + 1,
                     numberOfElements: data.response.numberOfElements,
                     size: data.response.size,
                     totalElements: data.response.totalElements,
