@@ -13,6 +13,7 @@ export class STextComponent {
     @Input() additionalClass?: string;
     @Input() textColor?: string;
     @Input() fontWeight?: string;
+    @Input() fontSize?: string;
     @Output() btnClick: EventEmitter<any> = new EventEmitter();
 
     onClick() {
@@ -35,5 +36,15 @@ export class STextComponent {
         if (this.fontWeight) return this.fontWeight;
 
         return 'auto';
+    }
+
+    getFontSize() {
+        if (this.fontSize) {
+            if (this.fontSize.includes('px')) return this.fontSize;
+
+            return `${this.fontSize}px`;
+        }
+
+        return '14px';
     }
 }
