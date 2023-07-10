@@ -53,13 +53,14 @@
                             !c.dataArray
                         "
                     >
-                        <span
-                            *ngIf="c.element === 'switch'"
-                            (click)="c.onClickElement && c.onClickElement(data)"
-                        >
+                        <span *ngIf="c.element === 'switch'">
                             <nz-switch
                                 [ngModel]="
                                     getValueByKey(data, c.dataIndex) === 1
+                                "
+                                (ngModelChange)="
+                                    c.onClickElement &&
+                                        c.onClickElement(data, $event)
                                 "
                             />
                         </span>
