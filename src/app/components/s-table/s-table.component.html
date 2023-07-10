@@ -7,11 +7,80 @@
     <tbody>
         <tr *ngFor="let data of basicTable.data">
             <td *ngFor="let c of header">
-                <span *ngIf="c.dataIndex">{{
-                    getValueByKey(data, c.dataIndex)
-                }}</span>
-                <span *ngIf="c.render">
-                    <ng-container *ngComponentOutlet="c.render"></ng-container>
+                <span
+                    *ngIf="
+                        c.dataIndex &&
+                        !c.render &&
+                        !c.element &&
+                        !c.onClickElement &&
+                        !c.onSecondClickElement &&
+                        !c.dataArray
+                    "
+                >
+                    {{ getValueByKey(data, c.dataIndex) }}
+                </span>
+
+                <span
+                    *ngIf="
+                        !c.dataIndex &&
+                        c.render &&
+                        !c.element &&
+                        !c.onClickElement &&
+                        !c.onSecondClickElement &&
+                        !c.dataArray
+                    "
+                >
+                    {{ c.render(data) }}
+                </span>
+
+                <span
+                    *ngIf="
+                        c.dataIndex &&
+                        !c.render &&
+                        c.element &&
+                        (c.onClickElement || c.onSecondClickElement) &&
+                        !c.dataArray
+                    "
+                >
+                    <span
+                        *ngIf="c.element === 'switch'"
+                        (click)="c.onClickElement && c.onClickElement(data)"
+                    >
+                        <nz-switch
+                            [ngModel]="getValueByKey(data, c.dataIndex) === 1"
+                        />
+                    </span>
+                </span>
+
+                <span
+                    *ngIf="
+                        !c.dataIndex &&
+                        !c.render &&
+                        c.element &&
+                        c.onClickElement &&
+                        c.onSecondClickElement &&
+                        !c.dataArray
+                    "
+                >
+                    <span *ngIf="c.element === 'actions'">
+                        <app-s-actions
+                            (btnEdit)="c.onClickElement(data)"
+                            (btnRemove)="c.onSecondClickElement(data)"
+                        ></app-s-actions>
+                    </span>
+                </span>
+
+                <span
+                    *ngIf="
+                        c.dataIndex &&
+                        !c.render &&
+                        c.element &&
+                        c.onClickElement &&
+                        !c.onSecondClickElement &&
+                        c.dataArray
+                    "
+                >
+                    Sera un select
                 </span>
             </td>
         </tr>
