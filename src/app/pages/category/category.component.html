@@ -3,6 +3,7 @@
     [header]="customHeader"
     [data]="categories"
     [index]="pagination?.number ?? 0"
-    [total]="pagination?.totalPages ?? 0"
+    [total]="pagination?.totalElements ?? 0"
     [size]="pagination?.size ?? 0"
+    (changePagination)="onChangePagination($event)"
 />

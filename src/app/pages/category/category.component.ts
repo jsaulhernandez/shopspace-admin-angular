@@ -42,11 +42,15 @@ export class CategoryComponent implements OnInit {
         this.getCategories();
     }
 
-    async getCategories() {
+    async getCategories(page = '0', size = '10') {
         this.isLoading = true;
         this._categoryService
             .getAllCategories<CategoryModel[]>({
                 path: 'category/paged',
+                params: {
+                    page,
+                    size,
+                },
             })
             .subscribe({
                 next: (c) => {
@@ -67,5 +71,9 @@ export class CategoryComponent implements OnInit {
 
     onDelete(data: CategoryModel) {
         console.log('remove', data);
+    }
+
+    onChangePagination(page: number) {
+        this.getCategories(page.toString());
     }
 }
