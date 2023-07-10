@@ -21,3 +21,5 @@ export declare type TypeElementTable =
     | 'checkbox'
     | 'select'
     | 'actions';
+export type ModalActionsType = 'success' | 'error' | 'info' | 'confirm';
+export type UserActions = 'get' | 'save' | 'update' | 'delete';

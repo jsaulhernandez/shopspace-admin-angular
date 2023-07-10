@@ -1,0 +1,23 @@
+.SModalActions_icon span {
+    transform: scale(3);
+}
+
+.SModalActions_icon .confirm {
+    color: #faad14;
+}
+
+.SModalActions_icon .success {
+    color: var(--primary-color);
+}
+
+.SModalActions_icon .info {
+    color: #1677ff;
+}
+
+.SModalActions_icon .error {
+    color: #ff4d4f;
+}
+
+.SModalActions_title {
+    text-align: center;
+}
