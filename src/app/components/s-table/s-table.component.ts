@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { CustomHeader } from 'src/app/utils/components.util';
 
@@ -14,8 +14,30 @@ export class STableComponent<T extends Object> {
     @Input() index: number = 0;
     @Input() total: number = 0;
     @Input() size: number = 0;
+    @Output() changePagination = new EventEmitter<number>();
 
     getValueByKey(data: any, key: string): any {
         return data[key as keyof typeof data];
     }
+
+    onPageIndexChange(value: number) {
+        this.changePagination.emit(value - 1);
+    }
+
+    //     DEFINE DATAINDEX SI
+    // Pintar solo texto plano
+
+    // DEFINE RENDER SI
+    // Pintar texto navegando entre obj
+
+    // DEFINE DATA INDEX AND ELEMENT AND ONCLICKELEMENT SI
+    // pintar un elemento que contendra el valor y
+    // ejecutara una accion
+
+    // DEFINE ELEMENT AND ONCLICKELEMENT OR
+    // ONSECONDCLICKELEMENT SI
+    // Sera un componente que solo ejecutara funciones
+
+    // DEFINE DATAINDEX AND ELEMENT AND DATAARRAY
+    // PINTAR UN SELECT
 }

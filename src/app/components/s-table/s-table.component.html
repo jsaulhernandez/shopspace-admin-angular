@@ -104,6 +104,7 @@
         [nzPageIndex]="index"
         [nzTotal]="total"
         [nzPageSize]="size"
+        (nzPageIndexChange)="onPageIndexChange($event)"
         nzSimple
     />
 </div>
