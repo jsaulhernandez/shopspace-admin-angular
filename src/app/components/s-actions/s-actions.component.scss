@@ -3,5 +3,6 @@ span {
 
     &:hover {
         color: var(--tertiary-text-color);
+        transform: scale(1.7);
     }
 }
