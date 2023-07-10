@@ -28,7 +28,7 @@ export class CategoryComponent implements OnInit {
             title: 'Estado',
             dataIndex: 'status',
             element: 'switch',
-            onClickElement: (data, _) => this.onUpdate(data),
+            onClickElement: (data, value) => this.onUpdateStatus(data, value),
         },
         {
             title: 'Acciones',
@@ -65,15 +65,37 @@ export class CategoryComponent implements OnInit {
             });
     }
 
+    onChangePagination(page: number) {
+        this.getCategories(page.toString());
+    }
+
+    onUpdateStatus(data: CategoryModel, value: boolean) {
+        this.isLoading = true;
+
+        data = {
+            ...data,
+            status: value ? 1 : 0,
+        };
+
+        this._categoryService
+            .updateCategory({
+                path: `category/${data.id}`,
+                data,
+            })
+            .subscribe({
+                next: (c) => console.log('category status update'),
+                error: (e) => {
+                    this.isLoading = false;
+                },
+                complete: () => (this.isLoading = false),
+            });
+    }
+
     onUpdate(data: CategoryModel) {
         console.log('update', data);
     }
 
     onDelete(data: CategoryModel) {
         console.log('remove', data);
-    }
-
-    onChangePagination(page: number) {
-        this.getCategories(page.toString());
     }
 }

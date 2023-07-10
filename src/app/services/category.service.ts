@@ -16,4 +16,22 @@ export class CategoryService {
     ): Observable<CustomResponse<T>> {
         return this.api.get<T>(req);
     }
+
+    public saveCategory<T extends Object>(
+        req: OptionRequest<T>
+    ): Observable<CustomResponse<T>> {
+        return this.api.post<T>(req);
+    }
+
+    public updateCategory<T extends Object>(
+        req: OptionRequest<T>
+    ): Observable<CustomResponse<T>> {
+        return this.api.put<T>(req);
+    }
+
+    public deleteCategory<T extends Object>(
+        req: OptionRequest<T>
+    ): Observable<CustomResponse<T>> {
+        return this.api.delete<T>(req);
+    }
 }
