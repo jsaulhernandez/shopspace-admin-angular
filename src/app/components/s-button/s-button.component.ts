@@ -15,7 +15,7 @@ export class SButtonComponent {
     }
 
     @Input() type: TypeButton = 'primary';
-    @Output() btnClick? = new EventEmitter();
+    @Output() btnClick = new EventEmitter();
     @Input() isDisabled = false;
     @Input() isLoading = false;
     @Input() isDanger = false;
@@ -31,6 +31,6 @@ export class SButtonComponent {
     }
 
     onClick() {
-        this.btnClick && this.btnClick.emit();
+        this.btnClick.emit();
     }
 }
