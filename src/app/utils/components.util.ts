@@ -7,8 +7,8 @@ export interface CustomHeader {
     render?: (data: any) => string;
     //only buttons, switches, radios y checkboxes
     element?: TypeElementTable;
-    onClickElement?: (data: any, index?: number) => void; //evento para los elementos
-    onSecondClickElement?: (data: any, index?: number) => void; //evento para los elementos
+    onClickElement?: (data: any, value?: any, index?: number) => void; //evento para los elementos
+    onSecondClickElement?: (data: any, value?: any, index?: number) => void; //evento para los elementos
     //only selects. Example for internal object ["id", "name"]
     dataArray?: string[];
 }
