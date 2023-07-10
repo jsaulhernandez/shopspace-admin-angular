@@ -1,0 +1,7 @@
+span {
+    transform: scale(1.5);
+
+    &:hover {
+        color: var(--tertiary-text-color);
+    }
+}
