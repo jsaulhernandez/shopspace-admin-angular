@@ -1,4 +1,4 @@
-interface CustomPagination {
+export interface CustomPagination {
     totalPages: number;
     totalElements: number;
     size: number;

@@ -14,6 +14,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 
 @NgModule({
     declarations: [
@@ -31,6 +32,7 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
         NzIconModule,
         NzTableModule,
         NzSwitchModule,
+        NzPaginationModule,
         FormsModule,
     ],
     exports: [

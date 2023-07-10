@@ -1,0 +1,22 @@
+::ng-deep nz-pagination {
+    margin-top: 20px !important;
+}
+
+::ng-deep
+    .ant-table-wrapper
+    > .ant-spin-nested-loading
+    > .ant-spin-container
+    > .ant-table
+    > .ant-table-container
+    > .ant-table-content
+    > table
+    > thead
+    > tr
+    > th {
+    background: #4d7768 !important;
+    color: var(--quaternary-text-color);
+}
+
+.ant-table-tbody > tr.ant-table-row:hover > td {
+    background: #c8f2e3;
+}

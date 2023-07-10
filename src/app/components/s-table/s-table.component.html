@@ -1,88 +1,109 @@
-<nz-table #basicTable [nzData]="data" [nzLoading]="isLoading">
-    <thead>
-        <tr>
-            <th *ngFor="let c of header">{{ c.title }}</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let data of basicTable.data">
-            <td *ngFor="let c of header">
-                <span
-                    *ngIf="
-                        c.dataIndex &&
-                        !c.render &&
-                        !c.element &&
-                        !c.onClickElement &&
-                        !c.onSecondClickElement &&
-                        !c.dataArray
-                    "
-                >
-                    {{ getValueByKey(data, c.dataIndex) }}
-                </span>
-
-                <span
-                    *ngIf="
-                        !c.dataIndex &&
-                        c.render &&
-                        !c.element &&
-                        !c.onClickElement &&
-                        !c.onSecondClickElement &&
-                        !c.dataArray
-                    "
-                >
-                    {{ c.render(data) }}
-                </span>
-
-                <span
-                    *ngIf="
-                        c.dataIndex &&
-                        !c.render &&
-                        c.element &&
-                        (c.onClickElement || c.onSecondClickElement) &&
-                        !c.dataArray
-                    "
-                >
+<div
+    class="STableComponent wp-100 flex flex-column items-center justify-center"
+>
+    <nz-table
+        #basicTable
+        [nzData]="data"
+        [nzLoading]="isLoading"
+        [nzScroll]="{ x: '640px' }"
+        [nzFrontPagination]="false"
+        [nzShowPagination]="false"
+        class="wp-100"
+    >
+        <thead class="custom-header">
+            <tr>
+                <th *ngFor="let c of header">{{ c.title }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of basicTable.data">
+                <td *ngFor="let c of header">
                     <span
-                        *ngIf="c.element === 'switch'"
-                        (click)="c.onClickElement && c.onClickElement(data)"
+                        *ngIf="
+                            c.dataIndex &&
+                            !c.render &&
+                            !c.element &&
+                            !c.onClickElement &&
+                            !c.onSecondClickElement &&
+                            !c.dataArray
+                        "
                     >
-                        <nz-switch
-                            [ngModel]="getValueByKey(data, c.dataIndex) === 1"
-                        />
+                        {{ getValueByKey(data, c.dataIndex) }}
                     </span>
-                </span>
 
-                <span
-                    *ngIf="
-                        !c.dataIndex &&
-                        !c.render &&
-                        c.element &&
-                        c.onClickElement &&
-                        c.onSecondClickElement &&
-                        !c.dataArray
-                    "
-                >
-                    <span *ngIf="c.element === 'actions'">
-                        <app-s-actions
-                            (btnEdit)="c.onClickElement(data)"
-                            (btnRemove)="c.onSecondClickElement(data)"
-                        ></app-s-actions>
+                    <span
+                        *ngIf="
+                            !c.dataIndex &&
+                            c.render &&
+                            !c.element &&
+                            !c.onClickElement &&
+                            !c.onSecondClickElement &&
+                            !c.dataArray
+                        "
+                    >
+                        {{ c.render(data) }}
                     </span>
-                </span>
 
-                <span
-                    *ngIf="
-                        c.dataIndex &&
-                        !c.render &&
-                        c.element &&
-                        c.onClickElement &&
-                        !c.onSecondClickElement &&
-                        c.dataArray
-                    "
-                >
-                    Sera un select
-                </span>
-            </td>
-        </tr>
-    </tbody>
-</nz-table>
+                    <span
+                        *ngIf="
+                            c.dataIndex &&
+                            !c.render &&
+                            c.element &&
+                            (c.onClickElement || c.onSecondClickElement) &&
+                            !c.dataArray
+                        "
+                    >
+                        <span
+                            *ngIf="c.element === 'switch'"
+                            (click)="c.onClickElement && c.onClickElement(data)"
+                        >
+                            <nz-switch
+                                [ngModel]="
+                                    getValueByKey(data, c.dataIndex) === 1
+                                "
+                            />
+                        </span>
+                    </span>
+
+                    <span
+                        *ngIf="
+                            !c.dataIndex &&
+                            !c.render &&
+                            c.element &&
+                            c.onClickElement &&
+                            c.onSecondClickElement &&
+                            !c.dataArray
+                        "
+                    >
+                        <span *ngIf="c.element === 'actions'">
+                            <app-s-actions
+                                (btnEdit)="c.onClickElement(data)"
+                                (btnRemove)="c.onSecondClickElement(data)"
+                            ></app-s-actions>
+                        </span>
+                    </span>
+
+                    <span
+                        *ngIf="
+                            c.dataIndex &&
+                            !c.render &&
+                            c.element &&
+                            c.onClickElement &&
+                            !c.onSecondClickElement &&
+                            c.dataArray
+                        "
+                    >
+                        Sera un select
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+
+    <nz-pagination
+        [nzPageIndex]="index"
+        [nzTotal]="total"
+        [nzPageSize]="size"
+        nzSimple
+    />
+</div>
