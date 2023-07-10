@@ -16,8 +16,4 @@ export class SModalActionsComponent {
     @Input() loading: boolean = false;
     @Input() isDanger: boolean = false;
     @Input() textConfirm?: string;
-
-    handleCancel(): void {
-        this.open = false;
-    }
 }

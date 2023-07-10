@@ -1,4 +1,4 @@
-<nz-modal [nzVisible]="open" [nzClosable]="true" [nzFooter]="null">
+<nz-modal [nzVisible]="open" (nzOnCancel)="onClose.emit()" [nzFooter]="null">
     <div
         class="flex flex-column items-center justify-center mt-2"
         *nzModalContent
