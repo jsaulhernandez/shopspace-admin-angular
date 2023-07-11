@@ -5,7 +5,11 @@ import { CategoryModel } from 'src/app/data/models/Category.interface';
 
 import { CustomPagination } from 'src/app/data/api/CustomResponse';
 
-import { ModalActionsType, UserActions } from 'src/app/constants/constants';
+import {
+    ModalActionsType,
+    ShowComponent,
+    UserActions,
+} from 'src/app/constants/constants';
 import { CustomHeader } from 'src/app/utils/components.util';
 
 @Component({
@@ -25,6 +29,7 @@ export class CategoryComponent implements OnInit {
     typeModal: ModalActionsType = 'confirm';
     textModal: string = '';
     userAction: UserActions = 'save';
+    showingComponent: ShowComponent = 'Table';
     pivote?: CategoryModel;
 
     customHeader: CustomHeader[] = [
@@ -41,7 +46,8 @@ export class CategoryComponent implements OnInit {
         {
             title: 'Acciones',
             element: 'actions',
-            onClickElement: (data, _) => this.onUpdate(data),
+            onClickElement: (data, _) =>
+                this.onAddCategory(data, false, 'update'),
             onSecondClickElement: (data, _) => this.onDelete(data),
         },
     ];
@@ -99,8 +105,24 @@ export class CategoryComponent implements OnInit {
             });
     }
 
-    onUpdate(data: CategoryModel) {
-        console.log('update', data);
+    onAddCategory(
+        record?: CategoryModel,
+        isSaved = false,
+        userAction: UserActions = 'save'
+    ) {
+        if (!isSaved) {
+            this.pivote = record;
+            this.showingComponent = 'Form';
+            this.userAction = userAction;
+        } else {
+            if (record) this.pivote = { ...record };
+
+            this.textModal = `¿En realidad desea ${
+                this.userAction === 'save' ? 'guardar' : 'actualizar'
+            } la categoría ${record?.name}?`;
+            this.typeModal = 'confirm';
+            this.open = true;
+        }
     }
 
     onDelete(data: CategoryModel) {
@@ -111,12 +133,70 @@ export class CategoryComponent implements OnInit {
         this.open = true;
     }
 
-    onCloseModal() {
-        this.open = false;
+    onClose(action: 'modal' | 'form') {
+        if (action === 'modal') {
+            this.open = false;
+        } else {
+            this.pivote = undefined;
+            this.showingComponent = 'Table';
+        }
     }
 
     onConfirm() {
         this.isLoading = true;
+
+        if (this.userAction === 'save') {
+            this._categoryService
+                .saveCategory({
+                    path: 'category',
+                    data: this.pivote,
+                })
+                .subscribe({
+                    next: (c) => {
+                        this.textModal = 'Registro guardado correctamente';
+                        this.typeModal = 'success';
+                        this.pivote = undefined;
+
+                        this.getCategories();
+                        this.showingComponent = 'Table';
+                    },
+                    error: (e) => {
+                        this.isLoading = false;
+                        this.textModal = `Ocurrio un error al guardar la categoría ${this.pivote?.name}`;
+                        this.typeModal = 'error';
+                    },
+                    complete: () => (this.isLoading = false),
+                });
+        }
+
+        if (this.userAction === 'update') {
+            this._categoryService
+                .updateCategory({
+                    path: `category${
+                        this.userAction === 'update'
+                            ? '/' + this.pivote?.id
+                            : ''
+                    }`,
+                    data: this.pivote,
+                })
+                .subscribe({
+                    next: (c) => {
+                        this.textModal = 'Registro actualizado correctamente';
+                        this.typeModal = 'success';
+                        this.pivote = undefined;
+
+                        this.getCategories();
+                        this.showingComponent = 'Table';
+                    },
+                    error: (e) => {
+                        this.isLoading = false;
+                        this.textModal = `Ocurrio un error al actualizae la categoría ${this.pivote?.name}`;
+                        this.typeModal = 'error';
+                    },
+                    complete: () => (this.isLoading = false),
+                });
+        }
+
         if (this.userAction === 'delete') {
             this._categoryService
                 .deleteCategory({

@@ -1,20 +1,36 @@
-<app-s-table
-    [isLoading]="isLoading"
-    [header]="customHeader"
-    [data]="categories"
-    [index]="pagination?.number ?? 0"
-    [total]="pagination?.totalElements ?? 0"
-    [size]="pagination?.size ?? 0"
-    (changePagination)="onChangePagination($event)"
-/>
+<div class="flex flex-column g-10" *ngIf="showingComponent === 'Table'">
+    <div class="CategoryComponent flex flex-wrap justify-between g-10 mb-1">
+        <app-s-input placeHolder="Buscar por nombre..." />
+        <app-s-button
+            text="Agregar"
+            suffix="plus"
+            (btnClick)="onAddCategory()"
+        />
+    </div>
 
-<app-s-toast />
+    <app-s-table
+        [isLoading]="isLoading"
+        [header]="customHeader"
+        [data]="categories"
+        [index]="pagination?.number ?? 0"
+        [total]="pagination?.totalElements ?? 0"
+        [size]="pagination?.size ?? 0"
+        (changePagination)="onChangePagination($event)"
+    />
+</div>
+
+<app-category-form
+    (submitted)="onAddCategory($event, true)"
+    (onCancel)="onClose('form')"
+    [categoryData]="pivote"
+    *ngIf="showingComponent === 'Form'"
+/>
 
 <app-s-modal-actions
     [open]="open"
     [type]="typeModal"
     [title]="textModal"
-    (onClose)="onCloseModal()"
+    (onClose)="onClose('modal')"
     (onConfirm)="onConfirm()"
     [isDanger]="userAction === 'delete' ? true : false"
     [textConfirm]="userAction === 'delete' ? 'Sí, eliminar' : undefined"
