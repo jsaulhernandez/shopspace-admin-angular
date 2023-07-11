@@ -1,4 +1,10 @@
-import { Component, Input, forwardRef } from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    Input,
+    Output,
+    forwardRef,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -19,11 +25,16 @@ export class SInputComponent implements ControlValueAccessor {
     @Input() placeHolder: string = '';
     @Input() prefix?: string;
     @Input() suffix?: string;
+    @Output() onChangeInput = new EventEmitter<string>();
 
     input?: string;
 
-    onChange: any = () => {};
+    onChange: any = (value: string) => {
+        this.onChangeInput.emit(value);
+    };
+
     onTouch: any = () => {};
+
     registerOnChange(fn: any): void {
         this.onChange = fn;
     }
@@ -31,6 +42,7 @@ export class SInputComponent implements ControlValueAccessor {
     registerOnTouched(fn: any): void {
         this.onTouch = fn;
     }
+
     writeValue(input: string) {
         this.input = input;
     }
