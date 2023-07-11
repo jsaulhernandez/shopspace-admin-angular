@@ -11,27 +11,12 @@ import { CustomResponse } from '../data/api/CustomResponse';
 export class CategoryService {
     constructor(private api: AdminApiService) {}
 
-    public getAllCategories<T extends Object>(
+    public useRequestCategory<T extends Object>(
         req: OptionRequest<T>
     ): Observable<CustomResponse<T>> {
+        if (req.method === 'POST') return this.api.post<T>(req);
+        if (req.method === 'PUT') return this.api.put<T>(req);
+        if (req.method === 'DELETE') return this.api.delete<T>(req);
         return this.api.get<T>(req);
-    }
-
-    public saveCategory<T extends Object>(
-        req: OptionRequest<T>
-    ): Observable<CustomResponse<T>> {
-        return this.api.post<T>(req);
-    }
-
-    public updateCategory<T extends Object>(
-        req: OptionRequest<T>
-    ): Observable<CustomResponse<T>> {
-        return this.api.put<T>(req);
-    }
-
-    public deleteCategory<T extends Object>(
-        req: OptionRequest<T>
-    ): Observable<CustomResponse<T>> {
-        return this.api.delete<T>(req);
     }
 }
