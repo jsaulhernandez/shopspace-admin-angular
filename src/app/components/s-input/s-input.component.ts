@@ -14,23 +14,24 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     ],
 })
 export class SInputComponent implements ControlValueAccessor {
-    onChange: any = () => {};
-    onTouch: any = () => {};
-    registerOnChange(fn: any): void {
-        this.onChange = fn;
-    }
-    registerOnTouched(fn: any): void {
-        this.onTouch = fn;
-    }
-
-    input?: string;
-    writeValue(input: string) {
-        this.input = input;
-    }
-
     @Input() typeInput: 'text' | 'password' = 'text';
     @Input() isInputGroup: boolean = false;
     @Input() placeHolder: string = '';
     @Input() prefix?: string;
     @Input() suffix?: string;
+
+    input?: string;
+
+    onChange: any = () => {};
+    onTouch: any = () => {};
+    registerOnChange(fn: any): void {
+        this.onChange = fn;
+    }
+
+    registerOnTouched(fn: any): void {
+        this.onTouch = fn;
+    }
+    writeValue(input: string) {
+        this.input = input;
+    }
 }

@@ -4,6 +4,9 @@
     nzSize="large"
     *ngIf="!isInputGroup"
     class="SInputComponent"
+    [(ngModel)]="input"
+    (ngModelChange)="onChange($event)"
+    (blur)="onTouch()"
 />
 
 <nz-input-group
@@ -15,5 +18,12 @@
         prefix || suffix ? 'SInputComponent' : 'SInputComponent_with-icon'
     "
 >
-    <input [type]="typeInput" nz-input [placeholder]="placeHolder" />
+    <input
+        [type]="typeInput"
+        nz-input
+        [placeholder]="placeHolder"
+        [(ngModel)]="input"
+        (ngModelChange)="onChange($event)"
+        (blur)="onTouch()"
+    />
 </nz-input-group>
