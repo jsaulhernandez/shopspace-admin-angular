@@ -101,7 +101,7 @@ export class CategoryComponent implements OnInit {
 
         this._categoryService
             .useRequestCategory({
-                method: 'GET',
+                method: 'PUT',
                 path: `category/${data.id}`,
                 data,
             })
