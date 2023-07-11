@@ -24,6 +24,7 @@ export class CategoryComponent implements OnInit {
     categories: CategoryModel[] = [];
     pagination?: CustomPagination;
     search: string = '';
+    currentPage: number = 0;
 
     //modal
     open: boolean = false;
@@ -88,6 +89,7 @@ export class CategoryComponent implements OnInit {
     }
 
     onChangePagination(page: number) {
+        this.currentPage = page;
         this.getCategories(this.search, page.toString());
     }
 
@@ -106,7 +108,13 @@ export class CategoryComponent implements OnInit {
                 data,
             })
             .subscribe({
-                next: (c) => console.log('category status update'),
+                next: (c) => {
+                    console.log('category status update');
+                    this.getCategories(
+                        this.search,
+                        this.currentPage.toString()
+                    );
+                },
                 error: (e) => {
                     this.isLoading = false;
                 },
