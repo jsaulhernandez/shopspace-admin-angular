@@ -23,6 +23,7 @@ export class CategoryComponent implements OnInit {
     isLoading: boolean = false;
     categories: CategoryModel[] = [];
     pagination?: CustomPagination;
+    search: string = '';
 
     //modal
     open: boolean = false;
@@ -56,12 +57,14 @@ export class CategoryComponent implements OnInit {
         this.getCategories();
     }
 
-    async getCategories(page = '0', size = '10') {
+    async getCategories(search = '', page = '0', size = '10') {
         this.isLoading = true;
         this._categoryService
-            .getAllCategories<CategoryModel[]>({
+            .useRequestCategory<CategoryModel[]>({
+                method: 'GET',
                 path: 'category/paged',
                 params: {
+                    search,
                     page,
                     size,
                 },
@@ -79,8 +82,13 @@ export class CategoryComponent implements OnInit {
             });
     }
 
+    onChangeValueInput(value: string) {
+        this.search = value;
+        this.getCategories(value);
+    }
+
     onChangePagination(page: number) {
-        this.getCategories(page.toString());
+        this.getCategories(this.search, page.toString());
     }
 
     onUpdateStatus(data: CategoryModel, value: boolean) {
@@ -92,7 +100,8 @@ export class CategoryComponent implements OnInit {
         };
 
         this._categoryService
-            .updateCategory({
+            .useRequestCategory({
+                method: 'GET',
                 path: `category/${data.id}`,
                 data,
             })
@@ -145,15 +154,24 @@ export class CategoryComponent implements OnInit {
     onConfirm() {
         this.isLoading = true;
 
-        if (this.userAction === 'save') {
+        if (this.userAction === 'save' || this.userAction === 'update') {
+            const path = `category${
+                this.userAction === 'update' ? '/' + this.pivote?.id : ''
+            }`;
+
             this._categoryService
-                .saveCategory({
-                    path: 'category',
+                .useRequestCategory({
+                    method: this.userAction === 'save' ? 'POST' : 'PUT',
+                    path: path,
                     data: this.pivote,
                 })
                 .subscribe({
                     next: (c) => {
-                        this.textModal = 'Registro guardado correctamente';
+                        this.textModal = `Registro ${
+                            this.userAction === 'save'
+                                ? 'guardado'
+                                : 'actualizado'
+                        } correctamente`;
                         this.typeModal = 'success';
                         this.pivote = undefined;
 
@@ -162,35 +180,11 @@ export class CategoryComponent implements OnInit {
                     },
                     error: (e) => {
                         this.isLoading = false;
-                        this.textModal = `Ocurrio un error al guardar la categoría ${this.pivote?.name}`;
-                        this.typeModal = 'error';
-                    },
-                    complete: () => (this.isLoading = false),
-                });
-        }
-
-        if (this.userAction === 'update') {
-            this._categoryService
-                .updateCategory({
-                    path: `category${
-                        this.userAction === 'update'
-                            ? '/' + this.pivote?.id
-                            : ''
-                    }`,
-                    data: this.pivote,
-                })
-                .subscribe({
-                    next: (c) => {
-                        this.textModal = 'Registro actualizado correctamente';
-                        this.typeModal = 'success';
-                        this.pivote = undefined;
-
-                        this.getCategories();
-                        this.showingComponent = 'Table';
-                    },
-                    error: (e) => {
-                        this.isLoading = false;
-                        this.textModal = `Ocurrio un error al actualizae la categoría ${this.pivote?.name}`;
+                        this.textModal = `Ocurrio un error al ${
+                            this.userAction === 'save'
+                                ? 'guardar'
+                                : 'actualizar'
+                        } la categoría ${this.pivote?.name}`;
                         this.typeModal = 'error';
                     },
                     complete: () => (this.isLoading = false),
@@ -199,7 +193,8 @@ export class CategoryComponent implements OnInit {
 
         if (this.userAction === 'delete') {
             this._categoryService
-                .deleteCategory({
+                .useRequestCategory({
+                    method: 'DELETE',
                     path: `category/${this.pivote?.id}`,
                 })
                 .subscribe({
