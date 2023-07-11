@@ -35,17 +35,17 @@ export class CategoryComponent implements OnInit {
 
     customHeader: CustomHeader[] = [
         {
-            title: 'Nombre',
+            title: 'Name',
             dataIndex: 'name',
         },
         {
-            title: 'Estado',
+            title: 'Status',
             dataIndex: 'status',
             element: 'switch',
             onClickElement: (data, value) => this.onUpdateStatus(data, value),
         },
         {
-            title: 'Acciones',
+            title: 'Actions',
             element: 'actions',
             onClickElement: (data, _) =>
                 this.onAddCategory(data, false, 'update'),
