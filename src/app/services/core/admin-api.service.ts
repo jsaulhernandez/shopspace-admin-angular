@@ -28,7 +28,6 @@ export class AdminApiService {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json',
                 'Cache-Control': 'no-cache',
-                Pragma: 'no-cache',
             }),
             observe: 'response' as 'body',
             params: new HttpParams({ fromObject: req.params }),
