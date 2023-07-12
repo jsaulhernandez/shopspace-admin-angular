@@ -19,8 +19,8 @@
                 <nz-form-control nzErrorTip="Please input your email address!">
                     <app-s-input
                         [isInputGroup]="true"
-                        formControlName="userName"
-                        placeHolder="example@exampl.com"
+                        formControlName="email"
+                        placeHolder="example@example.com"
                         prefix="user"
                     />
                 </nz-form-control>
@@ -32,31 +32,18 @@
                     <app-s-input
                         typeInput="password"
                         [isInputGroup]="true"
-                        formControlName="userName"
+                        formControlName="password"
                         placeHolder="type your password..."
                         prefix="lock"
                     />
                 </nz-form-control>
             </nz-form-item>
 
-            <app-s-button text="Login" additionalClass="wp-100" />
+            <app-s-button
+                text="Login"
+                additionalClass="wp-100"
+                [isLoading]="isLoading"
+            />
         </form>
-
-        <!-- <app-s-text
-                text="You don't have an account?"
-                typeTextElement="span"
-                class="mt-2"
-            >
-                <app-s-text
-                    text="Sign In"
-                    typeTextElement="span"
-                    class="pointer"
-                    textColor="--primary-text-color"
-                    fontWeight="700"
-                    (btnClick)="onRedirectToSignIn()"
-                />
-            </app-s-text> -->
     </div>
-
-    <!-- <div class="LogIn_form-info">info</div> -->
 </div>

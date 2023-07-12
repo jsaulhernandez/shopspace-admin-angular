@@ -18,39 +18,31 @@ import { environment } from 'src/environments/environment';
 })
 export class AdminApiService {
     URL: string = environment.apiUrl;
+    httpOptions = {
+        observe: 'response' as 'body',
+    };
 
     constructor(private httpClient: HttpClient) {}
 
     get<T extends Object>(
         req: OptionRequest<T>
     ): Observable<CustomResponse<T>> {
-        const httpOptions = {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json',
-                'Cache-Control': 'no-cache',
-            }),
-            observe: 'response' as 'body',
-            params: new HttpParams({ fromObject: req.params }),
-        };
-
-        return this.httpClient.get(`${this.URL}/${req.path}`, httpOptions).pipe(
-            map((response: any) => this.ResponseData<T>(response)),
-            catchError(this.handleError)
-        );
+        return this.httpClient
+            .get(`${this.URL}/${req.path}`, {
+                ...this.httpOptions,
+                params: new HttpParams({ fromObject: req.params }),
+            })
+            .pipe(
+                map((response: any) => this.ResponseData<T>(response)),
+                catchError(this.handleError)
+            );
     }
 
     post<T extends Object>(
         req: OptionRequest<T>
     ): Observable<CustomResponse<T>> {
-        const httpOptions = {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json',
-            }),
-            observe: 'response' as 'body',
-        };
-
         return this.httpClient
-            .post(`${this.URL}/${req.path}`, req.data, httpOptions)
+            .post(`${this.URL}/${req.path}`, req.data, this.httpOptions)
             .pipe(
                 map((response: any) => this.ResponseData<T>(response)),
                 catchError(this.handleError)
@@ -60,15 +52,8 @@ export class AdminApiService {
     put<T extends Object>(
         req: OptionRequest<T>
     ): Observable<CustomResponse<T>> {
-        const httpOptions = {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json',
-            }),
-            observe: 'response' as 'body',
-        };
-
         return this.httpClient
-            .put(`${this.URL}/${req.path}`, req.data, httpOptions)
+            .put(`${this.URL}/${req.path}`, req.data, this.httpOptions)
             .pipe(
                 map((response: any) => this.ResponseData<T>(response)),
                 catchError(this.handleError)
@@ -78,15 +63,8 @@ export class AdminApiService {
     delete<T extends Object>(
         req: OptionRequest<T>
     ): Observable<CustomResponse<T>> {
-        const httpOptions = {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json',
-            }),
-            observe: 'response' as 'body',
-        };
-
         return this.httpClient
-            .delete(`${this.URL}/${req.path}`, httpOptions)
+            .delete(`${this.URL}/${req.path}`, this.httpOptions)
             .pipe(
                 map((response: any) => this.ResponseData<T>(response)),
                 catchError(this.handleError)

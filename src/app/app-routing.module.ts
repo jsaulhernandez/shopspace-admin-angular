@@ -4,12 +4,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { LayoutComponent } from './shared/layout/layout.component';
 
+import { AuthGuard } from './guards/auth.guard';
+
 const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
     {
         path: 'admin',
         component: LayoutComponent,
+        canActivate: [AuthGuard],
         children: [
             {
                 path: 'category',
