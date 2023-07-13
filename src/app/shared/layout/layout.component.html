@@ -26,7 +26,7 @@
         <nz-header class="header">
             <ul nz-menu nzMode="horizontal" class="header-menu">
                 <li class="user-name">Devjs</li>
-                <li nz-menu-item>
+                <li nz-menu-item (click)="onLogOut()">
                     <span nz-icon nzType="logout" nzTheme="outline"></span>
                     Cerrar sesión
                 </li>

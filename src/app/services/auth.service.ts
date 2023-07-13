@@ -24,4 +24,11 @@ export class AuthService {
     public isLoggedIn() {
         return sessionStorage.getItem('jwt') != null;
     }
+
+    public logout() {
+        return this.api.get<boolean>({
+            method: 'GET',
+            path: 'auth/logout',
+        });
+    }
 }
