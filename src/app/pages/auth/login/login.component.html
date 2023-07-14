@@ -37,7 +37,7 @@
 
             <nz-form-item>
                 <nz-form-label>Password</nz-form-label>
-                <nz-form-control nzErrorTip="Please input your Password!">
+                <nz-form-control nzHasFeedback [nzErrorTip]="passwordError">
                     <app-s-input
                         typeInput="password"
                         [isInputGroup]="true"
@@ -45,6 +45,15 @@
                         placeHolder="type your password..."
                         prefix="lock"
                     />
+
+                    <ng-template #passwordError let-control>
+                        <ng-container *ngIf="control.hasError('required')"
+                            >Please input your Password!</ng-container
+                        >
+                        <ng-container *ngIf="control.hasError('invalid')">{{
+                            control.getError("message")
+                        }}</ng-container>
+                    </ng-template>
                 </nz-form-control>
             </nz-form-item>
 
