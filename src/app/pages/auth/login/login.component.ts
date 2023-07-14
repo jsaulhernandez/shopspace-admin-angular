@@ -50,12 +50,7 @@ export class LoginComponent implements OnInit {
                     next: (auth) => {
                         if (auth.data) {
                             const data: AuthResponse = auth.data;
-                            sessionStorage.setItem('jwt', data.token);
-                            sessionStorage.setItem(
-                                'expiration',
-                                data.expirationToken
-                            );
-
+                            this._authService.saveDataInSessionStorage(data);
                             this.router.navigateByUrl('/admin/category');
                         } else {
                             console.log('Data is empty');

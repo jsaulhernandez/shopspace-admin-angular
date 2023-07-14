@@ -5,6 +5,7 @@ import { AdminApiService } from './core/admin-api.service';
 
 import { OptionRequest } from '../data/api/OptionRequest';
 import { CustomResponse } from '../data/api/CustomResponse';
+import { AuthResponse } from '../data/models/AuthResponse.model';
 
 @Injectable({
     providedIn: 'root',
@@ -19,6 +20,16 @@ export class AuthService {
         if (req.method === 'PUT') return this.api.put<T>(req);
         if (req.method === 'DELETE') return this.api.delete<T>(req);
         return this.api.get<T>(req);
+    }
+
+    public saveDataInSessionStorage(data: AuthResponse) {
+        sessionStorage.setItem('jwt', data.token);
+        sessionStorage.setItem('expiration', data.expirationToken);
+    }
+
+    public clearDataInSessionStorage() {
+        sessionStorage.removeItem('jwt');
+        sessionStorage.removeItem('expiration');
     }
 
     public isLoggedIn() {

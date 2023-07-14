@@ -15,8 +15,7 @@ export class LayoutComponent {
     onLogOut() {
         this.auth.logout().subscribe({
             next: (c) => {
-                sessionStorage.removeItem('jwt');
-                sessionStorage.removeItem('expiration');
+                this.auth.clearDataInSessionStorage();
             },
             error: (e) => {
                 console.error('[Error] ' + e);
