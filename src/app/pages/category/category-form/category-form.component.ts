@@ -7,7 +7,7 @@ import {
 
 import { CategoryModel } from 'src/app/data/models/Category.interface';
 
-import { invalidate } from 'src/app/utils/form.util';
+import { FormUtils } from 'src/app/utils/form.util';
 
 @Component({
     selector: 'app-category-form',
@@ -42,7 +42,7 @@ export class CategoryFormComponent implements OnInit {
             this.submitted.emit(this.validateForm.getRawValue());
             this.validateForm.reset();
         } else {
-            invalidate(this.validateForm);
+            FormUtils.invalidate(this.validateForm);
         }
     }
 }
