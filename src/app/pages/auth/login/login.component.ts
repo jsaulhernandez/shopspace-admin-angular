@@ -6,12 +6,16 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { Store } from '@ngrx/store';
+
 import { AuthService } from 'src/app/services/auth.service';
 
 import { AuthRequest } from 'src/app/data/models/AuthRequest.model';
 import { AuthResponse } from 'src/app/data/models/AuthResponse.model';
 
-import { invalidate } from 'src/app/utils/form.util';
+import { UserState } from 'src/app/store/states/user-state.state';
+
+import { FormUtils } from 'src/app/utils/form.util';
 
 @Component({
     selector: 'app-login',
@@ -25,11 +29,14 @@ export class LoginComponent implements OnInit {
     isLoading: boolean = false;
     authData!: AuthRequest;
 
-    constructor(private fb: UntypedFormBuilder, private router: Router) {}
+    constructor(
+        private fb: UntypedFormBuilder,
+        private router: Router // private store: Store<UserState>
+    ) {}
 
     ngOnInit(): void {
         this.validateForm = this.fb.group({
-            email: [null, [Validators.required]],
+            email: [null, [Validators.required, FormUtils.validateEmail]],
             password: [null, [Validators.required]],
             // remember: [true],
         });
@@ -39,6 +46,8 @@ export class LoginComponent implements OnInit {
         if (this.validateForm.valid) {
             this.isLoading = true;
             this.authData = this.validateForm.value;
+
+            // this.store.dispatch(new LogIn(this.authData ));
 
             this._authService
                 .useRequestAuth<any>({
@@ -62,7 +71,7 @@ export class LoginComponent implements OnInit {
                     complete: () => (this.isLoading = false),
                 });
         } else {
-            invalidate(this.validateForm);
+            FormUtils.invalidate(this.validateForm);
         }
     }
 

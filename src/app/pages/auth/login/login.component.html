@@ -16,13 +16,22 @@
         >
             <nz-form-item>
                 <nz-form-label>Email</nz-form-label>
-                <nz-form-control nzErrorTip="Please input your email address!">
+                <nz-form-control nzHasFeedback [nzErrorTip]="emailError">
                     <app-s-input
                         [isInputGroup]="true"
                         formControlName="email"
                         placeHolder="example@example.com"
                         prefix="user"
                     />
+
+                    <ng-template #emailError let-control>
+                        <ng-container *ngIf="control.hasError('required')"
+                            >Please input your email address!</ng-container
+                        >
+                        <ng-container *ngIf="control.hasError('invalid')">{{
+                            control.getError("message")
+                        }}</ng-container>
+                    </ng-template>
                 </nz-form-control>
             </nz-form-item>
 
