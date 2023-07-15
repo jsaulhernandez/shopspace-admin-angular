@@ -11,11 +11,13 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent },
     {
         path: 'admin',
+        title: 'Admin',
         component: LayoutComponent,
         canActivate: [AuthGuard],
         children: [
             {
                 path: 'category',
+                title: 'Categories',
                 loadChildren: () =>
                     import('./pages/category/category.module').then(
                         (c) => c.CategoryModule
@@ -23,6 +25,7 @@ const routes: Routes = [
             },
             {
                 path: 'brand',
+                title: 'Brands',
                 loadChildren: () =>
                     import('./pages/brand/brand.module').then(
                         (b) => b.BrandModule
@@ -33,7 +36,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [RouterModule.forRoot(routes, { useHash: true })],
     exports: [RouterModule],
 })
 export class AppRoutingModule {}
