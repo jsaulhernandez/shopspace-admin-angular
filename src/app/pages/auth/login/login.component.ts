@@ -6,14 +6,10 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { Store } from '@ngrx/store';
-
 import { AuthService } from 'src/app/services/auth.service';
 
 import { AuthRequest } from 'src/app/data/models/AuthRequest.model';
 import { AuthResponse } from 'src/app/data/models/AuthResponse.model';
-
-import { UserState } from 'src/app/store/states/user-state.state';
 
 import { FormUtils } from 'src/app/utils/form.util';
 
