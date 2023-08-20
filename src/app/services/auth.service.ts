@@ -13,15 +13,6 @@ import { AuthResponse } from '../data/models/AuthResponse.model';
 export class AuthService {
     constructor(private api: AdminApiService) {}
 
-    public useRequestAuth<T extends Object>(
-        req: OptionRequest<T>
-    ): Observable<CustomResponse<T>> {
-        if (req.method === 'POST') return this.api.post<T>(req);
-        if (req.method === 'PUT') return this.api.put<T>(req);
-        if (req.method === 'DELETE') return this.api.delete<T>(req);
-        return this.api.get<T>(req);
-    }
-
     public saveDataInSessionStorage(data: AuthResponse) {
         sessionStorage.setItem('jwt', data.token);
         sessionStorage.setItem('expiration', data.expirationToken);
@@ -37,7 +28,7 @@ export class AuthService {
     }
 
     public logout() {
-        return this.api.get<boolean>({
+        return this.api.request<boolean>({
             method: 'GET',
             path: 'auth/logout',
         });

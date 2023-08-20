@@ -1,8 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 
-import { CategoryService } from 'src/app/services/category.service';
 import { CategoryModel } from 'src/app/data/models/Category.interface';
-
+import { AdminApiService } from 'src/app/services/core/admin-api.service';
 import { CustomPagination } from 'src/app/data/api/CustomResponse';
 
 import {
@@ -18,7 +17,7 @@ import { CustomHeader } from 'src/app/utils/components.util';
     styleUrls: ['./category.component.scss'],
 })
 export class CategoryComponent implements OnInit {
-    _categoryService = inject(CategoryService);
+    _categoryService = inject(AdminApiService);
 
     isLoading: boolean = false;
     categories: CategoryModel[] = [];
@@ -61,7 +60,7 @@ export class CategoryComponent implements OnInit {
     async getCategories(search = '', page = '0', size = '10') {
         this.isLoading = true;
         this._categoryService
-            .useRequestCategory<CategoryModel[]>({
+            .request<CategoryModel[]>({
                 method: 'GET',
                 path: 'category/paged',
                 params: {
@@ -102,7 +101,7 @@ export class CategoryComponent implements OnInit {
         };
 
         this._categoryService
-            .useRequestCategory({
+            .request({
                 method: 'PUT',
                 path: `category/${data.id}`,
                 data,
@@ -168,7 +167,7 @@ export class CategoryComponent implements OnInit {
             }`;
 
             this._categoryService
-                .useRequestCategory({
+                .request({
                     method: this.userAction === 'save' ? 'POST' : 'PUT',
                     path: path,
                     data: this.pivote,
@@ -201,7 +200,7 @@ export class CategoryComponent implements OnInit {
 
         if (this.userAction === 'delete') {
             this._categoryService
-                .useRequestCategory({
+                .request({
                     method: 'DELETE',
                     path: `category/${this.pivote?.id}`,
                 })

@@ -23,6 +23,7 @@ import {
     throwError,
 } from 'rxjs';
 
+import { AdminApiService } from '../services/core/admin-api.service';
 import { AuthService } from '../services/auth.service';
 import { AuthResponse } from '../data/models/AuthResponse.model';
 
@@ -33,7 +34,11 @@ export class AddTokenInterceptor implements HttpInterceptor {
         string | null
     >(null);
 
-    constructor(private _auth: AuthService, private router: Router) {}
+    constructor(
+        private _core: AdminApiService,
+        private _auth: AuthService,
+        private router: Router
+    ) {}
 
     setTokenHeaders(
         request: HttpRequest<unknown>,
@@ -93,8 +98,8 @@ export class AddTokenInterceptor implements HttpInterceptor {
             this.isRefreshing = true;
             this.tokenSubject.next(null);
 
-            return this._auth
-                .useRequestAuth<AuthResponse>({
+            return this._core
+                .request<AuthResponse>({
                     method: 'GET',
                     path: 'auth/refresh-token',
                 })

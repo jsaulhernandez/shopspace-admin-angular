@@ -6,6 +6,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { AdminApiService } from 'src/app/services/core/admin-api.service';
 import { AuthService } from 'src/app/services/auth.service';
 
 import { AuthRequest } from 'src/app/data/models/AuthRequest.model';
@@ -19,6 +20,7 @@ import { FormUtils } from 'src/app/utils/form.util';
     styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+    _coreService = inject(AdminApiService);
     _authService = inject(AuthService);
     validateForm!: UntypedFormGroup;
 
@@ -48,8 +50,8 @@ export class LoginComponent implements OnInit {
 
             // this.store.dispatch(new LogIn(this.authData ));
 
-            this._authService
-                .useRequestAuth<any>({
+            this._coreService
+                .request<any>({
                     method: 'POST',
                     path: 'auth/login',
                     data: this.authData,
