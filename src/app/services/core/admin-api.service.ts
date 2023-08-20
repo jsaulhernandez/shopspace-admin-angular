@@ -18,61 +18,25 @@ import { environment } from 'src/environments/environment';
 })
 export class AdminApiService {
     URL: string = environment.apiUrl;
-    httpOptions = {
-        observe: 'response' as 'body',
-    };
 
     constructor(private httpClient: HttpClient) {}
 
-    get<T extends Object>(
-        req: OptionRequest<T>
-    ): Observable<CustomResponse<T>> {
+    request<T = unknown>(req: OptionRequest<T>): Observable<CustomResponse<T>> {
+        const httpOptions = {
+            observe: 'response' as 'body',
+            params: new HttpParams({ fromObject: req.params }),
+        };
+
         return this.httpClient
-            .get(`${this.URL}/${req.path}`, {
-                ...this.httpOptions,
-                params: new HttpParams({ fromObject: req.params }),
-            })
+            .request(req.method, `${this.URL}/${req.path}`, httpOptions)
             .pipe(
                 map((response: any) => this.ResponseData<T>(response)),
                 catchError(this.handleError)
             );
     }
 
-    post<T extends Object>(
-        req: OptionRequest<T>
-    ): Observable<CustomResponse<T>> {
-        return this.httpClient
-            .post(`${this.URL}/${req.path}`, req.data, this.httpOptions)
-            .pipe(
-                map((response: any) => this.ResponseData<T>(response)),
-                catchError(this.handleError)
-            );
-    }
-
-    put<T extends Object>(
-        req: OptionRequest<T>
-    ): Observable<CustomResponse<T>> {
-        return this.httpClient
-            .put(`${this.URL}/${req.path}`, req.data, this.httpOptions)
-            .pipe(
-                map((response: any) => this.ResponseData<T>(response)),
-                catchError(this.handleError)
-            );
-    }
-
-    delete<T extends Object>(
-        req: OptionRequest<T>
-    ): Observable<CustomResponse<T>> {
-        return this.httpClient
-            .delete(`${this.URL}/${req.path}`, this.httpOptions)
-            .pipe(
-                map((response: any) => this.ResponseData<T>(response)),
-                catchError(this.handleError)
-            );
-    }
-
-    private ResponseData<M extends Object>(response: any): CustomResponse<M> {
-        const data: ResponseAdmin<M> = response.body as ResponseAdmin<M>;
+    private ResponseData<R = unknown>(response: any): CustomResponse<R> {
+        const data: ResponseAdmin<R> = response.body as ResponseAdmin<R>;
 
         if (['200', '201'].includes(data.statusCode)) {
             return {

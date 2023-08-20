@@ -6,7 +6,7 @@ export interface CustomPagination {
     numberOfElements: number;
 }
 
-export interface CustomResponse<M extends Object> {
+export interface CustomResponse<M = unknown> {
     isSuccess: boolean;
     isError: boolean;
     message: string;

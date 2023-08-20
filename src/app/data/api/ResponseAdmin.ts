@@ -25,12 +25,12 @@ export interface Slice {
     empty: boolean;
 }
 
-export interface Page<T extends Object> extends Slice {
+export interface Page<T = unknown> extends Slice {
     content: T;
     pageable: Pageable;
 }
 
-export interface ResponseAdmin<T extends Object> {
+export interface ResponseAdmin<T = unknown> {
     status: string;
     statusCode: string;
     statusMessage: string;
