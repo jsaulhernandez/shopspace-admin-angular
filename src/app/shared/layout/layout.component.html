@@ -34,8 +34,10 @@
         </nz-header>
         <nz-content>
             <nz-breadcrumb>
-                <nz-breadcrumb-item>User</nz-breadcrumb-item>
-                <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
+                <!-- <nz-breadcrumb-item *ngFor="let route of titles">{{
+                    route
+                }}</nz-breadcrumb-item> -->
+                <nz-breadcrumb-item>{{ title }}</nz-breadcrumb-item>
             </nz-breadcrumb>
             <div class="inner-content"><router-outlet></router-outlet></div>
         </nz-content>
