@@ -1,38 +1,40 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { NzLayoutModule } from 'ng-zorro-antd/layout';
-import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
-import { NzMenuModule } from 'ng-zorro-antd/menu';
-import { IconDefinition } from '@ant-design/icons-angular';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
-import {
-    AppstoreOutline,
-    ContactsOutline,
-    LogoutOutline,
-} from '@ant-design/icons-angular/icons';
-
-import { LayoutComponent } from './layout/layout.component';
-import { SpinComponent } from './spin/spin.component';
-
-const icons: IconDefinition[] = [
-    AppstoreOutline,
-    ContactsOutline,
-    LogoutOutline,
-];
+import * as shared from './components';
 
 @NgModule({
-    declarations: [LayoutComponent, SpinComponent],
+    declarations: [...shared.SHARED_COMPONENTS],
     imports: [
         CommonModule,
-        RouterModule,
-        NzIconModule.forRoot(icons),
-        NzLayoutModule,
-        NzBreadCrumbModule,
-        NzMenuModule,
+        ReactiveFormsModule,
+        FormsModule,
+        NzTypographyModule,
+        NzInputModule,
+        NzButtonModule,
+        NzIconModule,
+        NzTableModule,
+        NzSwitchModule,
+        NzPaginationModule,
+        NzModalModule,
     ],
-    exports: [LayoutComponent, SpinComponent],
+    exports: [
+        ...shared.SHARED_COMPONENTS,
+        FormsModule,
+        ReactiveFormsModule,
+        NzFormModule,
+        NzIconModule,
+    ],
 })
 export class SharedModule {}

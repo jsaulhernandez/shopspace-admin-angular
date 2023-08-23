@@ -1,34 +1,42 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { LoginComponent } from './pages/auth/login/login.component';
-import { LayoutComponent } from './shared/layout/layout.component';
+import { LoginComponent } from './modules/auth/pages/login/login.component';
+import { LayoutComponent } from './layout/layout.component';
 
-import { AuthGuard } from './guards/auth.guard';
+import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
-    { path: '', redirectTo: '/login', pathMatch: 'full' },
+    { path: '', redirectTo: '/auth/login', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
     {
-        path: 'admin',
         title: 'Admin',
+        path: '',
         component: LayoutComponent,
         canActivate: [AuthGuard],
         children: [
             {
-                path: 'category',
-                title: 'Categories',
+                path: 'admon',
+                title: 'Administration',
                 loadChildren: () =>
-                    import('./pages/category/category.module').then(
-                        (c) => c.CategoryModule
+                    import('./modules/admon/admon.module').then(
+                        (a) => a.AdmonModule
                     ),
             },
             {
-                path: 'brand',
-                title: 'Brands',
+                path: 'auth',
+                title: 'Authentication',
                 loadChildren: () =>
-                    import('./pages/brand/brand.module').then(
-                        (b) => b.BrandModule
+                    import('./modules/auth/auth.module').then(
+                        (a) => a.AuthModule
+                    ),
+            },
+            {
+                path: 'general',
+                title: 'General',
+                loadChildren: () =>
+                    import('./modules/general/general.module').then(
+                        (g) => g.GeneralModule
                     ),
             },
         ],

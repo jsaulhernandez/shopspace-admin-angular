@@ -7,30 +7,35 @@ import en from '@angular/common/locales/es';
 
 import { NZ_I18N, es_ES } from 'ng-zorro-antd/i18n';
 
+//modules
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-
-import { ComponentsModule } from './components/components.module';
 import { SharedModule } from './shared/shared.module';
-import { AuthModule } from './pages/auth/auth.module';
-import { CategoryModule } from './pages/category/category.module';
-import { BrandModule } from './pages/brand/brand.module';
-import { AddTokenInterceptor } from './interceptors/add-token.interceptor';
+
+//ng zorro modules
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+
+//components
+import { AppComponent } from './app.component';
+import * as index from './layout';
+
+//interceptors
+import { AddTokenInterceptor } from './core/interceptors/add-token.interceptor';
 
 registerLocaleData(en);
 
 @NgModule({
-    declarations: [AppComponent],
+    declarations: [AppComponent, ...index.LAYOUT],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
         AppRoutingModule,
         HttpClientModule,
+        NzLayoutModule,
+        NzMenuModule,
+        NzBreadCrumbModule,
         SharedModule,
-        ComponentsModule,
-        AuthModule,
-        CategoryModule,
-        BrandModule,
     ],
     providers: [
         { provide: NZ_I18N, useValue: es_ES },
