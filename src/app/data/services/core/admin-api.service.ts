@@ -22,6 +22,7 @@ export class AdminApiService {
 
     request<T = unknown>(req: OptionRequest<T>): Observable<CustomResponse<T>> {
         const httpOptions = {
+            body: req.data,
             observe: 'response' as 'body',
             params: new HttpParams({ fromObject: req.params }),
         };
