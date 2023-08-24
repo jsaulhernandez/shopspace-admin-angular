@@ -133,9 +133,9 @@ export class BrandComponent implements OnInit {
         } else {
             if (record) this.pivote = { ...record };
 
-            this.textModal = `¿En realidad desea ${
-                this.userAction === 'save' ? 'guardar' : 'actualizar'
-            } la marca ${record?.name}?`;
+            this.textModal = `¿Do you want to ${
+                this.userAction === 'save' ? 'save' : 'update'
+            } the brand ${record?.name}?`;
             this.typeModal = 'confirm';
             this.open = true;
         }
@@ -143,7 +143,7 @@ export class BrandComponent implements OnInit {
 
     onDelete(data: BrandModel) {
         this.pivote = data;
-        this.textModal = '¿Estás seguro de eliminar el registro?';
+        this.textModal = '¿Are you sure to delete the data?';
         this.typeModal = 'confirm';
         this.userAction = 'delete';
         this.open = true;
@@ -174,11 +174,9 @@ export class BrandComponent implements OnInit {
                 })
                 .subscribe({
                     next: (c) => {
-                        this.textModal = `Registro ${
-                            this.userAction === 'save'
-                                ? 'guardado'
-                                : 'actualizado'
-                        } correctamente`;
+                        this.textModal = `Data has been ${
+                            this.userAction === 'save' ? 'saved' : 'updated'
+                        } successfully`;
                         this.typeModal = 'success';
                         this.pivote = undefined;
 
@@ -187,11 +185,9 @@ export class BrandComponent implements OnInit {
                     },
                     error: (e) => {
                         this.loader$.hide();
-                        this.textModal = `Ocurrio un error al ${
-                            this.userAction === 'save'
-                                ? 'guardar'
-                                : 'actualizar'
-                        } la marca ${this.pivote?.name}`;
+                        this.textModal = `Error occurred when ${
+                            this.userAction === 'save' ? 'saving' : 'updating'
+                        } the brand ${this.pivote?.name}`;
                         this.typeModal = 'error';
                     },
                     complete: () => this.loader$.hide(),
@@ -206,7 +202,7 @@ export class BrandComponent implements OnInit {
                 })
                 .subscribe({
                     next: (c) => {
-                        this.textModal = 'Registro eliminado correctamente';
+                        this.textModal = 'Data has been removed successfully';
                         this.typeModal = 'success';
                         this.pivote = undefined;
 
@@ -214,7 +210,7 @@ export class BrandComponent implements OnInit {
                     },
                     error: (e) => {
                         this.loader$.hide();
-                        this.textModal = `Ocurrio un error al eliminar la marca ${this.pivote?.name}`;
+                        this.textModal = `Error occurred when removing the brand ${this.pivote?.name}`;
                         this.typeModal = 'error';
                     },
                     complete: () => this.loader$.hide(),

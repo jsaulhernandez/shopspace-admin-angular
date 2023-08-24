@@ -49,14 +49,14 @@
         <div class="flex mt-2 g-10">
             <app-s-button
                 [type]="'link'"
-                [text]="type === 'confirm' ? 'CANCELAR' : 'CERRAR'"
+                [text]="type === 'confirm' ? 'CANCEL' : 'CLOSE'"
                 (btnClick)="onClose.emit()"
             />
             <app-s-button
                 [type]="'primary'"
                 [isDanger]="isDanger"
                 [text]="
-                    textConfirm && type === 'confirm' ? textConfirm : 'Aceptar'
+                    textConfirm && type === 'confirm' ? textConfirm : 'Accept'
                 "
                 (btnClick)="onConfirm.emit()"
                 [isLoading]="loading ?? false"

@@ -137,9 +137,9 @@ export class CategoryComponent implements OnInit {
         } else {
             if (record) this.pivote = { ...record };
 
-            this.textModal = `¿En realidad desea ${
-                this.userAction === 'save' ? 'guardar' : 'actualizar'
-            } la categoría ${record?.name}?`;
+            this.textModal = `¿Do you want to ${
+                this.userAction === 'save' ? 'save' : 'update'
+            } the category ${record?.name}?`;
             this.typeModal = 'confirm';
             this.open = true;
         }
@@ -147,7 +147,7 @@ export class CategoryComponent implements OnInit {
 
     onDelete(data: CategoryModel) {
         this.pivote = data;
-        this.textModal = '¿Estás seguro de eliminar el registro?';
+        this.textModal = '¿Are you sure to delete the data?';
         this.typeModal = 'confirm';
         this.userAction = 'delete';
         this.open = true;
@@ -178,11 +178,9 @@ export class CategoryComponent implements OnInit {
                 })
                 .subscribe({
                     next: (c) => {
-                        this.textModal = `Registro ${
-                            this.userAction === 'save'
-                                ? 'guardado'
-                                : 'actualizado'
-                        } correctamente`;
+                        this.textModal = `Data has been ${
+                            this.userAction === 'save' ? 'saved' : 'updated'
+                        } successfully`;
                         this.typeModal = 'success';
                         this.pivote = undefined;
 
@@ -191,11 +189,9 @@ export class CategoryComponent implements OnInit {
                     },
                     error: (e) => {
                         this.loader$.hide();
-                        this.textModal = `Ocurrio un error al ${
-                            this.userAction === 'save'
-                                ? 'guardar'
-                                : 'actualizar'
-                        } la categoría ${this.pivote?.name}`;
+                        this.textModal = `Error occurred when ${
+                            this.userAction === 'save' ? 'saving' : 'updating'
+                        } the category ${this.pivote?.name}`;
                         this.typeModal = 'error';
                     },
                     complete: () => this.loader$.hide(),
@@ -210,7 +206,7 @@ export class CategoryComponent implements OnInit {
                 })
                 .subscribe({
                     next: (c) => {
-                        this.textModal = 'Registro eliminado correctamente';
+                        this.textModal = 'Data has been removed successfully';
                         this.typeModal = 'success';
                         this.pivote = undefined;
 
@@ -218,7 +214,7 @@ export class CategoryComponent implements OnInit {
                     },
                     error: (e) => {
                         this.loader$.hide();
-                        this.textModal = `Ocurrio un error al eliminar la categoría ${this.pivote?.name}`;
+                        this.textModal = `Error occurred when removing the category ${this.pivote?.name}`;
                         this.typeModal = 'error';
                     },
                     complete: () => this.loader$.hide(),
