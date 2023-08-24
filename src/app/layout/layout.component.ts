@@ -22,37 +22,37 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
     constructor(protected auth: AuthService, private router: Router) {}
     ngOnInit(): void {
-        this.navigationSubscription = this.getTitlePage();
+        // this.navigationSubscription = this.getTitlePage();
     }
 
-    getTitlePage() {
-        this.router.events
-            .pipe(
-                filter((ev) => ev instanceof NavigationEnd),
-                map(() => {
-                    console.log('first');
-                    let activeRoute: ActivatedRoute =
-                        this.router.routerState.root;
-                    let routerTitle = '';
+    // getTitlePage() {
+    //     this.router.events
+    //         .pipe(
+    //             filter((ev) => ev instanceof NavigationEnd),
+    //             map(() => {
+    //                 console.log('first');
+    //                 let activeRoute: ActivatedRoute =
+    //                     this.router.routerState.root;
+    //                 let routerTitle = '';
 
-                    while (activeRoute!.firstChild) {
-                        activeRoute = activeRoute.firstChild;
-                    }
+    //                 while (activeRoute!.firstChild) {
+    //                     activeRoute = activeRoute.firstChild;
+    //                 }
 
-                    if (activeRoute.snapshot.title) {
-                        routerTitle = activeRoute.snapshot.title;
-                    }
+    //                 if (activeRoute.snapshot.title) {
+    //                     routerTitle = activeRoute.snapshot.title;
+    //                 }
 
-                    return routerTitle;
-                })
-            )
-            .subscribe((title) => (this.title = title));
-    }
+    //                 return routerTitle;
+    //             })
+    //         )
+    //         .subscribe((title) => (this.title = title));
+    // }
 
     ngOnDestroy() {
-        if (this.navigationSubscription) {
-            this.navigationSubscription.unsubscribe();
-        }
+        // if (this.navigationSubscription) {
+        //     this.navigationSubscription.unsubscribe();
+        // }
     }
 
     onLogOut() {

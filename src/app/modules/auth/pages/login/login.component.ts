@@ -61,7 +61,9 @@ export class LoginComponent implements OnInit {
                         if (auth.data) {
                             const data: AuthResponse = auth.data;
                             this._authService.saveDataInSessionStorage(data);
-                            this.router.navigateByUrl('/admin/category');
+                            this.router.navigateByUrl(
+                                '/backoffice/general/categories'
+                            );
                         } else {
                             console.log('Data is empty');
                         }

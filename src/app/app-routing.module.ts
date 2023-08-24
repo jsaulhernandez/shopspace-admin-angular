@@ -1,17 +1,28 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { LoginComponent } from './modules/auth/pages/login/login.component';
 import { LayoutComponent } from './layout/layout.component';
 
 import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
-    { path: '', redirectTo: '/auth/login', pathMatch: 'full' },
-    { path: 'login', component: LoginComponent },
+    { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
+    {
+        title: 'Authentication',
+        path: 'auth',
+        children: [
+            {
+                path: '',
+                loadChildren: () =>
+                    import('./modules/auth/auth.module').then(
+                        (a) => a.AuthModule
+                    ),
+            },
+        ],
+    },
     {
         title: 'Admin',
-        path: '',
+        path: 'backoffice',
         component: LayoutComponent,
         canActivate: [AuthGuard],
         children: [
@@ -21,14 +32,6 @@ const routes: Routes = [
                 loadChildren: () =>
                     import('./modules/admon/admon.module').then(
                         (a) => a.AdmonModule
-                    ),
-            },
-            {
-                path: 'auth',
-                title: 'Authentication',
-                loadChildren: () =>
-                    import('./modules/auth/auth.module').then(
-                        (a) => a.AuthModule
                     ),
             },
             {

@@ -5,8 +5,8 @@ import { BrandComponent } from './pages/brand/brand.component';
 import { CategoryComponent } from './pages/category/category.component';
 
 const routes: Routes = [
-    { title: 'Brands', path: 'brand', component: BrandComponent },
-    { title: 'Categories', path: 'category', component: CategoryComponent },
+    { title: 'Brands', path: 'brands', component: BrandComponent },
+    { title: 'Categories', path: 'categories', component: CategoryComponent },
 ];
 
 @NgModule({
