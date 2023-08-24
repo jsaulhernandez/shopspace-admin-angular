@@ -1,6 +1,8 @@
 <nz-layout>
     <nz-sider nzBreakpoint="lg" nzCollapsible nzWidth="272px">
-        <div class="logo"></div>
+        <div class="logo flex justify-center items-center">
+            <img src="assets/images/logo/light.webp" height="32" alt="logo" />
+        </div>
         <ul nz-menu nzTheme="dark" nzMode="inline">
             <li nz-menu-item>
                 <span nz-icon nzType="appstore" nzTheme="outline"></span>
@@ -12,7 +14,11 @@
             </li>
             <li nz-menu-item>
                 <span nz-icon nzType="contacts" nzTheme="outline"></span>
-                <span><a [routerLink]="['/admin/brand']">Marcas</a></span>
+                <span
+                    ><a [routerLink]="['/backoffice/general/brands']"
+                        >Marcas</a
+                    ></span
+                >
             </li>
             <!-- <li nz-submenu nzTitle="User" nzIcon="user">
                 <ul>
