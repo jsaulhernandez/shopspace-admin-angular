@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
             this._coreService
                 .request<any>({
                     method: 'POST',
-                    path: '/auth/login',
+                    path: 'auth/login',
                     data: this.authData,
                 })
                 .subscribe({
