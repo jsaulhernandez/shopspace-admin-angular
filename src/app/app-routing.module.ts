@@ -6,19 +6,12 @@ import { LayoutComponent } from './layout/layout.component';
 import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
-    { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
+    { path: '', redirectTo: '/auth/login', pathMatch: 'full' },
     {
         title: 'Authentication',
         path: 'auth',
-        children: [
-            {
-                path: '',
-                loadChildren: () =>
-                    import('./modules/auth/auth.module').then(
-                        (a) => a.AuthModule
-                    ),
-            },
-        ],
+        loadChildren: () =>
+            import('./modules/auth/auth.module').then((a) => a.AuthModule),
     },
     {
         title: 'Admin',
@@ -47,7 +40,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes, { useHash: true })],
+    imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule],
 })
 export class AppRoutingModule {}
