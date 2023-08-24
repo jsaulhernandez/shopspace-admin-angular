@@ -10,7 +10,7 @@ import { CustomHeader } from 'src/app/core/utils/components.util';
 export class STableComponent<T extends Object> {
     @Input() header: CustomHeader[] = [];
     @Input() data: T[] = [];
-    @Input() isLoading: boolean = false;
+    @Input() isLoading: boolean | null = false;
     @Input() index: number = 0;
     @Input() total: number = 0;
     @Input() size: number = 0;

@@ -12,7 +12,7 @@
     </div>
 
     <app-s-table
-        [isLoading]="isLoading"
+        [isLoading]="isLoading | async"
         [header]="customHeader"
         [data]="categories"
         [index]="pagination?.number ?? 0"
@@ -37,5 +37,5 @@
     (onConfirm)="onConfirm()"
     [isDanger]="userAction === 'delete' ? true : false"
     [textConfirm]="userAction === 'delete' ? 'Sí, eliminar' : undefined"
-    [loading]="isLoading"
+    [loading]="isLoading | async"
 />

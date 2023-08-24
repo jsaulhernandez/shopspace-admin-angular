@@ -59,7 +59,7 @@
                     textConfirm && type === 'confirm' ? textConfirm : 'Aceptar'
                 "
                 (btnClick)="onConfirm.emit()"
-                [isLoading]="loading"
+                [isLoading]="loading ?? false"
                 *ngIf="type === 'confirm'"
             />
         </div>

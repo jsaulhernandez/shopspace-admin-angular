@@ -13,7 +13,7 @@ export class SModalActionsComponent {
     @Input() open: boolean = false;
     @Output() onClose = new EventEmitter();
     @Output() onConfirm = new EventEmitter();
-    @Input() loading: boolean = false;
+    @Input() loading: boolean | null = false;
     @Input() isDanger: boolean = false;
     @Input() textConfirm?: string;
 }

@@ -4,7 +4,7 @@
     <nz-table
         #basicTable
         [nzData]="data"
-        [nzLoading]="isLoading"
+        [nzLoading]="isLoading ?? false"
         [nzScroll]="{ x: '640px' }"
         [nzFrontPagination]="false"
         [nzShowPagination]="false"

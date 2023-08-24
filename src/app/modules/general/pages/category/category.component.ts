@@ -11,6 +11,8 @@ import {
 } from 'src/app/data/constants/constants';
 import { CustomHeader } from 'src/app/core/utils/components.util';
 
+import { LoaderService } from 'src/app/shared/services/loader.service';
+
 @Component({
     selector: 'app-category',
     templateUrl: './category.component.html',
@@ -19,7 +21,7 @@ import { CustomHeader } from 'src/app/core/utils/components.util';
 export class CategoryComponent implements OnInit {
     _categoryService = inject(AdminApiService);
 
-    isLoading: boolean = false;
+    isLoading = this.loader$.loading$;
     categories: CategoryModel[] = [];
     pagination?: CustomPagination;
     search: string = '';
@@ -53,12 +55,14 @@ export class CategoryComponent implements OnInit {
         },
     ];
 
+    constructor(private loader$: LoaderService) {}
+
     ngOnInit(): void {
         this.getCategories();
     }
 
     async getCategories(search = '', page = '0', size = '10') {
-        this.isLoading = true;
+        this.loader$.show();
         this._categoryService
             .request<CategoryModel[]>({
                 method: 'GET',
@@ -75,10 +79,10 @@ export class CategoryComponent implements OnInit {
                     this.pagination = c.page;
                 },
                 error: (e) => {
-                    this.isLoading = false;
+                    this.loader$.hide();
                     this.categories = [];
                 },
-                complete: () => (this.isLoading = false),
+                complete: () => this.loader$.hide(),
             });
     }
 
@@ -93,7 +97,7 @@ export class CategoryComponent implements OnInit {
     }
 
     onUpdateStatus(data: CategoryModel, value: boolean) {
-        this.isLoading = true;
+        this.loader$.show();
 
         data = {
             ...data,
@@ -115,9 +119,9 @@ export class CategoryComponent implements OnInit {
                     );
                 },
                 error: (e) => {
-                    this.isLoading = false;
+                    this.loader$.hide();
                 },
-                complete: () => (this.isLoading = false),
+                complete: () => this.loader$.hide(),
             });
     }
 
@@ -159,7 +163,7 @@ export class CategoryComponent implements OnInit {
     }
 
     onConfirm() {
-        this.isLoading = true;
+        this.loader$.show();
 
         if (this.userAction === 'save' || this.userAction === 'update') {
             const path = `category${
@@ -186,7 +190,7 @@ export class CategoryComponent implements OnInit {
                         this.showingComponent = 'Table';
                     },
                     error: (e) => {
-                        this.isLoading = false;
+                        this.loader$.hide();
                         this.textModal = `Ocurrio un error al ${
                             this.userAction === 'save'
                                 ? 'guardar'
@@ -194,7 +198,7 @@ export class CategoryComponent implements OnInit {
                         } la categoría ${this.pivote?.name}`;
                         this.typeModal = 'error';
                     },
-                    complete: () => (this.isLoading = false),
+                    complete: () => this.loader$.hide(),
                 });
         }
 
@@ -213,11 +217,11 @@ export class CategoryComponent implements OnInit {
                         this.getCategories();
                     },
                     error: (e) => {
-                        this.isLoading = false;
+                        this.loader$.hide();
                         this.textModal = `Ocurrio un error al eliminar la categoría ${this.pivote?.name}`;
                         this.typeModal = 'error';
                     },
-                    complete: () => (this.isLoading = false),
+                    complete: () => this.loader$.hide(),
                 });
         }
     }
