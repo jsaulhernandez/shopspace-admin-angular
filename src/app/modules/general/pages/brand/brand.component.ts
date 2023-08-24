@@ -1,10 +1,224 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+
+import { AdminApiService } from 'src/app/data/services/core/admin-api.service';
+import { BrandModel } from 'src/app/data/models/Brand.model';
+import { CustomPagination } from 'src/app/data/api/CustomResponse';
+
+import {
+    ModalActionsType,
+    ShowComponent,
+    UserActions,
+} from 'src/app/data/constants/constants';
+import { CustomHeader } from 'src/app/core/utils/components.util';
+
+import { LoaderService } from 'src/app/shared/services/loader.service';
 
 @Component({
-  selector: 'app-brand',
-  templateUrl: './brand.component.html',
-  styleUrls: ['./brand.component.scss']
+    selector: 'app-brand',
+    templateUrl: './brand.component.html',
+    styleUrls: ['./brand.component.scss'],
 })
-export class BrandComponent {
+export class BrandComponent implements OnInit {
+    _brandService = inject(AdminApiService);
 
+    isLoading = this.loader$.loading$;
+    brands: BrandModel[] = [];
+    pagination?: CustomPagination;
+    search: string = '';
+    currentPage: number = 0;
+
+    //modal
+    open: boolean = false;
+    typeModal: ModalActionsType = 'confirm';
+    textModal: string = '';
+    userAction: UserActions = 'save';
+    showingComponent: ShowComponent = 'Table';
+    pivote?: BrandModel;
+
+    customHeader: CustomHeader[] = [
+        {
+            title: 'Name',
+            dataIndex: 'name',
+        },
+        {
+            title: 'Status',
+            dataIndex: 'status',
+            element: 'switch',
+            onClickElement: (data, value) => this.onUpdateStatus(data, value),
+        },
+        {
+            title: 'Actions',
+            element: 'actions',
+            onClickElement: (data, _) => this.onAddBrand(data, false, 'update'),
+            onSecondClickElement: (data, _) => this.onDelete(data),
+        },
+    ];
+
+    constructor(private loader$: LoaderService) {}
+
+    ngOnInit(): void {
+        this.getBrands();
+    }
+
+    async getBrands(search = '', page = '0', size = '10') {
+        this.loader$.show();
+        this._brandService
+            .request<BrandModel[]>({
+                method: 'GET',
+                path: 'brand/paged',
+                params: {
+                    search,
+                    page,
+                    size,
+                },
+            })
+            .subscribe({
+                next: (c) => {
+                    this.brands = c.data || [];
+                    this.pagination = c.page;
+                },
+                error: (e) => {
+                    this.loader$.hide();
+                    this.brands = [];
+                },
+                complete: () => this.loader$.hide(),
+            });
+    }
+
+    onChangeValueInput(value: string) {
+        this.search = value;
+        this.getBrands(value);
+    }
+
+    onChangePagination(page: number) {
+        this.currentPage = page;
+        this.getBrands(this.search, page.toString());
+    }
+
+    onUpdateStatus(data: BrandModel, value: boolean) {
+        this.loader$.show();
+
+        data = {
+            ...data,
+            status: value ? 1 : 0,
+        };
+
+        this._brandService
+            .request({
+                method: 'PUT',
+                path: `brand/${data.id}`,
+                data,
+            })
+            .subscribe({
+                next: (c) => {
+                    console.log('brand status update');
+                    this.getBrands(this.search, this.currentPage.toString());
+                },
+                error: (e) => {
+                    this.loader$.hide();
+                },
+                complete: () => this.loader$.hide(),
+            });
+    }
+
+    onAddBrand(
+        record?: BrandModel,
+        isSaved = false,
+        userAction: UserActions = 'save'
+    ) {
+        if (!isSaved) {
+            this.pivote = record;
+            this.showingComponent = 'Form';
+            this.userAction = userAction;
+        } else {
+            if (record) this.pivote = { ...record };
+
+            this.textModal = `¿En realidad desea ${
+                this.userAction === 'save' ? 'guardar' : 'actualizar'
+            } la marca ${record?.name}?`;
+            this.typeModal = 'confirm';
+            this.open = true;
+        }
+    }
+
+    onDelete(data: BrandModel) {
+        this.pivote = data;
+        this.textModal = '¿Estás seguro de eliminar el registro?';
+        this.typeModal = 'confirm';
+        this.userAction = 'delete';
+        this.open = true;
+    }
+
+    onClose(action: 'modal' | 'form') {
+        if (action === 'modal') {
+            this.open = false;
+        } else {
+            this.pivote = undefined;
+            this.showingComponent = 'Table';
+        }
+    }
+
+    onConfirm() {
+        this.loader$.show();
+
+        if (this.userAction === 'save' || this.userAction === 'update') {
+            const path = `brand${
+                this.userAction === 'update' ? '/' + this.pivote?.id : ''
+            }`;
+
+            this._brandService
+                .request({
+                    method: this.userAction === 'save' ? 'POST' : 'PUT',
+                    path: path,
+                    data: this.pivote,
+                })
+                .subscribe({
+                    next: (c) => {
+                        this.textModal = `Registro ${
+                            this.userAction === 'save'
+                                ? 'guardado'
+                                : 'actualizado'
+                        } correctamente`;
+                        this.typeModal = 'success';
+                        this.pivote = undefined;
+
+                        this.getBrands();
+                        this.showingComponent = 'Table';
+                    },
+                    error: (e) => {
+                        this.loader$.hide();
+                        this.textModal = `Ocurrio un error al ${
+                            this.userAction === 'save'
+                                ? 'guardar'
+                                : 'actualizar'
+                        } la marca ${this.pivote?.name}`;
+                        this.typeModal = 'error';
+                    },
+                    complete: () => this.loader$.hide(),
+                });
+        }
+
+        if (this.userAction === 'delete') {
+            this._brandService
+                .request({
+                    method: 'DELETE',
+                    path: `brand/${this.pivote?.id}`,
+                })
+                .subscribe({
+                    next: (c) => {
+                        this.textModal = 'Registro eliminado correctamente';
+                        this.typeModal = 'success';
+                        this.pivote = undefined;
+
+                        this.getBrands();
+                    },
+                    error: (e) => {
+                        this.loader$.hide();
+                        this.textModal = `Ocurrio un error al eliminar la marca ${this.pivote?.name}`;
+                        this.typeModal = 'error';
+                    },
+                    complete: () => this.loader$.hide(),
+                });
+        }
+    }
 }
