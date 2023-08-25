@@ -12,6 +12,7 @@ import {
 import { CustomHeader } from 'src/app/core/utils/components.util';
 
 import { LoaderService } from 'src/app/shared/services/loader.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
     selector: 'app-category',
@@ -55,7 +56,10 @@ export class CategoryComponent implements OnInit {
         },
     ];
 
-    constructor(private loader$: LoaderService) {}
+    constructor(
+        private loader$: LoaderService,
+        private notification$: NotificationService
+    ) {}
 
     ngOnInit(): void {
         this.getCategories();
@@ -112,16 +116,25 @@ export class CategoryComponent implements OnInit {
             })
             .subscribe({
                 next: (c) => {
-                    console.log('category status update');
                     this.getCategories(
                         this.search,
                         this.currentPage.toString()
                     );
                 },
                 error: (e) => {
+                    this.notification$.onNotification(
+                        'error',
+                        'Error occurred when updating status'
+                    );
                     this.loader$.hide();
                 },
-                complete: () => this.loader$.hide(),
+                complete: () => {
+                    this.notification$.onNotification(
+                        'success',
+                        'Category status update'
+                    );
+                    this.loader$.hide();
+                },
             });
     }
 

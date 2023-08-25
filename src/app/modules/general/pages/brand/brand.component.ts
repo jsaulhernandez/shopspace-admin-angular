@@ -12,6 +12,7 @@ import {
 import { CustomHeader } from 'src/app/core/utils/components.util';
 
 import { LoaderService } from 'src/app/shared/services/loader.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
     selector: 'app-brand',
@@ -54,7 +55,10 @@ export class BrandComponent implements OnInit {
         },
     ];
 
-    constructor(private loader$: LoaderService) {}
+    constructor(
+        private loader$: LoaderService,
+        private notification$: NotificationService
+    ) {}
 
     ngOnInit(): void {
         this.getBrands();
@@ -111,13 +115,22 @@ export class BrandComponent implements OnInit {
             })
             .subscribe({
                 next: (c) => {
-                    console.log('brand status update');
                     this.getBrands(this.search, this.currentPage.toString());
                 },
                 error: (e) => {
+                    this.notification$.onNotification(
+                        'error',
+                        'Error occurred when updating status'
+                    );
                     this.loader$.hide();
                 },
-                complete: () => this.loader$.hide(),
+                complete: () => {
+                    this.notification$.onNotification(
+                        'success',
+                        'Brand status update'
+                    );
+                    this.loader$.hide();
+                },
             });
     }
 

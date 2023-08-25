@@ -15,6 +15,7 @@ import { SharedModule } from './shared/shared.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
 
 //components
 import { AppComponent } from './app.component';
@@ -35,6 +36,7 @@ registerLocaleData(en);
         NzLayoutModule,
         NzMenuModule,
         NzBreadCrumbModule,
+        NzNotificationModule,
         SharedModule,
     ],
     providers: [

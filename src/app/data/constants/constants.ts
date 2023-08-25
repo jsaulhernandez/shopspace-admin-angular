@@ -24,3 +24,9 @@ export declare type TypeElementTable =
 export type ModalActionsType = 'success' | 'error' | 'info' | 'confirm';
 export type UserActions = 'get' | 'save' | 'update' | 'delete';
 export type ShowComponent = 'Form' | 'Table';
+export type TypeNotification =
+    | 'success'
+    | 'info'
+    | 'warning'
+    | 'error'
+    | 'blank';

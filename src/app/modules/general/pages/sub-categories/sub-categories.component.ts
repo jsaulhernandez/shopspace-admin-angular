@@ -7,11 +7,13 @@ import { CustomPagination } from 'src/app/data/api/CustomResponse';
 import {
     ModalActionsType,
     ShowComponent,
+    TypeNotification,
     UserActions,
 } from 'src/app/data/constants/constants';
 import { CustomHeader } from 'src/app/core/utils/components.util';
 
 import { LoaderService } from 'src/app/shared/services/loader.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
     selector: 'app-sub-categories',
@@ -59,7 +61,10 @@ export class SubCategoriesComponent {
         },
     ];
 
-    constructor(private loader$: LoaderService) {}
+    constructor(
+        private loader$: LoaderService,
+        private notification$: NotificationService
+    ) {}
 
     ngOnInit(): void {
         this.getCategories();
@@ -116,16 +121,25 @@ export class SubCategoriesComponent {
             })
             .subscribe({
                 next: (c) => {
-                    console.log('subcategory status update');
                     this.getCategories(
                         this.search,
                         this.currentPage.toString()
                     );
                 },
                 error: (e) => {
+                    this.notification$.onNotification(
+                        'error',
+                        'Error occurred when updating status'
+                    );
                     this.loader$.hide();
                 },
-                complete: () => this.loader$.hide(),
+                complete: () => {
+                    this.notification$.onNotification(
+                        'success',
+                        'Subcategory status update'
+                    );
+                    this.loader$.hide();
+                },
             });
     }
 
