@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 
-import { CategoryModel } from 'src/app/data/models/Category.interface';
+import { CategoryModel } from 'src/app/data/models/Category.model';
 import { AdminApiService } from 'src/app/data/services/core/admin-api.service';
 import { CustomPagination } from 'src/app/data/api/CustomResponse';
 
@@ -35,7 +35,7 @@ export class CategoryComponent implements OnInit {
     showingComponent: ShowComponent = 'Table';
     pivote?: CategoryModel;
 
-    customHeader: CustomHeader[] = [
+    customHeader: CustomHeader<CategoryModel>[] = [
         {
             title: 'Name',
             dataIndex: 'name',

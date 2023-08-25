@@ -35,7 +35,7 @@ export class BrandComponent implements OnInit {
     showingComponent: ShowComponent = 'Table';
     pivote?: BrandModel;
 
-    customHeader: CustomHeader[] = [
+    customHeader: CustomHeader<BrandModel>[] = [
         {
             title: 'Name',
             dataIndex: 'name',

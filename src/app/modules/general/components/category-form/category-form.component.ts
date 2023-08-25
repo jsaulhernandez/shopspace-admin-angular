@@ -5,7 +5,7 @@ import {
     Validators,
 } from '@angular/forms';
 
-import { CategoryModel } from 'src/app/data/models/Category.interface';
+import { CategoryModel } from 'src/app/data/models/Category.model';
 
 import { FormUtils } from 'src/app/core/utils/form.util';
 

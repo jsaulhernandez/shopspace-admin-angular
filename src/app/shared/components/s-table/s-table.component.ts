@@ -7,9 +7,9 @@ import { CustomHeader } from 'src/app/core/utils/components.util';
     templateUrl: './s-table.component.html',
     styleUrls: ['./s-table.component.scss'],
 })
-export class STableComponent<T extends Object> {
-    @Input() header: CustomHeader[] = [];
-    @Input() data: T[] = [];
+export class STableComponent {
+    @Input() header: CustomHeader<any>[] = [];
+    @Input() data: any[] = [];
     @Input() isLoading: boolean | null = false;
     @Input() index: number = 0;
     @Input() total: number = 0;
