@@ -408,3 +408,13 @@
         }
     }
 }
+
+/* styles for select */
+nz-select nz-select-top-control {
+    height: 40px !important;
+    border-radius: 8px !important;
+}
+
+nz-select nz-select-top-control input {
+    height: 40px !important;
+}

@@ -1,4 +1,9 @@
 import { BrandFormComponent } from './brand-form/brand-form.component';
 import { CategoryFormComponent } from './category-form/category-form.component';
+import { SubCategoryFormComponent } from './sub-category-form/sub-category-form.component';
 
-export const GENERAL_COMPONENTS = [BrandFormComponent, CategoryFormComponent];
+export const GENERAL_COMPONENTS = [
+    BrandFormComponent,
+    CategoryFormComponent,
+    SubCategoryFormComponent,
+];
