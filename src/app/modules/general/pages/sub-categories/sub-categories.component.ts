@@ -1,4 +1,10 @@
-import { Component, inject } from '@angular/core';
+import {
+    AfterContentChecked,
+    ChangeDetectorRef,
+    Component,
+    OnInit,
+    inject,
+} from '@angular/core';
 
 import { SubCategoryModel } from 'src/app/data/models/SubCategory.model';
 import { AdminApiService } from 'src/app/data/services/core/admin-api.service';
@@ -7,7 +13,6 @@ import { CustomPagination } from 'src/app/data/api/CustomResponse';
 import {
     ModalActionsType,
     ShowComponent,
-    TypeNotification,
     UserActions,
 } from 'src/app/data/constants/constants';
 import { CustomHeader } from 'src/app/core/utils/components.util';
@@ -20,7 +25,7 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
     templateUrl: './sub-categories.component.html',
     styleUrls: ['./sub-categories.component.scss'],
 })
-export class SubCategoriesComponent {
+export class SubCategoriesComponent implements OnInit, AfterContentChecked {
     _subCategoryService = inject(AdminApiService);
 
     isLoading = this.loader$.loading$;
@@ -63,11 +68,16 @@ export class SubCategoriesComponent {
 
     constructor(
         private loader$: LoaderService,
-        private notification$: NotificationService
+        private notification$: NotificationService,
+        private cdRef: ChangeDetectorRef
     ) {}
 
     ngOnInit(): void {
         this.getCategories();
+    }
+
+    ngAfterContentChecked(): void {
+        this.cdRef.detectChanges();
     }
 
     async getCategories(search = '', page = '0', size = '10') {

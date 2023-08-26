@@ -3,7 +3,6 @@ import {
     EventEmitter,
     Input,
     Output,
-    inject,
     OnInit,
     OnDestroy,
 } from '@angular/core';
@@ -32,7 +31,6 @@ export class SubCategoryFormComponent implements OnInit, OnDestroy {
     @Output() onCancel = new EventEmitter();
     @Output() submitted = new EventEmitter<SubCategoryModel>();
 
-    _categoryService = inject(AdminApiService);
     validateForm!: UntypedFormGroup;
 
     isLoading = this.loader$.loading$;
@@ -41,7 +39,8 @@ export class SubCategoryFormComponent implements OnInit, OnDestroy {
 
     constructor(
         private fb: UntypedFormBuilder,
-        private loader$: LoaderService
+        private loader$: LoaderService,
+        private categoryService$: AdminApiService
     ) {}
 
     ngOnInit(): void {
@@ -68,15 +67,15 @@ export class SubCategoryFormComponent implements OnInit, OnDestroy {
         this.subscriber.unsubscribe();
     }
 
-    async getCategories() {
+    getCategories() {
         this.loader$.show();
-        this.subscriber = this._categoryService
+        this.subscriber = this.categoryService$
             .request<SubCategoryModel[]>({
                 method: 'GET',
                 path: 'category/active',
             })
             .subscribe({
-                next: (c) => {
+                next: async (c) => {
                     this.categories = c.data || [];
                 },
                 error: (e) => {
