@@ -13,7 +13,7 @@ import {
     Validators,
 } from '@angular/forms';
 
-import { SubCategoryModel } from 'src/app/data/models/SubCategory.model';
+import { SubcategoryModel } from 'src/app/data/models/Subcategory.model';
 import { CategoryModel } from 'src/app/data/models/Category.model';
 
 import { AdminApiService } from 'src/app/data/services/core/admin-api.service';
@@ -27,9 +27,9 @@ import { FormUtils } from 'src/app/core/utils/form.util';
     styleUrls: ['./sub-category-form.component.scss'],
 })
 export class SubCategoryFormComponent implements OnInit, OnDestroy {
-    @Input() data?: SubCategoryModel;
+    @Input() data?: SubcategoryModel;
     @Output() onCancel = new EventEmitter();
-    @Output() submitted = new EventEmitter<SubCategoryModel>();
+    @Output() submitted = new EventEmitter<SubcategoryModel>();
 
     validateForm!: UntypedFormGroup;
 
@@ -70,7 +70,7 @@ export class SubCategoryFormComponent implements OnInit, OnDestroy {
     getCategories() {
         this.loader$.show();
         this.subscriber = this.categoryService$
-            .request<SubCategoryModel[]>({
+            .request<SubcategoryModel[]>({
                 method: 'GET',
                 path: 'category/active',
             })

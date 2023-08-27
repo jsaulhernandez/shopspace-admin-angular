@@ -6,7 +6,7 @@ import {
     inject,
 } from '@angular/core';
 
-import { SubCategoryModel } from 'src/app/data/models/SubCategory.model';
+import { SubcategoryModel } from 'src/app/data/models/Subcategory.model';
 import { AdminApiService } from 'src/app/data/services/core/admin-api.service';
 import { CustomPagination } from 'src/app/data/api/CustomResponse';
 
@@ -29,7 +29,7 @@ export class SubCategoriesComponent implements OnInit, AfterContentChecked {
     _subCategoryService = inject(AdminApiService);
 
     isLoading = this.loader$.loading$;
-    subCategories: SubCategoryModel[] = [];
+    subCategories: SubcategoryModel[] = [];
     pagination?: CustomPagination;
     search: string = '';
     currentPage: number = 0;
@@ -40,9 +40,9 @@ export class SubCategoriesComponent implements OnInit, AfterContentChecked {
     textModal: string = '';
     userAction: UserActions = 'save';
     showingComponent: ShowComponent = 'Table';
-    pivote?: SubCategoryModel;
+    pivote?: SubcategoryModel;
 
-    customHeader: CustomHeader<SubCategoryModel>[] = [
+    customHeader: CustomHeader<SubcategoryModel>[] = [
         {
             title: 'Name',
             dataIndex: 'name',
@@ -83,7 +83,7 @@ export class SubCategoriesComponent implements OnInit, AfterContentChecked {
     async getCategories(search = '', page = '0', size = '10') {
         this.loader$.show();
         this._subCategoryService
-            .request<SubCategoryModel[]>({
+            .request<SubcategoryModel[]>({
                 method: 'GET',
                 path: 'categories/paged',
                 params: {
@@ -115,7 +115,7 @@ export class SubCategoriesComponent implements OnInit, AfterContentChecked {
         this.getCategories(this.search, page.toString());
     }
 
-    onUpdateStatus(data: SubCategoryModel, value: boolean) {
+    onUpdateStatus(data: SubcategoryModel, value: boolean) {
         this.loader$.show();
 
         data = {
@@ -154,7 +154,7 @@ export class SubCategoriesComponent implements OnInit, AfterContentChecked {
     }
 
     onAddSubCategory(
-        record?: SubCategoryModel,
+        record?: SubcategoryModel,
         isSaved = false,
         userAction: UserActions = 'save'
     ) {
@@ -173,7 +173,7 @@ export class SubCategoriesComponent implements OnInit, AfterContentChecked {
         }
     }
 
-    onDelete(data: SubCategoryModel) {
+    onDelete(data: SubcategoryModel) {
         this.pivote = data;
         this.textModal = '¿Are you sure to delete the data?';
         this.typeModal = 'confirm';
