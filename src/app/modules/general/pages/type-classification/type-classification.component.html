@@ -1,1 +1,43 @@
-<p>type-classification works!</p>
+<div class="flex flex-column g-10" *ngIf="showingComponent === 'Table'">
+    <div
+        class="TypeClassificationComponent flex flex-wrap justify-between g-10 mb-1"
+    >
+        <app-s-input
+            placeHolder="Look for name..."
+            (onChangeInput)="onChangeValueInput($event)"
+        />
+        <app-s-button
+            text="Add"
+            suffix="plus"
+            (btnClick)="onAddTypeClassification()"
+        />
+    </div>
+
+    <app-s-table
+        [isLoading]="isLoading | async"
+        [header]="customHeader"
+        [data]="typesClassifications"
+        [index]="pagination?.number ?? 0"
+        [total]="pagination?.totalElements ?? 0"
+        [size]="pagination?.size ?? 0"
+        (changePagination)="onChangePagination($event)"
+    />
+</div>
+
+<app-type-classification-form
+    (submitted)="onAddTypeClassification($event, true)"
+    (onCancel)="onClose('form')"
+    [data]="pivote"
+    *ngIf="showingComponent === 'Form'"
+/>
+
+<app-s-modal-actions
+    [open]="open"
+    [type]="typeModal"
+    [title]="textModal"
+    (onClose)="onClose('modal')"
+    (onConfirm)="onConfirm()"
+    [isDanger]="userAction === 'delete' ? true : false"
+    [textConfirm]="userAction === 'delete' ? 'Sí, eliminar' : undefined"
+    [loading]="isLoading | async"
+/>
