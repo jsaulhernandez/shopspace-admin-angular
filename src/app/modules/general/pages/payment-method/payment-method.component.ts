@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 
 import { PaymentMethodModel } from 'src/app/data/models/PaymentMethod.model';
 
@@ -20,7 +20,7 @@ import { CustomHeader } from 'src/app/core/utils/components.util';
     templateUrl: './payment-method.component.html',
     styleUrls: ['./payment-method.component.scss'],
 })
-export class PaymentMethodComponent {
+export class PaymentMethodComponent implements OnInit {
     api$ = inject(AdminApiService);
 
     isLoading = this.loader$.loading$;

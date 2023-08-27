@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    Input,
+    OnDestroy,
+    OnInit,
+    Output,
+} from '@angular/core';
 import {
     UntypedFormBuilder,
     UntypedFormGroup,
@@ -19,7 +26,9 @@ import { FormUtils } from 'src/app/core/utils/form.util';
     templateUrl: './classification-subcategories-form.component.html',
     styleUrls: ['./classification-subcategories-form.component.scss'],
 })
-export class ClassificationSubcategoriesFormComponent {
+export class ClassificationSubcategoriesFormComponent
+    implements OnInit, OnDestroy
+{
     @Input() data?: ClassificationModel;
     @Output() onCancel = new EventEmitter();
     @Output() submitted = new EventEmitter<ClassificationModel>();

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
     UntypedFormBuilder,
     UntypedFormGroup,
@@ -14,7 +14,7 @@ import { FormUtils } from 'src/app/core/utils/form.util';
     templateUrl: './brand-form.component.html',
     styleUrls: ['./brand-form.component.scss'],
 })
-export class BrandFormComponent {
+export class BrandFormComponent implements OnInit {
     @Input() data?: BrandModel;
     @Output() onCancel = new EventEmitter();
     @Output() submitted = new EventEmitter<BrandModel>();
