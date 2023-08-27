@@ -1,4 +1,10 @@
-import { ChangeDetectorRef, Component, inject } from '@angular/core';
+import {
+    AfterContentChecked,
+    ChangeDetectorRef,
+    Component,
+    OnInit,
+    inject,
+} from '@angular/core';
 
 import { TypeClassificationModel } from 'src/app/data/models/TypeClassification.model';
 
@@ -20,7 +26,9 @@ import {
     templateUrl: './type-classification.component.html',
     styleUrls: ['./type-classification.component.scss'],
 })
-export class TypeClassificationComponent {
+export class TypeClassificationComponent
+    implements OnInit, AfterContentChecked
+{
     api$ = inject(AdminApiService);
 
     isLoading = this.loader$.loading$;
