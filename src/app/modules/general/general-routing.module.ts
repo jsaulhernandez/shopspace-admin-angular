@@ -5,6 +5,7 @@ import { BrandComponent } from './pages/brand/brand.component';
 import { CategoryComponent } from './pages/category/category.component';
 import { SubCategoriesComponent } from './pages/sub-categories/sub-categories.component';
 import { ClassificationSubcategoriesComponent } from './pages/classification-subcategories/classification-subcategories.component';
+import { TypeClassificationComponent } from './pages/type-classification/type-classification.component';
 
 const routes: Routes = [
     { title: 'Brands', path: 'brands', component: BrandComponent },
@@ -18,6 +19,11 @@ const routes: Routes = [
         title: 'Clasificación',
         path: 'classification',
         component: ClassificationSubcategoriesComponent,
+    },
+    {
+        title: 'Types of Clasificación',
+        path: 'types',
+        component: TypeClassificationComponent,
     },
 ];
 
