@@ -39,6 +39,20 @@
             </div>
         </div>
 
+        <div class="ss-row">
+            <div class="ss-column-50">
+                <nz-form-item>
+                    <nz-form-label>¿Is credit or debit card?</nz-form-label>
+                    <nz-form-control nzErrorTip="Please selected the status!">
+                        <nz-radio-group formControlName="isCreditDebitCard">
+                            <label nz-radio nzValue="1">Yes</label>
+                            <label nz-radio nzValue="0">No</label>
+                        </nz-radio-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+
         <div class="flex justify-center g-20">
             <app-s-button
                 text="Cancel"
