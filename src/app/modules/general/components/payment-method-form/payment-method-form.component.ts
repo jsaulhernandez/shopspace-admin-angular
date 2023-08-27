@@ -32,7 +32,7 @@ export class PaymentMethodFormComponent implements OnInit {
                 [Validators.required],
             ],
             isCreditDebitCard: [
-                this.data?.isCreditDebitCard.toString() ?? '1',
+                this.data?.isCreditDebitCard.toString() ?? '0',
                 [Validators.required],
             ],
         });
