@@ -18,6 +18,13 @@
     />
 </div>
 
+<app-product-form
+    (submitted)="onAddProduct($event, true)"
+    (onCancel)="onClose('form')"
+    [data]="pivote"
+    *ngIf="showingComponent === 'Form'"
+/>
+
 <app-s-modal-actions
     [open]="open"
     [type]="typeModal"

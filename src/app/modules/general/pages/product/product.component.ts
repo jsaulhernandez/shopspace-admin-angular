@@ -1,4 +1,10 @@
-import { Component, OnInit, inject } from '@angular/core';
+import {
+    AfterContentChecked,
+    ChangeDetectorRef,
+    Component,
+    OnInit,
+    inject,
+} from '@angular/core';
 
 import { ProductModel } from 'src/app/data/models/Product.model';
 
@@ -20,7 +26,7 @@ import { NumberUtils } from 'src/app/core/utils/number.utils';
     templateUrl: './product.component.html',
     styleUrls: ['./product.component.scss'],
 })
-export class ProductComponent implements OnInit {
+export class ProductComponent implements OnInit, AfterContentChecked {
     api$ = inject(AdminApiService);
 
     isLoading = this.loader$.loading$;
@@ -79,10 +85,17 @@ export class ProductComponent implements OnInit {
         },
     ];
 
-    constructor(private loader$: LoaderService) {}
+    constructor(
+        private loader$: LoaderService,
+        private cdRef: ChangeDetectorRef
+    ) {}
 
     ngOnInit(): void {
         this.getProducts();
+    }
+
+    ngAfterContentChecked(): void {
+        this.cdRef.detectChanges();
     }
 
     async getProducts(search = '', page = '0', size = '10') {
