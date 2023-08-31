@@ -4,5 +4,5 @@ export interface ViewProductModel {
     color: string;
     stock: number;
     status: number;
-    productId: number;
+    productId?: number;
 }
