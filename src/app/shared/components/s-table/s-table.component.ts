@@ -11,6 +11,7 @@ export class STableComponent<T = unknown> {
     @Input() header: CustomHeader<T>[] = [];
     @Input() data: T[] = [];
     @Input() isLoading: boolean | null = false;
+    @Input() includePagination: boolean = true;
     @Input() index: number = 0;
     @Input() total: number = 0;
     @Input() size: number = 0;

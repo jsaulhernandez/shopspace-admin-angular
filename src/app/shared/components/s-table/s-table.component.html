@@ -102,6 +102,7 @@
     </nz-table>
 
     <nz-pagination
+        *ngIf="includePagination"
         [nzPageIndex]="index"
         [nzTotal]="total"
         [nzPageSize]="size"
