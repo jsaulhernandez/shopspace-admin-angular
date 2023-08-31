@@ -14,13 +14,16 @@ import {
 import { Subscription } from 'rxjs';
 
 import { ProductModel } from 'src/app/data/models/Product.model';
+import { BrandModel } from 'src/app/data/models/Brand.model';
+import { ProductDetailModel } from 'src/app/data/models/ProductDetail.model';
+import { ViewProductModel } from 'src/app/data/models/ViewProduct.model';
 
 import { AdminApiService } from 'src/app/data/services/core/admin-api.service';
 import { LoaderService } from 'src/app/shared/services/loader.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 
 import { FormUtils } from 'src/app/core/utils/form.util';
-import { BrandModel } from 'src/app/data/models/Brand.model';
+import { CustomHeader } from 'src/app/core/utils/components.util';
 
 @Component({
     selector: 'app-product-form',
@@ -33,10 +36,33 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     @Output() submitted = new EventEmitter<ProductModel>();
 
     validateForm!: UntypedFormGroup;
+    productDetails: ProductDetailModel[] = [];
+    viewsProduct: ViewProductModel[] = [];
 
     isLoading = this.loader$.loading$;
     brands: BrandModel[] = [];
     subscriber!: Subscription;
+
+    customHeader: CustomHeader<ViewProductModel>[] = [
+        {
+            title: 'Image',
+            dataIndex: 'image',
+        },
+        {
+            title: 'Color',
+            dataIndex: 'color',
+        },
+        {
+            title: 'Stock',
+            dataIndex: 'stock',
+        },
+        {
+            title: 'Status',
+            dataIndex: 'status',
+            element: 'switch',
+            onClickElement: (data, value) => {},
+        },
+    ];
 
     constructor(
         private fb: UntypedFormBuilder,

@@ -1,4 +1,4 @@
-<div class="flex flex-column p-3">
+<div class="product-form flex flex-column p-3">
     <form
         nz-form
         [formGroup]="validateForm"
@@ -112,6 +112,69 @@
                     </nz-form-item>
                 </div>
             </div>
+        </div>
+
+        <div class="ss-row">
+            <div class="ss-column-50">
+                <app-s-text text="Additional information" fontWeight="600" />
+            </div>
+
+            <div class="ss-column-50">
+                <app-s-button
+                    text="Add details"
+                    (click)="$event.preventDefault()"
+                    class="flex justify-end"
+                />
+            </div>
+        </div>
+
+        <div class="product-form__details my-2 p-2 flex justify-center">
+            <app-s-text
+                text="Please, add one or more records"
+                fontWeight="600"
+                *ngIf="productDetails.length === 0"
+            />
+
+            <div
+                class="flex flex-column g-20 wp-100"
+                *ngIf="productDetails.length > 0"
+            >
+                <div
+                    *ngFor="let item of productDetails"
+                    class="product-form__details-item flex justify-between items-center"
+                >
+                    <div class="flex g-10">
+                        <app-s-text
+                            [text]="item.identifier + ':'"
+                            fontWeight="600"
+                        />
+                        <app-s-text [text]="item.value" fontWeight="400" />
+                    </div>
+                    <div class="flex g-20">
+                        <span
+                            class="pointer product-form__details-item-icon"
+                            nz-icon
+                            nzType="edit"
+                            nzTheme="outline"
+                        ></span>
+                        <span
+                            class="pointer product-form__details-item-icon"
+                            nz-icon
+                            nzType="close"
+                            nzTheme="outline"
+                        ></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-column my-2 g-10">
+            <app-s-text text="View products" fontWeight="600" />
+            <app-s-table
+                [header]="customHeader"
+                [data]="viewsProduct"
+                [includePagination]="false"
+            />
         </div>
 
         <div class="flex justify-center g-20">

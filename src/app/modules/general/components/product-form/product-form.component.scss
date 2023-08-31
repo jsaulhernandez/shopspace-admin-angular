@@ -1,0 +1,11 @@
+.product-form {
+    &__details {
+        background-color: aliceblue;
+        border-radius: 10px;
+
+        &-item-icon:hover {
+            color: var(--primary-color);
+            transform: scale(1.2);
+        }
+    }
+}
