@@ -1,5 +1,6 @@
 import { SActionsComponent } from './s-actions/s-actions.component';
 import { SButtonComponent } from './s-button/s-button.component';
+import { SCustomModalComponent } from './s-custom-modal/s-custom-modal.component';
 import { SInputComponent } from './s-input/s-input.component';
 import { SModalActionsComponent } from './s-modal-actions/s-modal-actions.component';
 import { STableComponent } from './s-table/s-table.component';
@@ -14,4 +15,5 @@ export const SHARED_COMPONENTS = [
     STableComponent,
     SActionsComponent,
     SModalActionsComponent,
+    SCustomModalComponent,
 ];
