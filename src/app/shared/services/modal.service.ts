@@ -1,5 +1,5 @@
 import { Injectable, TemplateRef, inject } from '@angular/core';
-import { ModalOptions, NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { ModalOptions, NzModalService } from 'ng-zorro-antd/modal';
 
 import { SCustomModalComponent } from '../components/s-custom-modal/s-custom-modal.component';
 
