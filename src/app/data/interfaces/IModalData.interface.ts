@@ -1,16 +1,18 @@
-import { EventEmitter } from '@angular/core';
+import { TemplateRef } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { ModalActionsType } from '../constants/constants';
-
-type ScriptEvent = () => void;
+type ScriptEvent = () => void | {};
 
 export interface IModalData {
-    type: ModalActionsType;
-    title: string;
-    open: boolean;
-    onConfirm: ScriptEvent;
-    loading: Observable<boolean>;
-    isDanger: boolean;
-    textConfirm?: string;
+    title?: string;
+    includeFooter?: boolean;
+    textOnConfirm?: string;
+    textOnCancel?: string;
+    onConfirm?: ScriptEvent;
+    onCancel?: ScriptEvent;
+    loading?: Observable<boolean>;
+}
+
+export interface IModalConfig extends IModalData {
+    modalContent: TemplateRef<any>;
 }

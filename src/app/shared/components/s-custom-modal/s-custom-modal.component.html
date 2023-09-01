@@ -1,0 +1,21 @@
+<!-- title -->
+<div *nzModalTitle [innerHTML]="nzModalData.title"></div>
+<!-- body -->
+<div [ngTemplateOutlet]="nzModalData.modalContent"></div>
+<!-- footer -->
+<div class="flex flex-column" *ngIf="nzModalData.includeFooter">
+    <div *nzModalFooter class="flex justify-center items-center">
+        <div class="flex justify-center g-20">
+            <app-s-button
+                [text]="nzModalData.textOnCancel ?? 'Cancel'"
+                [type]="'text'"
+                (btnClick)="nzModalData.onCancel ?? closeModal()"
+            />
+            <app-s-button
+                [text]="nzModalData.textOnConfirm ?? 'Confirm'"
+                (btnClick)="nzModalData.onConfirm ?? closeModal()"
+                [isLoading]="(nzModalData.loading | async) ?? false"
+            />
+        </div>
+    </div>
+</div>
