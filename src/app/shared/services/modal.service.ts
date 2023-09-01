@@ -1,5 +1,5 @@
 import { Injectable, TemplateRef, inject } from '@angular/core';
-import { ModalOptions, NzModalService } from 'ng-zorro-antd/modal';
+import { ModalOptions, NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 
 import { SCustomModalComponent } from '../components/s-custom-modal/s-custom-modal.component';
 
@@ -13,13 +13,17 @@ import {
 })
 export class ModalService {
     private nzModalService$ = inject(NzModalService);
+    nzModalRef!: NzModalRef;
 
     open(
         template: TemplateRef<any>,
         data?: IModalData,
         modalConfig?: ModalOptions
     ) {
-        this.nzModalService$.create<SCustomModalComponent, IModalData>({
+        this.nzModalRef = this.nzModalService$.create<
+            SCustomModalComponent,
+            IModalData
+        >({
             ...modalConfig,
             nzData: <IModalConfig>{
                 ...data,
@@ -30,5 +34,9 @@ export class ModalService {
             nzMaskClosable: true,
             nzClosable: true,
         });
+    }
+
+    close() {
+        this.nzModalRef.destroy();
     }
 }
