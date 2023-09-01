@@ -14,6 +14,7 @@ export class SCustomModalComponent {
     readonly nzModalData: IModalConfig = inject(NZ_MODAL_DATA);
 
     closeModal(): void {
+        if (this.nzModalData.onCancel) this.nzModalData.onCancel();
         this.#modal.destroy();
     }
 }

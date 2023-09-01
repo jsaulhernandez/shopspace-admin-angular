@@ -24,7 +24,6 @@ export class ModalService {
             nzData: <IModalConfig>{
                 ...data,
                 modalContent: template,
-                includeFooter: true,
             },
             nzContent: SCustomModalComponent,
             nzFooter: null,
