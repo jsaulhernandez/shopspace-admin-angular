@@ -122,7 +122,7 @@
             <div class="ss-column-50">
                 <app-s-button
                     text="Add details"
-                    (click)="$event.preventDefault()"
+                    (click)="onCustomModal(); $event.preventDefault()"
                     class="flex justify-end"
                 />
             </div>
@@ -140,7 +140,7 @@
                 *ngIf="productDetails.length > 0"
             >
                 <div
-                    *ngFor="let item of productDetails"
+                    *ngFor="let item of productDetails; let i = index"
                     class="product-form__details-item flex justify-between items-center"
                 >
                     <div class="flex g-10">
@@ -156,20 +156,35 @@
                             nz-icon
                             nzType="edit"
                             nzTheme="outline"
+                            (click)="onUpdateDetail(item, i)"
                         ></span>
                         <span
                             class="pointer product-form__details-item-icon"
                             nz-icon
                             nzType="close"
                             nzTheme="outline"
+                            (click)="onRemoveDetail(i)"
                         ></span>
                     </div>
                 </div>
             </div>
         </div>
 
+        <div class="ss-row">
+            <div class="ss-column-50">
+                <app-s-text text="View products" fontWeight="600" />
+            </div>
+
+            <div class="ss-column-50">
+                <app-s-button
+                    text="Add view"
+                    (click)="onCustomModal('view'); $event.preventDefault()"
+                    class="flex justify-end"
+                />
+            </div>
+        </div>
+
         <div class="flex flex-column my-2 g-10">
-            <app-s-text text="View products" fontWeight="600" />
             <app-s-table
                 [header]="customHeader"
                 [data]="viewsProduct"
@@ -187,3 +202,105 @@
         </div>
     </form>
 </div>
+
+<!-- template for product details -->
+<ng-template #templateDetail>
+    <div class="product-detail-form flex flex-column">
+        <form
+            nz-form
+            [formGroup]="detailForm"
+            (ngSubmit)="submitDetailForm()"
+            class="wp-100"
+            nzLayout="vertical"
+        >
+            <div class="ss-row">
+                <div class="ss-column-50">
+                    <nz-form-item>
+                        <nz-form-label nzRequired>Identifier</nz-form-label>
+                        <nz-form-control
+                            nzErrorTip="Please input the identifier!"
+                        >
+                            <app-s-input formControlName="identifier" />
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+
+                <div class="ss-column-50">
+                    <nz-form-item>
+                        <nz-form-label nzRequired>Value</nz-form-label>
+                        <nz-form-control nzErrorTip="Please input the value!">
+                            <app-s-input formControlName="value" />
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+            </div>
+
+            <div class="flex justify-center g-20">
+                <app-s-button
+                    text="Cancel"
+                    [type]="'text'"
+                    (click)="onCustomModal('detail', 'close')"
+                />
+                <app-s-button text="Add detail" />
+            </div>
+        </form>
+    </div>
+</ng-template>
+
+<!-- template for view product -->
+<ng-template #templateView>
+    <div class="view-product-form flex flex-column">
+        <div class="product-detail-form flex flex-column">
+            <form
+                nz-form
+                [formGroup]="viewForm"
+                (ngSubmit)="submitViewForm()"
+                class="wp-100"
+                nzLayout="vertical"
+            >
+                <div class="ss-row">
+                    <div class="ss-column-50">
+                        <nz-form-item>
+                            <nz-form-label nzRequired>Stock</nz-form-label>
+                            <nz-form-control
+                                nzErrorTip="Please input the stock!"
+                            >
+                                <app-s-input formControlName="stock" />
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+
+                    <div class="ss-column-50">
+                        <nz-form-item>
+                            <nz-form-label nzRequired>Status</nz-form-label>
+                            <nz-form-control
+                                nzErrorTip="Please input the status!"
+                            >
+                                <nz-radio-group
+                                    formControlName="status"
+                                    nzButtonStyle="solid"
+                                >
+                                    <label nz-radio-button nzValue="1"
+                                        >ACTIVE</label
+                                    >
+                                    <label nz-radio-button nzValue="0"
+                                        >INACTIVE</label
+                                    >
+                                </nz-radio-group>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                </div>
+
+                <div class="flex justify-center g-20">
+                    <app-s-button
+                        text="Cancel"
+                        [type]="'text'"
+                        (click)="onCustomModal('view', 'close')"
+                    />
+                    <app-s-button text="Add detail" />
+                </div>
+            </form>
+        </div>
+    </div>
+</ng-template>
