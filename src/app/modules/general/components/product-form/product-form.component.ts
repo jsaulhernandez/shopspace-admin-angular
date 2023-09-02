@@ -174,7 +174,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
                 }
 
                 this.modal$.open(this.detailTemplate, {
-                    title: 'Add detail',
+                    title: (method === 'save' ? 'Add' : 'Edit') + ' detail',
                 });
             } else {
                 if (method === 'update')
@@ -185,7 +185,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
                 }
 
                 this.modal$.open(this.viewTemplate, {
-                    title: 'Add view',
+                    title: (method === 'save' ? 'Add' : 'Edit') + ' view',
                 });
             }
         } else {
@@ -289,6 +289,22 @@ export class ProductFormComponent implements OnInit, OnDestroy {
 
     submitForm(): void {
         if (this.validateForm.valid) {
+            if (this.productDetails.length === 0) {
+                this.notification$.onNotification(
+                    'error',
+                    'Please, add product details'
+                );
+                return;
+            }
+
+            if (this.viewsProduct.length === 0) {
+                this.notification$.onNotification(
+                    'error',
+                    'Please, add views product'
+                );
+                return;
+            }
+
             console.log('form data => ', this.validateForm.getRawValue());
             // this.submitted.emit(this.validateForm.getRawValue());
             // this.validateForm.reset();

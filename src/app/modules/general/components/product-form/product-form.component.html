@@ -121,7 +121,7 @@
 
             <div class="ss-column-50">
                 <app-s-button
-                    text="Add details"
+                    text="Add detail"
                     (click)="onCustomModal(); $event.preventDefault()"
                     class="flex justify-end"
                 />
@@ -241,7 +241,7 @@
                     [type]="'text'"
                     (click)="onCustomModal('detail', 'close')"
                 />
-                <app-s-button text="Add detail" />
+                <app-s-button [text]="action === 'save' ? 'Add' : 'Edit'" />
             </div>
         </form>
     </div>
@@ -298,7 +298,7 @@
                         [type]="'text'"
                         (click)="onCustomModal('view', 'close')"
                     />
-                    <app-s-button text="Add detail" />
+                    <app-s-button [text]="action === 'save' ? 'Add' : 'Edit'" />
                 </div>
             </form>
         </div>
