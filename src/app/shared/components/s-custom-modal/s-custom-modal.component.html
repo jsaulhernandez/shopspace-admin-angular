@@ -9,11 +9,17 @@
             <app-s-button
                 [text]="nzModalData.textOnCancel ?? 'Cancel'"
                 [type]="'text'"
-                (btnClick)="closeModal()"
+                (btnClick)="
+                    nzModalData.onCancel ? nzModalData.onCancel() : closeModal()
+                "
             />
             <app-s-button
                 [text]="nzModalData.textOnConfirm ?? 'Confirm'"
-                (btnClick)="nzModalData.onConfirm()"
+                (btnClick)="
+                    nzModalData.onConfirm
+                        ? nzModalData.onConfirm()
+                        : closeModal()
+                "
                 [isLoading]="(nzModalData.loading | async) ?? false"
             />
         </div>

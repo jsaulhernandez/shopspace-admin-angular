@@ -8,7 +8,7 @@ export interface IModalData {
     includeFooter?: boolean;
     textOnConfirm?: string;
     textOnCancel?: string;
-    onConfirm: ScriptEvent;
+    onConfirm?: ScriptEvent;
     onCancel?: ScriptEvent;
     loading?: Observable<boolean>;
 }
