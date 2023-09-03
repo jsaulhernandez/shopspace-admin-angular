@@ -5,7 +5,7 @@
             display: showPicker ? 'flex' : 'none'
         }"
     >
-        <app-s-color-palette [hue]="hue" (color)="color = $event" />
+        <app-s-color-palette [hue]="hue" (color)="onSetColor($event)" />
         <app-s-color-slider (color)="hue = $event" />
     </div>
 
