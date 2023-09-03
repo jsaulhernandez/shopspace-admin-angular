@@ -1,0 +1,17 @@
+<div class="color-picker flex flex-column wp-100 relative">
+    <div
+        class="color-picker__components justify-center items-center g-10 absolute"
+        [ngStyle]="{
+            display: showPicker ? 'flex' : 'none'
+        }"
+    >
+        <app-s-color-palette [hue]="hue" (color)="color = $event" />
+        <app-s-color-slider (color)="hue = $event" />
+    </div>
+
+    <div
+        class="color-picker__background wp-100 pointer"
+        [ngStyle]="{ 'background-color': color || 'white' }"
+        (click)="open()"
+    ></div>
+</div>

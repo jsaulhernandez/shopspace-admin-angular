@@ -1,0 +1,22 @@
+.color-picker {
+    margin-bottom: 24px;
+
+    &__components,
+    &__background {
+        border: 1px solid #d9d9d9;
+        border-radius: 10px;
+    }
+
+    &__components {
+        padding: 10px;
+        width: 220px;
+        z-index: 15;
+        bottom: -190px;
+        right: 0px;
+        background-color: white;
+    }
+
+    &__background {
+        height: 40px;
+    }
+}
