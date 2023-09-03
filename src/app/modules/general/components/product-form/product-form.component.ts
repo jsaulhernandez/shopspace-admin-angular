@@ -68,6 +68,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
         {
             title: 'Color',
             dataIndex: 'color',
+            element: 'circle-color',
         },
         {
             title: 'Stock',
@@ -77,7 +78,14 @@ export class ProductFormComponent implements OnInit, OnDestroy {
             title: 'Status',
             dataIndex: 'status',
             element: 'switch',
-            onClickElement: (data, value) => {},
+            onClickElement: (data, value) => this.onUpdateStatus(data, value),
+        },
+        {
+            title: 'Actions',
+            element: 'actions',
+            onClickElement: (data, _, index) =>
+                this.onUpdateView(data, index ?? 0),
+            onSecondClickElement: (data, _) => this.onRemoveView(data),
         },
     ];
 
@@ -122,6 +130,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
 
         this.viewForm = this.fb.group({
             id: [null],
+            image: [null, [Validators.required]],
             color: [null, [Validators.required]],
             stock: [null, [Validators.required]],
             status: [null, [Validators.required]],
@@ -181,12 +190,16 @@ export class ProductFormComponent implements OnInit, OnDestroy {
                     this.viewForm.patchValue(this.auxView ?? {});
                 else {
                     this.resetDefaultValues('view');
-                    this.viewForm.patchValue({ status: '1' });
+                    this.viewForm.patchValue({ status: 1 });
                 }
 
-                this.modal$.open(this.viewTemplate, {
-                    title: (method === 'save' ? 'Add' : 'Edit') + ' view',
-                });
+                this.modal$.open(
+                    this.viewTemplate,
+                    {
+                        title: (method === 'save' ? 'Add' : 'Edit') + ' view',
+                    },
+                    { nzWidth: 720 }
+                );
             }
         } else {
             this.resetDefaultValues(option);
@@ -237,7 +250,49 @@ export class ProductFormComponent implements OnInit, OnDestroy {
             return;
         }
 
-        this.viewsProduct.push(this.viewForm.getRawValue());
+        const dataForm: ViewProductModel = this.viewForm.getRawValue();
+        let exists: boolean = false;
+
+        if (this.auxView && this.action === 'update') {
+            if (this.auxView.color !== dataForm.color)
+                exists = this.existsData('view', dataForm);
+        } else exists = this.existsData('view', dataForm);
+
+        if (exists) {
+            this.notification$.onNotification('error', 'El registro ya existe');
+            return;
+        }
+
+        if (this.action === 'save') {
+            this.viewsProduct.push(dataForm);
+            this.viewsProduct = [...this.viewsProduct];
+        } else this.updateData('view', dataForm);
+
+        this.onCustomModal('view', 'close');
+    }
+
+    onUpdateView(data: ViewProductModel, index: number) {
+        this.auxView = data;
+        this.position = index;
+        this.onCustomModal('view', 'open', (this.action = 'update'));
+    }
+
+    onUpdateStatus(data: ViewProductModel, value: boolean) {
+        this.viewsProduct = this.viewsProduct.map((v) => {
+            if (v.color === data.color)
+                v = {
+                    ...v,
+                    status: value ? 1 : 0,
+                };
+
+            return v;
+        });
+    }
+
+    onRemoveView(data: ViewProductModel) {
+        this.viewsProduct = this.viewsProduct.filter(
+            (v) => v.color !== data.color
+        );
     }
 
     //another methods
@@ -252,9 +307,14 @@ export class ProductFormComponent implements OnInit, OnDestroy {
             );
 
             return !!result;
-        }
+        } else {
+            const view = data as ViewProductModel;
+            const result = this.viewsProduct.find(
+                (d) => d.color === view.color
+            );
 
-        return false;
+            return !!result;
+        }
     }
 
     updateData(
@@ -267,9 +327,9 @@ export class ProductFormComponent implements OnInit, OnDestroy {
                 return p;
             });
         } else {
-            this.viewsProduct = this.viewsProduct.map((p, index) => {
+            this.viewsProduct = this.viewsProduct.map((v, index) => {
                 if (this.position === index) return data as ViewProductModel;
-                return p;
+                return v;
             });
         }
     }
