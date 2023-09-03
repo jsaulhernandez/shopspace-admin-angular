@@ -15,7 +15,7 @@ export class SButtonComponent {
     }
 
     @Input() type: TypeButton = 'primary';
-    @Output() btnClick = new EventEmitter();
+    @Output() btnClick = new EventEmitter<MouseEvent>();
     @Input() isDisabled = false;
     @Input() isLoading = false;
     @Input() isDanger = false;
@@ -30,7 +30,7 @@ export class SButtonComponent {
         return this.buttonText;
     }
 
-    onClick() {
-        this.btnClick.emit();
+    onClick(evt: MouseEvent) {
+        this.btnClick.emit(evt);
     }
 }

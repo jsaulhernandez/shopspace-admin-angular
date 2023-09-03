@@ -1,7 +1,7 @@
 <button
     nz-button
     [nzType]="type"
-    (click)="onClick()"
+    (click)="onClick($event)"
     [nzLoading]="isLoading"
     [nzDanger]="isDanger"
     [disabled]="isDisabled"
