@@ -6,14 +6,14 @@ import { Component, EventEmitter, Output } from '@angular/core';
     styleUrls: ['./s-actions.component.scss'],
 })
 export class SActionsComponent {
-    @Output() btnEdit = new EventEmitter();
-    @Output() btnRemove = new EventEmitter();
+    @Output() btnEdit = new EventEmitter<MouseEvent>();
+    @Output() btnRemove = new EventEmitter<MouseEvent>();
 
-    onEdit() {
-        this.btnEdit.emit();
+    onEdit(evt: MouseEvent) {
+        this.btnEdit.emit(evt);
     }
 
-    onRemove() {
-        this.btnRemove.emit();
+    onRemove(evt: MouseEvent) {
+        this.btnRemove.emit(evt);
     }
 }

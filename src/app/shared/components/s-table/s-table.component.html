@@ -16,8 +16,9 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let data of basicTable.data">
+            <tr *ngFor="let data of basicTable.data; let i = index">
                 <td *ngFor="let c of header">
+                    <!-- get data by key -->
                     <span
                         *ngIf="
                             c.dataIndex &&
@@ -31,6 +32,7 @@
                         {{ getValueByKey(data, c.dataIndex) }}
                     </span>
 
+                    <!-- get data by object -->
                     <span
                         *ngIf="
                             !c.dataIndex &&
@@ -44,6 +46,9 @@
                         {{ c.render(data) }}
                     </span>
 
+                    <!-- data by elements -->
+
+                    <!-- switch element -->
                     <span
                         *ngIf="
                             c.dataIndex &&
@@ -66,6 +71,7 @@
                         </span>
                     </span>
 
+                    <!-- icon edit and remove item -->
                     <span
                         *ngIf="
                             !c.dataIndex &&
@@ -78,12 +84,19 @@
                     >
                         <span *ngIf="c.element === 'actions'">
                             <app-s-actions
-                                (btnEdit)="c.onClickElement(data)"
-                                (btnRemove)="c.onSecondClickElement(data)"
+                                (btnEdit)="
+                                    c.onClickElement(data, data, i);
+                                    $event.preventDefault()
+                                "
+                                (btnRemove)="
+                                    c.onSecondClickElement(data, data, i);
+                                    $event.preventDefault()
+                                "
                             ></app-s-actions>
                         </span>
                     </span>
 
+                    <!-- select element -->
                     <span
                         *ngIf="
                             c.dataIndex &&
