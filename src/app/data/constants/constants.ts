@@ -20,7 +20,8 @@ export declare type TypeElementTable =
     | 'radio'
     | 'checkbox'
     | 'select'
-    | 'actions';
+    | 'actions'
+    | 'circle-color';
 export type ModalActionsType = 'success' | 'error' | 'info' | 'confirm';
 export type UserActions = 'get' | 'save' | 'update' | 'delete';
 export type ShowComponent = 'Form' | 'Table';

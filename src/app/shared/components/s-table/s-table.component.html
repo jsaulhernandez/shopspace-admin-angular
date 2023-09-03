@@ -46,7 +46,7 @@
                         {{ c.render(data) }}
                     </span>
 
-                    <!-- data by elements -->
+                    <!---------- DATA BY ELEMENTS ---------->
 
                     <!-- switch element -->
                     <span
@@ -94,6 +94,23 @@
                                 "
                             ></app-s-actions>
                         </span>
+                    </span>
+
+                    <!-- color element -->
+                    <span *ngIf="c.dataIndex && c.element">
+                        <span
+                            *ngIf="c.element === 'circle-color'"
+                            [ngStyle]="{
+                                backgroundColor: getValueByKey(
+                                    data,
+                                    c.dataIndex
+                                ),
+                                width: '30px',
+                                height: '30px',
+                                borderRadius: '50%',
+                                display: 'block'
+                            }"
+                        ></span>
                     </span>
 
                     <!-- select element -->
