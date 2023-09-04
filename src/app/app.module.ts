@@ -5,7 +5,7 @@ import { registerLocaleData } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import en from '@angular/common/locales/es';
 
-import { NZ_I18N, es_ES } from 'ng-zorro-antd/i18n';
+import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
 
 //modules
 import { AppRoutingModule } from './app-routing.module';
@@ -40,7 +40,7 @@ registerLocaleData(en);
         SharedModule,
     ],
     providers: [
-        { provide: NZ_I18N, useValue: es_ES },
+        { provide: NZ_I18N, useValue: en_US },
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AddTokenInterceptor,
