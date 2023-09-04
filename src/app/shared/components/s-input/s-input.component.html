@@ -2,21 +2,21 @@
     nz-input
     [placeholder]="placeHolder"
     nzSize="large"
-    *ngIf="!isInputGroup"
     class="SInputComponent"
     [(ngModel)]="input"
     (ngModelChange)="onChange($event)"
     (blur)="onTouch()"
+    *ngIf="!isInputGroup && type === 'input'"
 />
 
 <nz-input-group
     [nzPrefixIcon]="prefix"
     [nzSuffix]="suffix"
     nzSize="large"
-    *ngIf="isInputGroup"
     [ngClass]="
         prefix || suffix ? 'SInputComponent' : 'SInputComponent_with-icon'
     "
+    *ngIf="isInputGroup && type === 'input'"
 >
     <input
         [type]="typeInput"
@@ -27,3 +27,22 @@
         (blur)="onTouch()"
     />
 </nz-input-group>
+
+<nz-date-picker
+    [nzMode]="modeDatePicker"
+    [nzFormat]="formatDatePicker"
+    [nzPlaceHolder]="placeHolder"
+    [(ngModel)]="input"
+    (ngModelChange)="onChange($event)"
+    (blur)="onTouch()"
+    *ngIf="type === 'date'"
+></nz-date-picker>
+
+<nz-time-picker
+    [nzPlaceHolder]="placeHolder"
+    [(ngModel)]="input"
+    (ngModelChange)="onChange($event)"
+    (blur)="onTouch()"
+    nzBorderless
+    *ngIf="type === 'time'"
+></nz-time-picker>

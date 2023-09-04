@@ -11,6 +11,8 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 
 import * as shared from './components';
 
@@ -28,6 +30,8 @@ import * as shared from './components';
         NzSwitchModule,
         NzPaginationModule,
         NzModalModule,
+        NzDatePickerModule,
+        NzTimePickerModule,
     ],
     exports: [
         ...shared.SHARED_COMPONENTS,

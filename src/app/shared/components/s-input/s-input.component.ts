@@ -7,6 +7,8 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+import { TypesInputs } from 'src/app/data/constants/constants';
+
 @Component({
     selector: 'app-s-input',
     templateUrl: './s-input.component.html',
@@ -20,12 +22,17 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     ],
 })
 export class SInputComponent implements ControlValueAccessor {
+    @Input() type: TypesInputs = 'input';
     @Input() typeInput: 'text' | 'password' = 'text';
     @Input() isInputGroup: boolean = false;
     @Input() placeHolder: string = '';
     @Input() prefix?: string;
     @Input() suffix?: string;
     @Output() onChangeInput = new EventEmitter<string>();
+
+    /**date picker */
+    @Input() modeDatePicker: 'date' | 'week' | 'month' | 'year' = 'date';
+    @Input() formatDatePicker: string = 'yyyy/MM/dd';
 
     input?: string;
 

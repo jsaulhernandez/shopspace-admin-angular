@@ -4,6 +4,7 @@ export declare type TypeButton =
     | 'dashed'
     | 'text'
     | 'link';
+export declare type TypesInputs = 'input' | 'date' | 'time' | 'textArea';
 export declare type ThemeTypeIcon = 'fill' | 'outline' | 'twotone';
 export declare type TypeTextElement =
     | 'h1'

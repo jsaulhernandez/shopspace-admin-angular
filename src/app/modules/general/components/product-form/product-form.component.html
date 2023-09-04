@@ -85,7 +85,12 @@
                     <nz-form-control
                         nzErrorTip="Please input the product release date!"
                     >
-                        <app-s-input formControlName="releaseDate" />
+                        <app-s-input
+                            formControlName="releaseDate"
+                            placeHolder="YY/MM/DD"
+                            formatDatePicker="yyyy/MM/dd"
+                            type="date"
+                        />
                     </nz-form-control>
                 </nz-form-item>
             </div>
