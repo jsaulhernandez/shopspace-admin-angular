@@ -149,7 +149,7 @@ export class TypeClassificationComponent
                 complete: () => {
                     this.notification$.onNotification(
                         'success',
-                        'Subcategory status update'
+                        'Type classification status update'
                     );
                     this.loader$.hide();
                 },
