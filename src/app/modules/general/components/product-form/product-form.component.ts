@@ -180,7 +180,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
 
     getTypesClassifications() {
         this.loader$.show();
-        this.subscriber = this.api$
+        this.subscriberTwo = this.api$
             .request<TypeClassificationModel[]>({
                 method: 'GET',
                 path: 'type-classification/active',
