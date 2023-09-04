@@ -19,6 +19,7 @@ import { ProductModel } from 'src/app/data/models/Product.model';
 import { BrandModel } from 'src/app/data/models/Brand.model';
 import { ProductDetailModel } from 'src/app/data/models/ProductDetail.model';
 import { ViewProductModel } from 'src/app/data/models/ViewProduct.model';
+import { TypeClassificationModel } from 'src/app/data/models/TypeClassification.model';
 
 import { AdminApiService } from 'src/app/data/services/core/admin-api.service';
 import { LoaderService } from 'src/app/shared/services/loader.service';
@@ -58,7 +59,9 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     isLoading = this.loader$.loading$;
     action: UserActions = 'save';
     brands: BrandModel[] = [];
+    typesClassifications: TypeClassificationModel[] = [];
     subscriber!: Subscription;
+    subscriberTwo!: Subscription;
 
     customHeader: CustomHeader<ViewProductModel>[] = [
         {
@@ -119,6 +122,12 @@ export class ProductFormComponent implements OnInit, OnDestroy {
             brand: this.fb.group({
                 id: [this.data?.brand.id ?? null, [Validators.required]],
             }),
+            typeClassification: this.fb.group({
+                id: [
+                    this.data?.typeClassification.id ?? null,
+                    [Validators.required],
+                ],
+            }),
         });
 
         this.detailForm = this.fb.group({
@@ -138,10 +147,12 @@ export class ProductFormComponent implements OnInit, OnDestroy {
         });
 
         this.getBrands();
+        this.getTypesClassifications();
     }
 
     ngOnDestroy(): void {
         this.subscriber.unsubscribe();
+        this.subscriberTwo.unsubscribe();
     }
 
     getBrands() {
@@ -161,6 +172,29 @@ export class ProductFormComponent implements OnInit, OnDestroy {
                     this.notification$.onNotification(
                         'error',
                         'Error occurred when getting brands data'
+                    );
+                },
+                complete: () => this.loader$.hide(),
+            });
+    }
+
+    getTypesClassifications() {
+        this.loader$.show();
+        this.subscriber = this.api$
+            .request<TypeClassificationModel[]>({
+                method: 'GET',
+                path: 'type-classification/active',
+            })
+            .subscribe({
+                next: (c) => {
+                    this.typesClassifications = c.data || [];
+                },
+                error: (e) => {
+                    this.loader$.hide();
+                    this.typesClassifications = [];
+                    this.notification$.onNotification(
+                        'error',
+                        'Error occurred when getting types classifications data'
                     );
                 },
                 complete: () => this.loader$.hide(),
@@ -347,6 +381,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
         }
     }
 
+    //send data for saving or updating
     submitForm(): void {
         if (this.validateForm.valid) {
             if (this.productDetails.length === 0) {
@@ -365,9 +400,14 @@ export class ProductFormComponent implements OnInit, OnDestroy {
                 return;
             }
 
-            console.log('form data => ', this.validateForm.getRawValue());
-            // this.submitted.emit(this.validateForm.getRawValue());
-            // this.validateForm.reset();
+            const main: ProductModel = {
+                ...this.validateForm.getRawValue(),
+                viewProducts: this.viewsProduct,
+                productDetails: this.productDetails,
+            };
+
+            this.submitted.emit(main);
+            this.validateForm.reset();
         } else {
             FormUtils.invalidate(this.validateForm);
         }
