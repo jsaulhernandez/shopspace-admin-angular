@@ -11,6 +11,8 @@ import {
     ViewChild,
 } from '@angular/core';
 
+import { Color } from 'src/app/core/utils/color.utils';
+
 @Component({
     selector: 'app-s-color-palette',
     templateUrl: './s-color-palette.component.html',
@@ -77,7 +79,9 @@ export class SColorPaletteComponent implements AfterViewInit, OnChanges {
             this.draw();
             const pos = this.selectedPosition;
             if (pos) {
-                this.color.emit(this.getColorAtPosition(pos.x, pos.y));
+                this.color.emit(
+                    Color.rgbaToHex(this.getColorAtPosition(pos.x, pos.y))
+                );
             }
         }
     }
@@ -91,7 +95,9 @@ export class SColorPaletteComponent implements AfterViewInit, OnChanges {
         this.mousedown = true;
         this.selectedPosition = { x: evt.offsetX, y: evt.offsetY };
         this.draw();
-        this.color.emit(this.getColorAtPosition(evt.offsetX, evt.offsetY));
+        this.color.emit(
+            Color.rgbaToHex(this.getColorAtPosition(evt.offsetX, evt.offsetY))
+        );
     }
 
     onMouseMove(evt: MouseEvent) {
@@ -104,7 +110,7 @@ export class SColorPaletteComponent implements AfterViewInit, OnChanges {
 
     emitColor(x: number, y: number) {
         const rgbaColor = this.getColorAtPosition(x, y);
-        this.color.emit(rgbaColor);
+        this.color.emit(Color.rgbaToHex(rgbaColor));
     }
 
     getColorAtPosition(x: number, y: number) {
