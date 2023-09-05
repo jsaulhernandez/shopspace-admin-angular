@@ -6,6 +6,9 @@ import {
     inject,
 } from '@angular/core';
 
+import format from 'date-fns/format';
+import parseISO from 'date-fns/parseISO';
+
 import { ProductModel } from 'src/app/data/models/Product.model';
 
 import { AdminApiService } from 'src/app/data/services/core/admin-api.service';
@@ -70,7 +73,13 @@ export class ProductComponent implements OnInit, AfterContentChecked {
         },
         {
             title: 'Release date',
-            dataIndex: 'releaseDate',
+            render: (data) =>
+                format(parseISO(data.releaseDate.toString()), 'yyyy/MM/dd') ??
+                'n/a',
+        },
+        {
+            title: 'Type classification',
+            render: (data) => data.typeClassification.name ?? 'n/a',
         },
         {
             title: 'Brand',
