@@ -14,6 +14,13 @@ export class STextComponent {
     @Input() textColor?: string;
     @Input() fontWeight?: string;
     @Input() fontSize?: string;
+    @Input() textAlign?:
+        | 'center'
+        | 'left'
+        | 'right'
+        | 'start'
+        | 'end'
+        | 'justify';
     @Output() btnClick: EventEmitter<any> = new EventEmitter();
 
     onClick() {
