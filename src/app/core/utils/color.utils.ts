@@ -14,7 +14,7 @@ export class Color {
         return `rgba(${r},${g},${b},${opacity})`;
     }
 
-    public static rgbaToHex(value: string, forceRemoveAlpha = false) {
+    public static rgbaToHex(value: string, forceRemoveAlpha = false): string {
         return (
             '#' +
             value
@@ -29,5 +29,10 @@ export class Color {
                 .map((string) => (string.length === 1 ? '0' + string : string)) // Adds 0 when length of one number is 1
                 .join('')
         );
+    }
+
+    public static getValuesFromRgba(rgba: string): RegExpMatchArray | null {
+        // => /[\.\d]+/g
+        return rgba.match(/[0-9.]+/gi);
     }
 }
