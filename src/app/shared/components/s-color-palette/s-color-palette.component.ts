@@ -21,8 +21,12 @@ import { Color } from 'src/app/core/utils/color.utils';
 export class SColorPaletteComponent implements AfterViewInit, OnChanges {
     @Input()
     hue!: string;
+    @Input()
+    isInputValue!: boolean;
     @Output()
     color: EventEmitter<string> = new EventEmitter<string>();
+    @Output()
+    isInput: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     @ViewChild('canvas')
     canvas!: ElementRef<HTMLCanvasElement>;
@@ -78,11 +82,10 @@ export class SColorPaletteComponent implements AfterViewInit, OnChanges {
         if (changes['hue']) {
             this.draw();
             const pos = this.selectedPosition;
-            if (pos) {
+            if (pos && !this.isInputValue)
                 this.color.emit(
                     Color.rgbaToHex(this.getColorAtPosition(pos.x, pos.y))
                 );
-            }
         }
     }
 
@@ -95,9 +98,7 @@ export class SColorPaletteComponent implements AfterViewInit, OnChanges {
         this.mousedown = true;
         this.selectedPosition = { x: evt.offsetX, y: evt.offsetY };
         this.draw();
-        this.color.emit(
-            Color.rgbaToHex(this.getColorAtPosition(evt.offsetX, evt.offsetY))
-        );
+        this.emitColor(evt.offsetX, evt.offsetY);
     }
 
     onMouseMove(evt: MouseEvent) {
@@ -111,6 +112,7 @@ export class SColorPaletteComponent implements AfterViewInit, OnChanges {
     emitColor(x: number, y: number) {
         const rgbaColor = this.getColorAtPosition(x, y);
         this.color.emit(Color.rgbaToHex(rgbaColor));
+        this.isInput.emit(false);
     }
 
     getColorAtPosition(x: number, y: number) {

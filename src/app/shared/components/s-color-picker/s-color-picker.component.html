@@ -1,12 +1,77 @@
 <div class="color-picker flex flex-column wp-100 relative">
     <div
-        class="color-picker__components justify-center items-center g-10 absolute"
+        class="color-picker__components absolute"
+        [ngClass]="{
+            'flex-column justify-center items-center g-10': showPicker
+        }"
         [ngStyle]="{
             display: showPicker ? 'flex' : 'none'
         }"
     >
-        <app-s-color-palette [hue]="hue" (color)="onSetColor($event)" />
-        <app-s-color-slider (color)="hue = $event" />
+        <div class="flex justify-center items-center g-10 wp-100">
+            <app-s-color-palette
+                [hue]="hue"
+                (color)="onSetColor($event)"
+                [isInputValue]="isInputValue"
+                (isInput)="isInputValue = $event"
+            />
+            <app-s-color-slider
+                (color)="hue = $event"
+                (isInput)="isInputValue = $event"
+            />
+        </div>
+
+        <div class="color-picker__components-inputs flex g-5">
+            <div
+                class="color-picker__components-inputs-hex flex flex-column g-5"
+            >
+                <app-s-input
+                    [ngModel]="hex"
+                    (ngModelChange)="getValueHex($event)"
+                    maxLength="7"
+                />
+                <app-s-text
+                    text="HEX"
+                    textAlign="center"
+                    textColor="--quinary-text-color"
+                />
+            </div>
+
+            <div class="color-picker__components-inputs-rgba flex g-5">
+                <div class="flex flex-column g-5">
+                    <app-s-input [ngModel]="rgba.r" />
+                    <app-s-text
+                        text="R"
+                        textAlign="center"
+                        textColor="--quinary-text-color"
+                    />
+                </div>
+                <div class="flex flex-column g-5">
+                    <app-s-input [ngModel]="rgba.g" />
+                    <app-s-text
+                        text="G"
+                        textAlign="center"
+                        textColor="--quinary-text-color"
+                    />
+                </div>
+                <div class="flex flex-column g-5">
+                    <app-s-input [ngModel]="rgba.b" />
+                    <app-s-text
+                        text="B"
+                        textAlign="center"
+                        textColor="--quinary-text-color"
+                    />
+                </div>
+                <div class="flex flex-column g-5">
+                    <app-s-input [ngModel]="rgba.a" />
+                    <app-s-text
+                        text="A"
+                        textAlign="center"
+                        textColor="--quinary-text-color"
+                    />
+                </div>
+            </div>
+        </div>
     </div>
 
     <div

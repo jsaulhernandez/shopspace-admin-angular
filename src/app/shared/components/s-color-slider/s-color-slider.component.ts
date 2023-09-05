@@ -19,6 +19,8 @@ export class SColorSliderComponent implements AfterViewInit {
 
     @Output()
     color: EventEmitter<string> = new EventEmitter<string>();
+    @Output()
+    isInput: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     private ctx!: CanvasRenderingContext2D;
     private mousedown: boolean = false;
@@ -84,6 +86,7 @@ export class SColorSliderComponent implements AfterViewInit {
     emitColor(x: number, y: number) {
         const rgbaColor = this.getColorAtPosition(x, y);
         this.color.emit(rgbaColor);
+        this.isInput.emit(false);
     }
 
     getColorAtPosition(x: number, y: number) {
