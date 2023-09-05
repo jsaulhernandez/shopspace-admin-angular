@@ -7,6 +7,8 @@
     (ngModelChange)="onChange($event)"
     (blur)="onTouch()"
     *ngIf="!isInputGroup && type === 'input'"
+    [maxlength]="maxLength"
+    [minlength]="minLength"
 />
 
 <nz-input-group
@@ -25,6 +27,8 @@
         [(ngModel)]="input"
         (ngModelChange)="onChange($event)"
         (blur)="onTouch()"
+        [maxlength]="maxLength"
+        [minlength]="minLength"
     />
 </nz-input-group>
 

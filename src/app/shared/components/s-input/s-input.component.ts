@@ -28,6 +28,8 @@ export class SInputComponent implements ControlValueAccessor {
     @Input() placeHolder: string = '';
     @Input() prefix?: string;
     @Input() suffix?: string;
+    @Input() maxLength: string | null = null;
+    @Input() minLength: string | null = null;
     @Output() onChangeInput = new EventEmitter<string>();
 
     /**date picker */
