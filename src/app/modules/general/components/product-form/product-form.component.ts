@@ -101,6 +101,11 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit(): void {
+        //set array data;
+        this.productDetails = this.data?.productDetails ?? [];
+        this.viewsProduct = this.data?.viewProducts ?? [];
+
+        //forms
         this.validateForm = this.fb.group({
             id: [this.data?.id ?? null],
             title: [this.data?.title ?? null, [Validators.required]],
@@ -146,6 +151,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
             productId: [null],
         });
 
+        //call data
         this.getBrands();
         this.getTypesClassifications();
     }
