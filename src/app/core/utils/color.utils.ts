@@ -1,3 +1,5 @@
+import { IColorData } from 'src/app/data/interfaces/IColorData.interface';
+
 export class Color {
     public static hexToRgba(value: string, opacity: number = 1): string {
         let hex = value.replace('#', '');
@@ -14,7 +16,7 @@ export class Color {
         return `rgba(${r},${g},${b},${opacity})`;
     }
 
-    public static rgbaToHex(value: string, forceRemoveAlpha = false): string {
+    public static rgbaToHex(value: string, forceRemoveAlpha = true): string {
         return (
             '#' +
             value
@@ -31,8 +33,15 @@ export class Color {
         );
     }
 
-    public static getValuesFromRgba(rgba: string): RegExpMatchArray | null {
+    public static getValuesFromRgba(rgba: string): IColorData {
         // => /[\.\d]+/g
-        return rgba.match(/[0-9.]+/gi);
+        const data = rgba.match(/[0-9.]+/gi);
+
+        return {
+            r: data?.[0] ?? '',
+            g: data?.[1] ?? '',
+            b: data?.[2] ?? '',
+            a: data?.[3] ?? '',
+        };
     }
 }
