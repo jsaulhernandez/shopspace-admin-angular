@@ -15,9 +15,10 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 
 import * as shared from './components';
+import * as directives from './directives/index';
 
 @NgModule({
-    declarations: [...shared.SHARED_COMPONENTS],
+    declarations: [...shared.SHARED_COMPONENTS, ...directives.DIRECTIVES_LIST],
     imports: [
         CommonModule,
         ReactiveFormsModule,
