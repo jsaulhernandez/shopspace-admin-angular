@@ -28,6 +28,7 @@ import { ModalService } from 'src/app/shared/services/modal.service';
 
 import { FormUtils } from 'src/app/core/utils/form.util';
 import { CustomHeader } from 'src/app/core/utils/components.util';
+import { NumberUtils } from 'src/app/core/utils/number.utils';
 
 import { UserActions } from 'src/app/data/constants/constants';
 
@@ -409,6 +410,9 @@ export class ProductFormComponent implements OnInit, OnDestroy {
 
             const main: ProductModel = {
                 ...this.validateForm.getRawValue(),
+                price: NumberUtils.getOnlyNumbers(
+                    `${this.validateForm.get('price')?.value}`
+                ),
                 viewProducts: this.viewsProduct,
                 productDetails: this.productDetails,
             };

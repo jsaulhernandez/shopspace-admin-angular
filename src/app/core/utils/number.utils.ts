@@ -14,8 +14,10 @@ export class NumberUtils {
     public static getOnlyNumbers(value?: string): number | null {
         if (value) {
             value = value.trim();
-            if (value !== '') return +value.replace(GetOnlyNumbers, '');
+            if (value !== '')
+                return +(value.match(GetOnlyNumbers) || [])?.join('') ?? 0;
         }
+
         return null;
     }
 }

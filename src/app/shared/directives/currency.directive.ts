@@ -59,13 +59,10 @@ export class CurrencyDirective implements OnInit {
     onInput(event: Event) {
         if (this.appIsCurrency) {
             const target = event.target as HTMLInputElement;
-            console.log('target', target.value);
             const cleanValue = (
                 String(target.value).match(OnlyDecimalsNumbersWithPointRegEx) ||
                 []
             ).join('');
-
-            console.log('cleanValue', cleanValue);
 
             if (cleanValue || !target.value) this.lastValid = cleanValue;
 
