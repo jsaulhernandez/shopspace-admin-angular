@@ -33,6 +33,17 @@ export type TypeNotification =
     | 'error'
     | 'blank';
 
+//for pipes
+export const specialKeys: string[] = [
+    'Backspace',
+    'Delete',
+    'Tab',
+    'End',
+    'Home',
+    'ArrowLeft',
+    'ArrowRight',
+];
+
 //Type events angular
 // interface GlobalEventHandlersEventMap {
 //     "abort": UIEvent;

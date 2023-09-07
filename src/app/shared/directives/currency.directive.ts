@@ -7,7 +7,10 @@ import {
     OnInit,
 } from '@angular/core';
 
-import { OnlyNumbersWithOneDotRegEx } from 'src/app/core/utils/RegEx.utils';
+import {
+    OnlyDecimalsNumbersWithPointRegEx,
+    OnlyNumbersWithOneDotRegEx,
+} from 'src/app/core/utils/RegEx.utils';
 
 @Directive({
     selector: '[appCurrency]',
@@ -16,6 +19,7 @@ export class CurrencyDirective implements OnInit {
     @Input() appIsCurrency?: boolean;
 
     private el!: HTMLInputElement;
+    private lastValid: string = '';
 
     constructor(
         private elementRef: ElementRef,
@@ -51,16 +55,21 @@ export class CurrencyDirective implements OnInit {
         if (this.appIsCurrency) this.el.value = '';
     }
 
-    // private lastValid = '';
-    // @HostListener('input', ['$event'])
-    // onInput(event: Event) {
-    //     const target = event.target as HTMLInputElement;
-    //     const cleanValue = (
-    //         target.value.match(OnlyDecimalsNumbersWithPointRegEx) || []
-    //     ).join('');
+    @HostListener('input', ['$event'])
+    onInput(event: Event) {
+        if (this.appIsCurrency) {
+            const target = event.target as HTMLInputElement;
+            console.log('target', target.value);
+            const cleanValue = (
+                String(target.value).match(OnlyDecimalsNumbersWithPointRegEx) ||
+                []
+            ).join('');
 
-    //     if (cleanValue || !target.value) this.lastValid = cleanValue;
+            console.log('cleanValue', cleanValue);
 
-    //     this.el.value = cleanValue || this.lastValid;
-    // }
+            if (cleanValue || !target.value) this.lastValid = cleanValue;
+
+            this.el.value = cleanValue || this.lastValid;
+        }
+    }
 }
