@@ -30,6 +30,8 @@ export class SInputComponent implements ControlValueAccessor {
     @Input() suffix?: string;
     @Input() maxLength: string | null = null;
     @Input() minLength: string | null = null;
+    @Input() mask?: RegExp;
+    @Input() isCurrency?: boolean = false;
     @Output() onChangeInput = new EventEmitter<string>();
 
     /**date picker */

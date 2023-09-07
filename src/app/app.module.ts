@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { registerLocaleData } from '@angular/common';
+import { CurrencyPipe, registerLocaleData } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import en from '@angular/common/locales/es';
 
@@ -46,6 +46,7 @@ registerLocaleData(en);
             useClass: AddTokenInterceptor,
             multi: true,
         },
+        CurrencyPipe,
     ],
     bootstrap: [AppComponent],
 })

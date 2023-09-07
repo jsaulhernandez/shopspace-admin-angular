@@ -28,6 +28,8 @@ import { ModalService } from 'src/app/shared/services/modal.service';
 
 import { FormUtils } from 'src/app/core/utils/form.util';
 import { CustomHeader } from 'src/app/core/utils/components.util';
+import { OnlyDecimalsNumbersWithPointRegEx } from 'src/app/core/utils/RegEx.utils';
+
 import { UserActions } from 'src/app/data/constants/constants';
 
 type optionsTemplate = 'detail' | 'view';
@@ -62,6 +64,8 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     typesClassifications: TypeClassificationModel[] = [];
     subscriber!: Subscription;
     subscriberTwo!: Subscription;
+
+    currencyMask = OnlyDecimalsNumbersWithPointRegEx;
 
     customHeader: CustomHeader<ViewProductModel>[] = [
         {

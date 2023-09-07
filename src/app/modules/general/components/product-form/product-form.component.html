@@ -48,7 +48,11 @@
                     <nz-form-control
                         nzErrorTip="Please input the product price!"
                     >
-                        <app-s-input formControlName="price" />
+                        <app-s-input
+                            formControlName="price"
+                            [mask]="currencyMask"
+                            [isCurrency]="true"
+                        />
                     </nz-form-control>
                 </nz-form-item>
             </div>

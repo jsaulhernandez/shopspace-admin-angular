@@ -9,6 +9,10 @@
     *ngIf="!isInputGroup && type === 'input'"
     [maxlength]="maxLength"
     [minlength]="minLength"
+    appMasking
+    [appMaskValue]="mask"
+    appCurrency
+    [appIsCurrency]="isCurrency"
 />
 
 <nz-input-group
@@ -29,6 +33,10 @@
         (blur)="onTouch()"
         [maxlength]="maxLength"
         [minlength]="minLength"
+        appMasking
+        [appMaskValue]="mask"
+        appCurrency
+        [appIsCurrency]="isCurrency"
     />
 </nz-input-group>
 
