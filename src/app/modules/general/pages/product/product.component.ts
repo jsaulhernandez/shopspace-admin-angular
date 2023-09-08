@@ -151,7 +151,7 @@ export class ProductComponent implements OnInit, AfterContentChecked {
         this.api$
             .request({
                 method: 'PUT',
-                path: `view-product/${data.id}`,
+                path: `product/view/${data.id}`,
                 data,
             })
             .subscribe({
