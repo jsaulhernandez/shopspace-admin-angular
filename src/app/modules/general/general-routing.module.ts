@@ -8,6 +8,7 @@ import { ClassificationSubcategoriesComponent } from './pages/classification-sub
 import { TypeClassificationComponent } from './pages/type-classification/type-classification.component';
 import { ProductComponent } from './pages/product/product.component';
 import { PaymentMethodComponent } from './pages/payment-method/payment-method.component';
+import { CouponComponent } from './pages/coupon/coupon.component';
 
 const routes: Routes = [
     { title: 'Brands', path: 'brands', component: BrandComponent },
@@ -32,6 +33,11 @@ const routes: Routes = [
         title: 'Payment method',
         path: 'payment-methods',
         component: PaymentMethodComponent,
+    },
+    {
+        title: 'Coupons',
+        path: 'coupons',
+        component: CouponComponent,
     },
 ];
 
