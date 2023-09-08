@@ -24,6 +24,7 @@
         "ng-zorro-antd": "^15.1.0",
         "rxjs": "~7.8.0",
         "tslib": "^2.3.0",
+        "voucher-code-generator": "^1.1.1",
         "zone.js": "~0.12.0"
     },
     "devDependencies": {
@@ -31,6 +32,7 @@
         "@angular/cli": "~15.2.9",
         "@angular/compiler-cli": "^15.2.0",
         "@types/jasmine": "~4.3.0",
+        "@types/voucher-code-generator": "^1.1.1",
         "jasmine-core": "~4.5.0",
         "karma": "~6.4.0",
         "karma-chrome-launcher": "~3.1.0",
