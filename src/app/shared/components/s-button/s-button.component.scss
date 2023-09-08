@@ -1,4 +1,13 @@
-.SButtonComponent {
+.button,
+.button-only-icon {
     height: 40px !important;
+}
+
+.button {
     border-radius: 25px !important;
+}
+
+.button-only-icon {
+    width: 40px;
+    border-radius: 50% !important;
 }

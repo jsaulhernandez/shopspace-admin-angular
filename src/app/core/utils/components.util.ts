@@ -11,4 +11,6 @@ export interface CustomHeader<T = unknown> {
     onSecondClickElement?: (data: T, value?: any, index?: number) => void; //evento para los elementos
     //only selects. Example for internal object ["id", "name"]
     dataArray?: string[];
+    //for icon to button
+    icon?: string;
 }

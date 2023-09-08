@@ -86,6 +86,12 @@ export class ProductComponent implements OnInit, AfterContentChecked {
             render: (data) => data.brand.name ?? 'n/a',
         },
         {
+            title: 'More information',
+            element: 'button',
+            icon: 'eye',
+            onClickElement: (data) => {},
+        },
+        {
             title: 'Actions',
             element: 'actions',
             onClickElement: (data, _) =>

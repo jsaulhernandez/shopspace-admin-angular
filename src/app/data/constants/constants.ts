@@ -22,7 +22,8 @@ export declare type TypeElementTable =
     | 'checkbox'
     | 'select'
     | 'actions'
-    | 'circle-color';
+    | 'circle-color'
+    | 'button';
 export type ModalActionsType = 'success' | 'error' | 'info' | 'confirm';
 export type UserActions = 'get' | 'save' | 'update' | 'delete';
 export type ShowComponent = 'Form' | 'Table';

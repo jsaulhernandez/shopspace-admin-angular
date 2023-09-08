@@ -7,7 +7,7 @@ import { ThemeTypeIcon, TypeButton } from 'src/app/data/constants/constants';
     styleUrls: ['./s-button.component.scss'],
 })
 export class SButtonComponent {
-    public buttonText = 'BUTTON TEXT';
+    public buttonText = '';
 
     @Input()
     set text(name: string) {

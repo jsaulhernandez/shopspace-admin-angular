@@ -113,6 +113,24 @@
                         ></span>
                     </span>
 
+                    <!-- one button -->
+                    <span
+                        *ngIf="
+                            !c.dataIndex &&
+                            !c.render &&
+                            c.element &&
+                            c.onClickElement &&
+                            !c.onSecondClickElement &&
+                            !c.dataArray
+                        "
+                    >
+                        <span *ngIf="c.element === 'button'">
+                            <app-s-button
+                                [prefix]="c.icon ?? ''"
+                                (btnClick)="c.onClickElement(data)"
+                            />
+                        </span>
+                    </span>
                     <!-- select element -->
                     <span
                         *ngIf="

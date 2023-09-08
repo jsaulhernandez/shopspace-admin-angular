@@ -5,7 +5,10 @@
     [nzLoading]="isLoading"
     [nzDanger]="isDanger"
     [disabled]="isDisabled"
-    [ngClass]="['SButtonComponent', additionalClass]"
+    [ngClass]="[
+        'button' + (buttonText === '' ? '-only-icon' : ''),
+        additionalClass
+    ]"
 >
     <span
         nz-icon
@@ -13,7 +16,7 @@
         [nzTheme]="themeIcon"
         *ngIf="prefix !== ''"
     ></span>
-    {{ buttonText }}
+    <span class="content" *ngIf="buttonText !== ''">{{ buttonText }}</span>
     <span
         nz-icon
         [nzType]="suffix"
