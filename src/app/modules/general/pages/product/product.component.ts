@@ -3,6 +3,8 @@ import {
     ChangeDetectorRef,
     Component,
     OnInit,
+    TemplateRef,
+    ViewChild,
     inject,
 } from '@angular/core';
 
@@ -13,6 +15,7 @@ import { ProductModel } from 'src/app/data/models/Product.model';
 
 import { AdminApiService } from 'src/app/data/services/core/admin-api.service';
 import { LoaderService } from 'src/app/shared/services/loader.service';
+import { ModalService } from 'src/app/shared/services/modal.service';
 
 import { CustomPagination } from 'src/app/data/api/CustomResponse';
 
@@ -31,6 +34,9 @@ import { NumberUtils } from 'src/app/core/utils/number.utils';
 })
 export class ProductComponent implements OnInit, AfterContentChecked {
     api$ = inject(AdminApiService);
+
+    //templates
+    @ViewChild('templateInformation') templateInformation!: TemplateRef<any>;
 
     isLoading = this.loader$.loading$;
     products: ProductModel[] = [];
@@ -56,20 +62,8 @@ export class ProductComponent implements OnInit, AfterContentChecked {
             dataIndex: 'name',
         },
         {
-            title: 'Description',
-            dataIndex: 'description',
-        },
-        {
             title: 'Price',
             render: (data) => NumberUtils.formatMoney(data.price) ?? 'n/a',
-        },
-        {
-            title: 'Model',
-            dataIndex: 'model',
-        },
-        {
-            title: 'Model number',
-            dataIndex: 'modelNumber',
         },
         {
             title: 'Release date',
@@ -89,7 +83,10 @@ export class ProductComponent implements OnInit, AfterContentChecked {
             title: 'More information',
             element: 'button',
             icon: 'eye',
-            onClickElement: (data) => {},
+            onClickElement: (data) => {
+                this.pivote = data;
+                this.onCustomModal();
+            },
         },
         {
             title: 'Actions',
@@ -102,6 +99,7 @@ export class ProductComponent implements OnInit, AfterContentChecked {
 
     constructor(
         private loader$: LoaderService,
+        private modal$: ModalService,
         private cdRef: ChangeDetectorRef
     ) {}
 
@@ -242,6 +240,21 @@ export class ProductComponent implements OnInit, AfterContentChecked {
                     },
                     complete: () => this.loader$.hide(),
                 });
+        }
+    }
+
+    onCustomModal(option: 'open' | 'close' = 'open') {
+        if (option === 'open') {
+            this.modal$.open(
+                this.templateInformation,
+                {
+                    title: 'Information about the product',
+                },
+                { nzWidth: 800 }
+            );
+        } else {
+            this.pivote = undefined;
+            this.modal$.close();
         }
     }
 }

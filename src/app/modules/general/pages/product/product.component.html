@@ -35,3 +35,35 @@
     [textConfirm]="userAction === 'delete' ? 'Sí, eliminar' : undefined"
     [loading]="isLoading | async"
 />
+
+<!-- template for show more about product -->
+<ng-template #templateInformation>
+    <div class="flex flex-column wp-100 justify-center g-10">
+        <div class="flex flex-wrap g-10">
+            <app-s-text text="Description:" fontWeight="700" />
+            <app-s-text [text]="pivote?.description ?? ''" />
+        </div>
+
+        <div class="flex flex-wrap g-10">
+            <app-s-text text="Model:" fontWeight="700" />
+            <app-s-text [text]="pivote?.model ?? ''" />
+        </div>
+
+        <div class="flex flex-wrap g-10">
+            <app-s-text text="Model number:" fontWeight="700" />
+            <app-s-text [text]="pivote?.modelNumber ?? ''" />
+        </div>
+
+        <app-s-text
+            text="Information about details"
+            textAlign="center"
+            fontWeight="700"
+        />
+
+        <app-s-text
+            text="Information about views"
+            textAlign="center"
+            fontWeight="700"
+        />
+    </div>
+</ng-template>
