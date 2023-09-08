@@ -1,3 +1,4 @@
+<!-- main form -->
 <div class="product-form flex flex-column p-3">
     <form
         nz-form
@@ -323,7 +324,10 @@
                             <nz-form-control
                                 nzErrorTip="Please input the stock!"
                             >
-                                <app-s-input formControlName="stock" />
+                                <app-s-input
+                                    formControlName="stock"
+                                    [mask]="onlyNumbers"
+                                />
                             </nz-form-control>
                         </nz-form-item>
                     </div>
