@@ -3,4 +3,22 @@
         background-color: aliceblue;
         border-radius: 10px;
     }
+
+    &__views {
+        max-height: 290px;
+        overflow-y: auto;
+
+        &-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            background-color: var(--tertiary-color);
+        }
+
+        &-color {
+            width: 35px;
+            height: 15px;
+            border-radius: 20px;
+        }
+    }
 }

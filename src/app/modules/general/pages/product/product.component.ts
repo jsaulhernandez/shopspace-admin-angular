@@ -12,20 +12,23 @@ import format from 'date-fns/format';
 import parseISO from 'date-fns/parseISO';
 
 import { ProductModel } from 'src/app/data/models/Product.model';
+import { ViewProductModel } from 'src/app/data/models/ViewProduct.model';
 
 import { AdminApiService } from 'src/app/data/services/core/admin-api.service';
 import { LoaderService } from 'src/app/shared/services/loader.service';
 import { ModalService } from 'src/app/shared/services/modal.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 import { CustomPagination } from 'src/app/data/api/CustomResponse';
+
+import { CustomHeader } from 'src/app/core/utils/components.util';
+import { NumberUtils } from 'src/app/core/utils/number.utils';
 
 import {
     ModalActionsType,
     ShowComponent,
     UserActions,
 } from 'src/app/data/constants/constants';
-import { CustomHeader } from 'src/app/core/utils/components.util';
-import { NumberUtils } from 'src/app/core/utils/number.utils';
 
 @Component({
     selector: 'app-product',
@@ -100,6 +103,7 @@ export class ProductComponent implements OnInit, AfterContentChecked {
     constructor(
         private loader$: LoaderService,
         private modal$: ModalService,
+        private notification$: NotificationService,
         private cdRef: ChangeDetectorRef
     ) {}
 
@@ -133,6 +137,41 @@ export class ProductComponent implements OnInit, AfterContentChecked {
                     this.products = [];
                 },
                 complete: () => this.loader$.hide(),
+            });
+    }
+
+    onUpdateStatus(data: ViewProductModel, value: boolean) {
+        this.loader$.show();
+
+        data = {
+            ...data,
+            status: value ? 1 : 0,
+        };
+
+        this.api$
+            .request({
+                method: 'PUT',
+                path: `view-product/${data.id}`,
+                data,
+            })
+            .subscribe({
+                next: (c) => {
+                    this.getProducts(this.search, this.currentPage.toString());
+                },
+                error: (e) => {
+                    this.notification$.onNotification(
+                        'error',
+                        'Error occurred when updating status'
+                    );
+                    this.loader$.hide();
+                },
+                complete: () => {
+                    this.notification$.onNotification(
+                        'success',
+                        'View Product status update'
+                    );
+                    this.loader$.hide();
+                },
             });
     }
 

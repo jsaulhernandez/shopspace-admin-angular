@@ -270,7 +270,10 @@ export class ProductFormComponent implements OnInit, OnDestroy {
         } else exists = this.existsData('detail', dataForm);
 
         if (exists) {
-            this.notification$.onNotification('error', 'El registro ya existe');
+            this.notification$.onNotification(
+                'error',
+                'Register already exist'
+            );
             return;
         }
 
@@ -306,7 +309,10 @@ export class ProductFormComponent implements OnInit, OnDestroy {
         } else exists = this.existsData('view', dataForm);
 
         if (exists) {
-            this.notification$.onNotification('error', 'El registro ya existe');
+            this.notification$.onNotification(
+                'error',
+                'Register already exist'
+            );
             return;
         }
 

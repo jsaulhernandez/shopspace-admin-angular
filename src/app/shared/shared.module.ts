@@ -13,6 +13,7 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 import * as shared from './components';
 import * as directives from './directives/index';
@@ -33,6 +34,7 @@ import * as directives from './directives/index';
         NzModalModule,
         NzDatePickerModule,
         NzTimePickerModule,
+        NzSpinModule,
     ],
     exports: [
         ...shared.SHARED_COMPONENTS,
@@ -40,6 +42,8 @@ import * as directives from './directives/index';
         ReactiveFormsModule,
         NzFormModule,
         NzIconModule,
+        NzSwitchModule,
+        NzSpinModule,
     ],
 })
 export class SharedModule {}
