@@ -38,7 +38,7 @@
 
 <!-- template for show more about product -->
 <ng-template #templateInformation>
-    <div class="flex flex-column wp-100 justify-center g-10">
+    <div class="data-information flex flex-column wp-100 justify-center g-10">
         <div class="flex flex-wrap g-10">
             <app-s-text text="Description:" fontWeight="700" />
             <app-s-text [text]="pivote?.description ?? ''" />
@@ -59,6 +59,18 @@
             textAlign="center"
             fontWeight="700"
         />
+
+        <div
+            class="data-information__details flex flex-column justify-center p-2"
+        >
+            <div
+                class="flex g-10"
+                *ngFor="let item of pivote?.productDetails || []"
+            >
+                <app-s-text [text]="item.identifier + ':'" fontWeight="600" />
+                <app-s-text [text]="item.value" fontWeight="400" />
+            </div>
+        </div>
 
         <app-s-text
             text="Information about views"
