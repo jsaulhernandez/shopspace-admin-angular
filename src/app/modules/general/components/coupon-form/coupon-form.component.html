@@ -1,1 +1,97 @@
-<p>coupon-form works!</p>
+<div class="flex flex-column p-3">
+    <form
+        nz-form
+        [formGroup]="validateForm"
+        (ngSubmit)="submitForm()"
+        class="wp-100"
+        nzLayout="vertical"
+    >
+        <div class="ss-row">
+            <div class="ss-column-50">
+                <nz-form-item>
+                    <nz-form-label nzRequired>Code</nz-form-label>
+                    <nz-form-control nzHasFeedback [nzErrorTip]="length">
+                        <app-s-input formControlName="code" />
+                        <ng-template #length let-control>
+                            <ng-container
+                                *ngIf="
+                                    control.hasError('maxlength') ||
+                                    control.hasError('minlength')
+                                "
+                                >Length must be 6</ng-container
+                            >
+                            <ng-container *ngIf="control.hasError('required')"
+                                >Input is required</ng-container
+                            >
+                        </ng-template>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+            <div class="ss-column-50">
+                <nz-form-item>
+                    <nz-form-label nzRequired>Off</nz-form-label>
+                    <nz-form-control
+                        nzHasFeedback
+                        nzErrorTip="Please input the off!"
+                    >
+                        <app-s-input
+                            formControlName="off"
+                            [mask]="onlyNumbers"
+                            suffix="percentage"
+                            [isInputGroup]="true"
+                        />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+
+        <div class="ss-row">
+            <div class="ss-column-50">
+                <nz-form-item>
+                    <nz-form-label nzRequired>Expire</nz-form-label>
+                    <nz-form-control
+                        nzHasFeedback
+                        nzErrorTip="Please input the expire date!"
+                    >
+                        <app-s-input
+                            formControlName="expireAt"
+                            placeHolder="YY/MM/DD"
+                            formatDatePicker="yyyy/MM/dd"
+                            type="date"
+                        />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+            <div class="ss-column-50">
+                <nz-form-item>
+                    <nz-form-label>Status</nz-form-label>
+                    <nz-form-control
+                        nzHasFeedback
+                        nzErrorTip="Please selected the coupon status!"
+                    >
+                        <nz-radio-group
+                            formControlName="status"
+                            nzButtonStyle="solid"
+                        >
+                            <label nz-radio-button [nzValue]="1">ACTIVE</label>
+                            <label nz-radio-button [nzValue]="0"
+                                >INACTIVE</label
+                            >
+                        </nz-radio-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+
+        <div class="flex justify-center g-20">
+            <app-s-button
+                text="Cancel"
+                [type]="'text'"
+                (btnClick)="onCancel.emit()"
+            />
+            <app-s-button text="Add coupon" />
+        </div>
+    </form>
+</div>
