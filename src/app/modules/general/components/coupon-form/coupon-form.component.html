@@ -11,7 +11,11 @@
                 <nz-form-item>
                     <nz-form-label nzRequired>Code</nz-form-label>
                     <nz-form-control nzHasFeedback [nzErrorTip]="length">
-                        <app-s-input formControlName="code" />
+                        <app-s-input-coupon-code
+                            formControlName="code"
+                            (generate)="onGenerateCouponCode()"
+                        />
+
                         <ng-template #length let-control>
                             <ng-container
                                 *ngIf="

@@ -9,6 +9,7 @@ import { CouponModel } from 'src/app/data/models/Coupon.model';
 
 import { FormUtils } from 'src/app/core/utils/form.util';
 import { OnlyNumbersRegEx } from 'src/app/core/utils/RegEx.utils';
+import { CouponUtils } from 'src/app/core/utils/coupon.utils';
 
 @Component({
     selector: 'app-coupon-form',
@@ -31,7 +32,10 @@ export class CouponFormComponent implements OnInit {
         this.validateForm = this.fb.group({
             id: [this.data?.id ?? null],
             code: [
-                this.data?.code ?? null,
+                {
+                    value: this.data?.code ?? CouponUtils.generate(),
+                    disabled: true,
+                },
                 [
                     Validators.required,
                     Validators.minLength(6),
@@ -42,6 +46,10 @@ export class CouponFormComponent implements OnInit {
             expireAt: [this.data?.expireAt ?? null, [Validators.required]],
             status: [this.data?.status ?? 1, [Validators.required]],
         });
+    }
+
+    onGenerateCouponCode() {
+        this.validateForm.get('code')?.setValue(CouponUtils.generate());
     }
 
     submitForm(): void {

@@ -1,1 +1,18 @@
-<p>s-input-coupon-code works!</p>
+<div class="input-coupon flex flex items-center relative">
+    <input
+        class="input-coupon__input"
+        nz-input
+        [placeholder]="placeHolder"
+        [(ngModel)]="input"
+        (ngModelChange)="onChange($event)"
+        (blur)="onTouch()"
+        [disabled]="disabled"
+    />
+    <span
+        (click)="generate.emit()"
+        nz-icon
+        nzType="sync"
+        nzTheme="outline"
+        class="input-coupon__icon pointer"
+    ></span>
+</div>
