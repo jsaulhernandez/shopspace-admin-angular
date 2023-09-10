@@ -4,6 +4,7 @@ import { SColorPaletteComponent } from './s-color-palette/s-color-palette.compon
 import { SColorPickerComponent } from './s-color-picker/s-color-picker.component';
 import { SColorSliderComponent } from './s-color-slider/s-color-slider.component';
 import { SCustomModalComponent } from './s-custom-modal/s-custom-modal.component';
+import { SInputCouponCodeComponent } from './s-input-coupon-code/s-input-coupon-code.component';
 import { SInputComponent } from './s-input/s-input.component';
 import { SModalActionsComponent } from './s-modal-actions/s-modal-actions.component';
 import { STableComponent } from './s-table/s-table.component';
@@ -22,4 +23,5 @@ export const SHARED_COMPONENTS = [
     SColorPaletteComponent,
     SColorSliderComponent,
     SColorPickerComponent,
+    SInputCouponCodeComponent,
 ];
