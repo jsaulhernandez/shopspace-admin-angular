@@ -63,6 +63,6 @@ export class AdminApiService {
 
     private handleError(error: HttpErrorResponse) {
         console.log('[Error] ', error);
-        return throwError(() => error.error.response || 'Ocurrio un error');
+        return throwError(() => error.error || 'Ocurrio un error');
     }
 }
