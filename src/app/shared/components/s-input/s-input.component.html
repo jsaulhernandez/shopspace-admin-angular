@@ -47,6 +47,7 @@
     [(ngModel)]="input"
     (ngModelChange)="onChange($event)"
     (blur)="onTouch()"
+    [nzDisabledDate]="disabledDates"
     *ngIf="type === 'date'"
 ></nz-date-picker>
 

@@ -5,6 +5,8 @@ import {
     Validators,
 } from '@angular/forms';
 
+import { differenceInCalendarDays } from 'date-fns';
+
 import { CouponModel } from 'src/app/data/models/Coupon.model';
 
 import { FormUtils } from 'src/app/core/utils/form.util';
@@ -65,4 +67,8 @@ export class CouponFormComponent implements OnInit {
             FormUtils.invalidate(this.validateForm);
         }
     }
+
+    //disable dates before current date
+    disabledDate = (current: Date): boolean =>
+        differenceInCalendarDays(current, new Date()) <= 0;
 }

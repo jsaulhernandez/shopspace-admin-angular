@@ -32,6 +32,7 @@ export class SInputComponent implements ControlValueAccessor {
     @Input() minLength: string | null = null;
     @Input() mask?: RegExp;
     @Input() isCurrency?: boolean = false;
+    @Input() disabledDates?: (value: Date) => boolean;
     @Output() onChangeInput = new EventEmitter<string>();
 
     /**date picker */
