@@ -218,9 +218,16 @@ export class CouponComponent implements OnInit {
                     },
                     error: (e) => {
                         this.loader$.hide();
-                        this.textModal = `Error occurred when ${
-                            this.userAction === 'save' ? 'saving' : 'updating'
-                        } the coupon ${this.auxCoupon?.code}`;
+
+                        if (e.statusCode === '409')
+                            this.textModal = `Coupon ${this.auxCoupon?.code} already exists.`;
+                        else
+                            this.textModal = `Error occurred when ${
+                                this.userAction === 'save'
+                                    ? 'saving'
+                                    : 'updating'
+                            } the coupon ${this.auxCoupon?.code}`;
+
                         this.typeModal = 'error';
                     },
                     complete: () => this.loader$.hide(),
