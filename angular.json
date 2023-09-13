@@ -17,6 +17,10 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
+                        "allowedCommonJsDependencies": [
+                            "quill",
+                            "voucher-code-generator"
+                        ],
                         "outputPath": "dist/shopspace-admin-angular",
                         "index": "src/index.html",
                         "main": "src/main.ts",

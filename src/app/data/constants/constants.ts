@@ -45,7 +45,7 @@ export const specialKeys: string[] = [
     'ArrowRight',
 ];
 
-const modules = {
+export const QuillConfiguration = {
     toolbar: [
         ['bold', 'italic', 'underline', 'strike'], // toggled buttons
         ['blockquote', 'code-block'],
