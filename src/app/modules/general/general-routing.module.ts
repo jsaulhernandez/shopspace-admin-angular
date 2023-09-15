@@ -9,7 +9,7 @@ import { TypeClassificationComponent } from './pages/type-classification/type-cl
 import { ProductComponent } from './pages/product/product.component';
 import { PaymentMethodComponent } from './pages/payment-method/payment-method.component';
 import { CouponComponent } from './pages/coupon/coupon.component';
-import { QuestionComponent } from './pages/question/question.component';
+import { FaqComponent } from './pages/faq/faq.component';
 
 const routes: Routes = [
     { title: 'Brands', path: 'brands', component: BrandComponent },
@@ -41,9 +41,9 @@ const routes: Routes = [
         component: CouponComponent,
     },
     {
-        title: 'Question',
-        path: 'questions',
-        component: QuestionComponent,
+        title: 'Faqs',
+        path: 'faqs',
+        component: FaqComponent,
     },
 ];
 

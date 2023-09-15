@@ -6,7 +6,7 @@ import { TypeClassificationComponent } from './type-classification/type-classifi
 import { ProductComponent } from './product/product.component';
 import { PaymentMethodComponent } from './payment-method/payment-method.component';
 import { CouponComponent } from './coupon/coupon.component';
-import { QuestionComponent } from './question/question.component';
+import { FaqComponent } from './faq/faq.component';
 
 export const GENERAL_PAGES = [
     BrandComponent,
@@ -17,5 +17,5 @@ export const GENERAL_PAGES = [
     ProductComponent,
     PaymentMethodComponent,
     CouponComponent,
-    QuestionComponent,
+    FaqComponent,
 ];
