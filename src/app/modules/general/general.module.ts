@@ -8,7 +8,6 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 
 import * as general from './index';
-import { QuillModule } from 'ngx-quill';
 
 @NgModule({
     declarations: [...general.GENERAL_MODULE],
@@ -18,7 +17,6 @@ import { QuillModule } from 'ngx-quill';
         SharedModule,
         NzRadioModule,
         NzSelectModule,
-        QuillModule.forRoot(),
     ],
 })
 export class GeneralModule {}

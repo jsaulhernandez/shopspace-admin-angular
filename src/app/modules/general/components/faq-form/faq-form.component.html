@@ -18,17 +18,6 @@
 
             <div class="ss-column-50">
                 <nz-form-item>
-                    <nz-form-label nzRequired>Answer</nz-form-label>
-                    <nz-form-control nzErrorTip="Please input the answer!">
-                        <app-s-input formControlName="answer" />
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
-        </div>
-
-        <div class="ss-row">
-            <div class="ss-column-50">
-                <nz-form-item>
                     <nz-form-label>Status</nz-form-label>
                     <nz-form-control nzErrorTip="Please selected the status!">
                         <nz-radio-group
@@ -43,6 +32,19 @@
                     </nz-form-control>
                 </nz-form-item>
             </div>
+        </div>
+
+        <div class="ss-column">
+            <nz-form-item>
+                <nz-form-label nzRequired>Answer</nz-form-label>
+                <nz-form-control nzErrorTip="Please input the answer!">
+                    <app-s-editor
+                        formControlName="answer"
+                        [placeHolder]="'Type the answer'"
+                        [customHeight]="300"
+                    />
+                </nz-form-control>
+            </nz-form-item>
         </div>
 
         <div class="flex justify-center g-20">
