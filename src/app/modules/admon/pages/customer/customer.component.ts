@@ -1,9 +1,13 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CustomHeader } from 'src/app/core/utils/components.util';
-import { CustomPagination } from 'src/app/data/api/CustomResponse';
+
 import { CustomerModel } from 'src/app/data/models/Customer.model';
+
 import { AdminApiService } from 'src/app/data/services/core/admin-api.service';
 import { LoaderService } from 'src/app/shared/services/loader.service';
+
+import { CustomPagination } from 'src/app/data/api/CustomResponse';
+
+import { CustomHeader } from 'src/app/core/utils/components.util';
 
 @Component({
     selector: 'app-customer',
