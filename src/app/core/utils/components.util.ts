@@ -14,3 +14,9 @@ export interface CustomHeader<T = unknown> {
     //for icon to button
     icon?: string;
 }
+
+export type ParentHeader = {
+    description: string;
+    colspan: number;
+    backgroundColor?: string;
+};

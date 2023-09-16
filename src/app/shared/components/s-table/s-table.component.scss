@@ -13,6 +13,18 @@
     color: var(--quaternary-text-color);
 }
 
+::ng-deep .custom-row > th:not(:last-child)::before {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 1px;
+    height: 1.6em;
+    background-color: var(--secondary-color);
+    transform: translateY(-50%);
+    transition: background-color 0.3s;
+    content: "";
+}
+
 .ant-table-tbody > tr.ant-table-row:hover > td {
     background: #e1f8f0;
 }

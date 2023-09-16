@@ -8,7 +8,7 @@ import { LoaderService } from 'src/app/shared/services/loader.service';
 
 import { CustomPagination } from 'src/app/data/api/CustomResponse';
 
-import { CustomHeader } from 'src/app/core/utils/components.util';
+import { CustomHeader, ParentHeader } from 'src/app/core/utils/components.util';
 
 @Component({
     selector: 'app-customer',
@@ -23,6 +23,12 @@ export class CustomerComponent implements OnInit {
     pagination?: CustomPagination;
     search: string = '';
     currentPage: number = 0;
+
+    parentHeader: ParentHeader[] = [
+        { description: 'Customer data', colspan: 7 },
+        { description: 'User data', colspan: 5 },
+        { description: 'Actions', colspan: 1 },
+    ];
 
     customHeader: CustomHeader<UserCustomerModel>[] = [
         {

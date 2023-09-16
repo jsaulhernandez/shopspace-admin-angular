@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { CustomHeader } from 'src/app/core/utils/components.util';
+import { CustomHeader, ParentHeader } from 'src/app/core/utils/components.util';
 
 @Component({
     selector: 'app-s-table',
@@ -8,6 +8,7 @@ import { CustomHeader } from 'src/app/core/utils/components.util';
     styleUrls: ['./s-table.component.scss'],
 })
 export class STableComponent<T = unknown> {
+    @Input() parentHeader: ParentHeader[] = [];
     @Input() header: CustomHeader<T>[] = [];
     @Input() data: T[] = [];
     @Input() isLoading: boolean | null = false;

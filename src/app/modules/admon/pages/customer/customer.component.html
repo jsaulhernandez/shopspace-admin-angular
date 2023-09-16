@@ -9,6 +9,7 @@
     <app-s-table
         [nzScrollX]="2000"
         [isLoading]="isLoading | async"
+        [parentHeader]="parentHeader"
         [header]="customHeader"
         [data]="customers"
         [index]="pagination?.number ?? 0"

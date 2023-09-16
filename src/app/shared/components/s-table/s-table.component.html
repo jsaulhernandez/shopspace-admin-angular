@@ -11,6 +11,14 @@
         class="wp-100"
     >
         <thead class="custom-header">
+            <tr class="custom-row" *ngIf="parentHeader.length > 0">
+                <th
+                    *ngFor="let parent of parentHeader"
+                    [colspan]="parent.colspan"
+                >
+                    {{ parent.description }}
+                </th>
+            </tr>
             <tr>
                 <th *ngFor="let c of header">{{ c.title }}</th>
             </tr>
