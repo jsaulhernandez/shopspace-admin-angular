@@ -5,6 +5,7 @@ import { UserCustomerModel } from 'src/app/data/models/UserCustomer.model';
 
 import { AdminApiService } from 'src/app/data/services/core/admin-api.service';
 import { LoaderService } from 'src/app/shared/services/loader.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 import { CustomPagination } from 'src/app/data/api/CustomResponse';
 
@@ -68,7 +69,7 @@ export class CustomerComponent implements OnInit {
             title: 'Status',
             dataIndex: 'status',
             element: 'switch',
-            onClickElement: (data, value) => {},
+            onClickElement: (data, value) => this.onUpdateStatus(data, value),
         },
         {
             title: 'Created at',
@@ -94,7 +95,10 @@ export class CustomerComponent implements OnInit {
         },
     ];
 
-    constructor(private loader$: LoaderService) {}
+    constructor(
+        private loader$: LoaderService,
+        private notification$: NotificationService
+    ) {}
 
     ngOnInit(): void {
         this.getCustomers();
@@ -133,5 +137,40 @@ export class CustomerComponent implements OnInit {
     onChangePagination(page: number) {
         this.currentPage = page;
         this.getCustomers(this.search, page.toString());
+    }
+
+    onUpdateStatus(data: UserCustomerModel, value: boolean) {
+        this.loader$.show();
+
+        data = {
+            ...data,
+            status: value ? 1 : 0,
+        };
+
+        this.api$
+            .request({
+                method: 'PUT',
+                path: `customer/${data.id}`,
+                data,
+            })
+            .subscribe({
+                next: (c) => {
+                    this.getCustomers(this.search, this.currentPage.toString());
+                },
+                error: (e) => {
+                    this.notification$.onNotification(
+                        'error',
+                        'Error occurred when updating status'
+                    );
+                    this.loader$.hide();
+                },
+                complete: () => {
+                    this.notification$.onNotification(
+                        'success',
+                        'User customer status update'
+                    );
+                    this.loader$.hide();
+                },
+            });
     }
 }
