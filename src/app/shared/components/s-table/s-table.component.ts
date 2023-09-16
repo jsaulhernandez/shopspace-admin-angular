@@ -15,6 +15,7 @@ export class STableComponent<T = unknown> {
     @Input() index: number = 0;
     @Input() total: number = 0;
     @Input() size: number = 0;
+    @Input() nzScrollX: number = 640;
     @Output() changePagination = new EventEmitter<number>();
 
     getValueByKey(data: any, key: string): any {
