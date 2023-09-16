@@ -1,10 +1,17 @@
-import { Component, OnInit, inject } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    TemplateRef,
+    ViewChild,
+    inject,
+} from '@angular/core';
 
 import { FaqModel } from 'src/app/data/models/Faq.model';
 
 import { LoaderService } from 'src/app/shared/services/loader.service';
 import { AdminApiService } from 'src/app/data/services/core/admin-api.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { ModalService } from 'src/app/shared/services/modal.service';
 
 import { CustomPagination } from 'src/app/data/api/CustomResponse';
 
@@ -23,6 +30,9 @@ import {
 })
 export class FaqComponent implements OnInit {
     api$ = inject(AdminApiService);
+
+    //templates
+    @ViewChild('templateFaq') templateFaq!: TemplateRef<any>;
 
     isLoading = this.loader$.loading$;
     faqs: FaqModel[] = [];
@@ -50,6 +60,15 @@ export class FaqComponent implements OnInit {
             onClickElement: (data, value) => this.onUpdateStatus(data, value),
         },
         {
+            title: 'Show answer',
+            element: 'button',
+            icon: 'eye',
+            onClickElement: (data) => {
+                this.pivote = data;
+                this.onCustomModal();
+            },
+        },
+        {
             title: 'Actions',
             element: 'actions',
             onClickElement: (data, _) => this.onAddFaq(data, false, 'update'),
@@ -59,7 +78,8 @@ export class FaqComponent implements OnInit {
 
     constructor(
         private loader$: LoaderService,
-        private notification$: NotificationService
+        private notification$: NotificationService,
+        private modal$: ModalService
     ) {}
 
     ngOnInit(): void {
@@ -230,6 +250,17 @@ export class FaqComponent implements OnInit {
                     },
                     complete: () => this.loader$.hide(),
                 });
+        }
+    }
+
+    onCustomModal(option: 'open' | 'close' = 'open') {
+        if (option === 'open') {
+            this.modal$.open(this.templateFaq, {
+                title: 'Answer for the question',
+            });
+        } else {
+            this.pivote = undefined;
+            this.modal$.close();
         }
     }
 }

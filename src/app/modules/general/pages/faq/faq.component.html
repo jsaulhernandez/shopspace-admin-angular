@@ -35,3 +35,7 @@
     [textConfirm]="userAction === 'delete' ? 'Sí, eliminar' : undefined"
     [loading]="isLoading | async"
 />
+
+<ng-template #templateFaq>
+    <div [innerHTML]="pivote?.answer ?? 'n/a'"></div>
+</ng-template>
