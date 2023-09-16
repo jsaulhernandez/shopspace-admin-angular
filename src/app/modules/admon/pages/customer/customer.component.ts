@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { format, parseISO } from 'date-fns';
 
-import { CustomerModel } from 'src/app/data/models/Customer.model';
+import { UserCustomerModel } from 'src/app/data/models/UserCustomer.model';
 
 import { AdminApiService } from 'src/app/data/services/core/admin-api.service';
 import { LoaderService } from 'src/app/shared/services/loader.service';
@@ -18,39 +19,66 @@ export class CustomerComponent implements OnInit {
     api$ = inject(AdminApiService);
 
     isLoading = this.loader$.loading$;
-    customers: CustomerModel[] = [];
+    customers: UserCustomerModel[] = [];
     pagination?: CustomPagination;
     search: string = '';
     currentPage: number = 0;
 
-    customHeader: CustomHeader<CustomerModel>[] = [
+    customHeader: CustomHeader<UserCustomerModel>[] = [
         {
             title: 'Name',
-            render: (data) => `${data.firstName} ${data.lastName}`,
+            render: (data) =>
+                `${data.customer.firstName} ${data.customer.lastName}`,
         },
         {
             title: 'Email',
-            dataIndex: 'email',
+            render: (data) => data.customer.email ?? 'n/a',
         },
         {
             title: 'Address',
-            dataIndex: 'address',
+            render: (data) => data.customer.address ?? 'n/a',
         },
         {
             title: 'City',
-            dataIndex: 'city',
+            render: (data) => data.customer.city ?? 'n/a',
         },
         {
             title: 'ZipCode',
-            dataIndex: 'zipCode',
+            render: (data) => data.customer.zipCode ?? 'n/a',
         },
         {
             title: 'Mobile',
-            dataIndex: 'mobile',
+            render: (data) => data.customer.mobile ?? 'n/a',
         },
         {
             title: 'Accepted terms',
-            render: (data) => (data.terms === 1 ? 'Yes' : 'No'),
+            render: (data) => (data.customer.terms === 1 ? 'Yes' : 'No'),
+        },
+        {
+            title: 'User name',
+            dataIndex: 'userName',
+        },
+        {
+            title: 'Status',
+            dataIndex: 'status',
+            element: 'switch',
+            onClickElement: (data, value) => {},
+        },
+        {
+            title: 'Created at',
+            render: (data) =>
+                format(parseISO(data.createdAt.toString()), 'yyyy/MM/dd') ??
+                'n/a',
+        },
+        {
+            title: 'Updated at',
+            render: (data) =>
+                format(parseISO(data.updatedAt.toString()), 'yyyy/MM/dd') ??
+                'n/a',
+        },
+        {
+            title: 'Verified email',
+            render: (data) => (data.verifiedEmail === 1 ? 'Yes' : 'No'),
         },
         {
             title: 'Show sells',
@@ -69,7 +97,7 @@ export class CustomerComponent implements OnInit {
     async getCustomers(search = '', page = '0', size = '10') {
         this.loader$.show();
         this.api$
-            .request<CustomerModel[]>({
+            .request<UserCustomerModel[]>({
                 method: 'GET',
                 path: 'customer/paged',
                 params: {
