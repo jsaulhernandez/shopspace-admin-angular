@@ -84,7 +84,7 @@ export class AddTokenInterceptor implements HttpInterceptor {
                         case 401:
                             return this.handle401Error(request, next);
                         default:
-                            return throwError(() => error);
+                            return throwError(() => error.error);
                     }
                 } else {
                     return throwError(() => error);
@@ -143,7 +143,7 @@ export class AddTokenInterceptor implements HttpInterceptor {
             return this.logoutUser();
         }
 
-        return throwError(() => error);
+        return throwError(() => error.error);
     }
 
     logoutUser() {
