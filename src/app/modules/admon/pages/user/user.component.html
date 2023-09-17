@@ -1,1 +1,18 @@
-<p>user works!</p>
+<div class="flex flex-column g-10">
+    <div class="users flex flex-wrap justify-between g-10 mb-1">
+        <app-s-input
+            placeHolder="Look for name or code..."
+            (onChangeInput)="onChangeValueInput($event)"
+        />
+    </div>
+
+    <app-s-table
+        [isLoading]="isLoading | async"
+        [header]="customHeader"
+        [data]="users"
+        [index]="pagination?.number ?? 0"
+        [total]="pagination?.totalElements ?? 0"
+        [size]="pagination?.size ?? 0"
+        (changePagination)="onChangePagination($event)"
+    />
+</div>
