@@ -107,7 +107,11 @@
             <ul nz-menu nzMode="horizontal" class="header-menu">
                 <li class="user-name">Devjs</li>
                 <li nz-menu-item (click)="onLogOut()">
-                    <span nz-icon nzType="logout" nzTheme="outline"></span>
+                    <span
+                        nz-icon
+                        [nzType]="(isLoading | async) ? 'loading' : 'logout'"
+                        nzTheme="outline"
+                    ></span>
                     Logout
                 </li>
             </ul>

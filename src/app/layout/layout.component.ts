@@ -9,6 +9,7 @@ import {
 import { filter, map } from 'rxjs';
 
 import { AuthService } from '../data/services/auth.service';
+import { LoaderService } from '../shared/services/loader.service';
 
 @Component({
     selector: 'app-layout',
@@ -20,7 +21,13 @@ export class LayoutComponent implements OnInit, OnDestroy {
     title: string = '';
     navigationSubscription: any;
 
-    constructor(protected auth: AuthService, private router: Router) {}
+    isLoading = this.loader$.loading$;
+
+    constructor(
+        protected auth: AuthService,
+        private router: Router,
+        private loader$: LoaderService
+    ) {}
     ngOnInit(): void {
         // this.navigationSubscription = this.getTitlePage();
     }
@@ -56,14 +63,19 @@ export class LayoutComponent implements OnInit, OnDestroy {
     }
 
     onLogOut() {
+        this.loader$.show();
         this.auth.logout().subscribe({
             next: (c) => {
                 this.auth.clearDataInSessionStorage();
             },
             error: (e) => {
                 console.error('[Error] ' + e);
+                this.loader$.hide();
             },
-            complete: () => this.router.navigate(['/auth/login']),
+            complete: () => {
+                this.loader$.hide();
+                this.router.navigate(['/auth/login']);
+            },
         });
     }
 }
