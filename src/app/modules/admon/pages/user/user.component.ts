@@ -95,7 +95,7 @@ export class UserComponent implements OnInit {
         data = {
             ...data,
             status: value ? 1 : 0,
-            password: '',
+            password: 'default',
         };
 
         this.api$
