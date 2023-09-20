@@ -85,12 +85,6 @@ export class ProductFormComponent implements OnInit, OnDestroy {
             dataIndex: 'stock',
         },
         {
-            title: 'Status',
-            dataIndex: 'status',
-            element: 'switch',
-            onClickElement: (data, value) => this.onUpdateStatus(data, value),
-        },
-        {
             title: 'Actions',
             element: 'actions',
             onClickElement: (data, _, index) =>
@@ -131,6 +125,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
                 this.data?.releaseDate ?? null,
                 [Validators.required],
             ],
+            status: [this.data?.status ?? 1, [Validators.required]],
             brand: this.fb.group({
                 id: [this.data?.brand.id ?? null, [Validators.required]],
             }),
@@ -154,7 +149,6 @@ export class ProductFormComponent implements OnInit, OnDestroy {
             image: [null, [Validators.required]],
             color: [null, [Validators.required]],
             stock: [null, [Validators.required]],
-            status: [null, [Validators.required]],
             productId: [null],
         });
 
@@ -328,18 +322,6 @@ export class ProductFormComponent implements OnInit, OnDestroy {
         this.auxView = data;
         this.position = index;
         this.onCustomModal('view', 'open', (this.action = 'update'));
-    }
-
-    onUpdateStatus(data: ViewProductModel, value: boolean) {
-        this.viewsProduct = this.viewsProduct.map((v) => {
-            if (v.color === data.color)
-                v = {
-                    ...v,
-                    status: value ? 1 : 0,
-                };
-
-            return v;
-        });
     }
 
     onRemoveView(data: ViewProductModel) {

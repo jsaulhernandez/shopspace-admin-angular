@@ -81,48 +81,39 @@
 
         <nz-spin [nzSpinning]="isLoading | async" nzTip="Updating status...">
             <div class="data-information__views">
-                <div class="flex flex-column g-10 justify-center p-2">
+                <div class="flex flex-wrap g-10 p-2">
                     <div
-                        class="flex g-10 justify-between"
+                        class="flex g-10 items-center"
                         *ngFor="let item of pivote?.viewProducts || []"
                     >
-                        <div class="flex g-10 items-center">
-                            <div
-                                class="data-information__views-image flex items-center justify-center"
-                            >
-                                {{ item.image }}
-                            </div>
-                            <div class="flex flex-column g-5">
-                                <div class="flex g-5 items-center">
-                                    <app-s-text
-                                        [text]="'Color:'"
-                                        fontWeight="600"
-                                    />
-                                    <div
-                                        class="data-information__views-color"
-                                        [ngStyle]="{
-                                            backgroundColor:
-                                                item.color || 'white'
-                                        }"
-                                    ></div>
-                                </div>
-                                <div class="flex g-5">
-                                    <app-s-text
-                                        [text]="'Stock:'"
-                                        fontWeight="600"
-                                    />
-                                    <app-s-text
-                                        [text]="item.stock.toString()"
-                                        fontWeight="400"
-                                    />
-                                </div>
-                            </div>
+                        <div
+                            class="data-information__views-image flex items-center justify-center"
+                        >
+                            {{ item.image }}
                         </div>
-                        <div class="flex items-center">
-                            <nz-switch
-                                [ngModel]="item.status === 1"
-                                (ngModelChange)="onUpdateStatus(item, $event)"
-                            />
+                        <div class="flex flex-column g-5">
+                            <div class="flex g-5 items-center">
+                                <app-s-text
+                                    [text]="'Color:'"
+                                    fontWeight="600"
+                                />
+                                <div
+                                    class="data-information__views-color"
+                                    [ngStyle]="{
+                                        backgroundColor: item.color || 'white'
+                                    }"
+                                ></div>
+                            </div>
+                            <div class="flex g-5">
+                                <app-s-text
+                                    [text]="'Stock:'"
+                                    fontWeight="600"
+                                />
+                                <app-s-text
+                                    [text]="item.stock.toString()"
+                                    fontWeight="400"
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>

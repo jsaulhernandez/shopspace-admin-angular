@@ -83,6 +83,12 @@ export class ProductComponent implements OnInit, AfterContentChecked {
             render: (data) => data.brand.name ?? 'n/a',
         },
         {
+            title: 'Status',
+            dataIndex: 'status',
+            element: 'switch',
+            onClickElement: (data, value) => this.onUpdateStatus(data, value),
+        },
+        {
             title: 'More information',
             element: 'button',
             icon: 'eye',
@@ -140,7 +146,7 @@ export class ProductComponent implements OnInit, AfterContentChecked {
             });
     }
 
-    onUpdateStatus(data: ViewProductModel, value: boolean) {
+    onUpdateStatus(data: ProductModel, value: boolean) {
         this.loader$.show();
 
         data = {
@@ -151,7 +157,7 @@ export class ProductComponent implements OnInit, AfterContentChecked {
         this.api$
             .request({
                 method: 'PUT',
-                path: `product/view/${data.id}`,
+                path: `product/${data.id}`,
                 data,
             })
             .subscribe({
@@ -168,7 +174,7 @@ export class ProductComponent implements OnInit, AfterContentChecked {
                 complete: () => {
                     this.notification$.onNotification(
                         'success',
-                        'View Product status update'
+                        'Product status update'
                     );
                     this.loader$.hide();
                 },

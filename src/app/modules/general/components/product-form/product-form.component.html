@@ -123,28 +123,47 @@
             </div>
         </div>
 
-        <div class="ss-column-50 pr-2">
-            <div formGroupName="typeClassification">
-                <nz-form-item>
-                    <nz-form-label nzRequired
-                        >Type classification</nz-form-label
-                    >
-                    <nz-form-control
-                        nzErrorTip="Please select type classification!"
-                    >
-                        <nz-select
-                            nzShowSearch
-                            nzAllowClear
-                            nzPlaceHolder="Select a type classification"
-                            formControlName="id"
-                            [nzLoading]="isLoading | async"
+        <div class="ss-row">
+            <div class="ss-column-50">
+                <div formGroupName="typeClassification">
+                    <nz-form-item>
+                        <nz-form-label nzRequired
+                            >Type classification</nz-form-label
                         >
-                            <nz-option
-                                *ngFor="let c of typesClassifications"
-                                [nzLabel]="c.name"
-                                [nzValue]="c.id"
-                            ></nz-option>
-                        </nz-select>
+                        <nz-form-control
+                            nzErrorTip="Please select type classification!"
+                        >
+                            <nz-select
+                                nzShowSearch
+                                nzAllowClear
+                                nzPlaceHolder="Select a type classification"
+                                formControlName="id"
+                                [nzLoading]="isLoading | async"
+                            >
+                                <nz-option
+                                    *ngFor="let c of typesClassifications"
+                                    [nzLabel]="c.name"
+                                    [nzValue]="c.id"
+                                ></nz-option>
+                            </nz-select>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+            </div>
+
+            <div class="ss-column-50">
+                <nz-form-item>
+                    <nz-form-label nzRequired>Status</nz-form-label>
+                    <nz-form-control nzErrorTip="Please input the status!">
+                        <nz-radio-group
+                            formControlName="status"
+                            nzButtonStyle="solid"
+                        >
+                            <label nz-radio-button [nzValue]="1">ACTIVE</label>
+                            <label nz-radio-button [nzValue]="0"
+                                >INACTIVE</label
+                            >
+                        </nz-radio-group>
                     </nz-form-control>
                 </nz-form-item>
             </div>
@@ -328,27 +347,6 @@
                                     formControlName="stock"
                                     [mask]="onlyNumbers"
                                 />
-                            </nz-form-control>
-                        </nz-form-item>
-                    </div>
-
-                    <div class="ss-column-50">
-                        <nz-form-item>
-                            <nz-form-label nzRequired>Status</nz-form-label>
-                            <nz-form-control
-                                nzErrorTip="Please input the status!"
-                            >
-                                <nz-radio-group
-                                    formControlName="status"
-                                    nzButtonStyle="solid"
-                                >
-                                    <label nz-radio-button [nzValue]="1"
-                                        >ACTIVE</label
-                                    >
-                                    <label nz-radio-button [nzValue]="0"
-                                        >INACTIVE</label
-                                    >
-                                </nz-radio-group>
                             </nz-form-control>
                         </nz-form-item>
                     </div>

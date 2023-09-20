@@ -12,6 +12,7 @@ export interface ProductModel {
     model: string;
     modelNumber: string;
     releaseDate: Date;
+    status: number;
     viewProducts: ViewProductModel[];
     productDetails: ProductDetailModel[];
     typeClassification: TypeClassificationModel;
