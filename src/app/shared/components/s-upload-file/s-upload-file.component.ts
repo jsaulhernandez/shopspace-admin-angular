@@ -5,7 +5,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NzUploadFile, NzUploadXHRArgs } from 'ng-zorro-antd/upload';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
-import { FileUtils } from '../../../core/utils/file.utils';
+import { FileUtils } from 'src/app/core/utils/file.utils';
 
 @Component({
     selector: 'app-s-upload-file',
