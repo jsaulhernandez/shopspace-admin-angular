@@ -18,6 +18,7 @@ import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 
 import { QuillModule } from 'ngx-quill';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 import * as shared from './components';
 import * as directives from './directives/index';
@@ -41,6 +42,7 @@ import * as directives from './directives/index';
         NzSpinModule,
         NzUploadModule,
         NzMessageModule,
+        NgxSkeletonLoaderModule,
         QuillModule.forRoot(),
     ],
     exports: [

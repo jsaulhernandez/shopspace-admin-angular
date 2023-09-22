@@ -74,6 +74,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
         {
             title: 'Image',
             dataIndex: 'image',
+            element: 'image',
         },
         {
             title: 'Color',

@@ -139,6 +139,16 @@
                             />
                         </span>
                     </span>
+
+                    <!-- image element -->
+                    <span *ngIf="c.element === 'image' && c.dataIndex">
+                        <app-s-preview-image
+                            width="75px"
+                            heightSkeleton="75px"
+                            [path]="getValueByKey(data, c.dataIndex)"
+                        />
+                    </span>
+
                     <!-- select element -->
                     <span
                         *ngIf="

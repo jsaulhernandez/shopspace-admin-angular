@@ -23,7 +23,8 @@ export declare type TypeElementTable =
     | 'select'
     | 'actions'
     | 'circle-color'
-    | 'button';
+    | 'button'
+    | 'image';
 export type ModalActionsType = 'success' | 'error' | 'info' | 'confirm';
 export type UserActions = 'get' | 'save' | 'update' | 'delete';
 export type ShowComponent = 'Form' | 'Table';

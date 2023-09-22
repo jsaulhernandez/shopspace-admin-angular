@@ -1,1 +1,23 @@
-<p>s-preview-image works!</p>
+<div class="preview flex justify-center items-center">
+    <img
+        [src]="dataFile"
+        alt="preview"
+        [ngStyle]="{
+            width: width,
+            height: height,
+            maxHeight: maxHeight
+        }"
+        *ngIf="!isLoading"
+    />
+
+    <ngx-skeleton-loader
+        [theme]="{
+            width: width,
+            height: heightSkeleton,
+            'margin-bottom': 0
+        }"
+        animation="pulse"
+        *ngIf="isLoading"
+    >
+    </ngx-skeleton-loader>
+</div>
