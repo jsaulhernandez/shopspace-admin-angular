@@ -316,16 +316,6 @@
                 <div class="ss-row">
                     <div class="ss-column-50">
                         <nz-form-item>
-                            <nz-form-label nzRequired>Image</nz-form-label>
-                            <nz-form-control
-                                nzErrorTip="Please input the image!"
-                            >
-                                <app-s-input formControlName="image" />
-                            </nz-form-control>
-                        </nz-form-item>
-                    </div>
-                    <div class="ss-column-50">
-                        <nz-form-item>
                             <nz-form-label nzRequired>Color</nz-form-label>
                             <nz-form-control
                                 nzErrorTip="Please input the color!"
@@ -334,9 +324,7 @@
                             </nz-form-control>
                         </nz-form-item>
                     </div>
-                </div>
 
-                <div class="ss-row">
                     <div class="ss-column-50">
                         <nz-form-item>
                             <nz-form-label nzRequired>Stock</nz-form-label>
@@ -350,6 +338,15 @@
                             </nz-form-control>
                         </nz-form-item>
                     </div>
+                </div>
+
+                <div class="ss-column">
+                    <nz-form-item>
+                        <nz-form-label nzRequired>Image</nz-form-label>
+                        <nz-form-control nzErrorTip="Please add image!">
+                            <app-s-upload-file formControlName="image" />
+                        </nz-form-control>
+                    </nz-form-item>
                 </div>
 
                 <div class="flex justify-center g-20">

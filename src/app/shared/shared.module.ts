@@ -14,6 +14,8 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { NzMessageModule } from 'ng-zorro-antd/message';
 
 import { QuillModule } from 'ngx-quill';
 
@@ -37,6 +39,8 @@ import * as directives from './directives/index';
         NzDatePickerModule,
         NzTimePickerModule,
         NzSpinModule,
+        NzUploadModule,
+        NzMessageModule,
         QuillModule.forRoot(),
     ],
     exports: [
@@ -47,6 +51,7 @@ import * as directives from './directives/index';
         NzIconModule,
         NzSwitchModule,
         NzSpinModule,
+        NzMessageModule,
     ],
 })
 export class SharedModule {}

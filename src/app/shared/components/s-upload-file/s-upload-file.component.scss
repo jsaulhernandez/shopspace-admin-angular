@@ -1,0 +1,25 @@
+.upload-file {
+    width: 104px;
+
+    &__actions {
+        span {
+            color: var(--senary-text-color);
+
+            &:hover {
+                transform: scale(1.2);
+            }
+        }
+    }
+}
+
+::ng-deep .ant-upload-picture-card-wrapper {
+    width: auto;
+}
+
+::ng-deep .ant-upload.ant-upload-select-picture-card {
+    min-height: 104px;
+    height: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}

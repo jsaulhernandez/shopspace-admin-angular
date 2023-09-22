@@ -1,1 +1,34 @@
-<p>s-upload-file works!</p>
+<div class="upload-file flex flex-column g-5 relative">
+    <nz-upload
+        nzName="avatar"
+        nzListType="picture-card"
+        [nzShowUploadList]="false"
+        [nzBeforeUpload]="onBeforeUpload"
+        (nzChange)="onHandleChange($event)"
+        [nzCustomRequest]="onCustomRequest"
+        [nzDisabled]="disabled"
+    >
+        <ng-container *ngIf="!dataFile">
+            <span
+                class="upload-icon"
+                nz-icon
+                [nzType]="loading ? 'loading' : 'plus'"
+            ></span>
+            <div class="ant-upload-text">Upload</div>
+        </ng-container>
+        <img *ngIf="dataFile" [src]="dataFile" class="wp-100" />
+    </nz-upload>
+
+    <div
+        class="upload-file__actions flex justify-center items-center g-20"
+        *ngIf="dataFile"
+    >
+        <span
+            class="pointer"
+            nz-icon
+            nzType="delete"
+            nzTheme="outline"
+            (click)="onRemoveFile()"
+        ></span>
+    </div>
+</div>
