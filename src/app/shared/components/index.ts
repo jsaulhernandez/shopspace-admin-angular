@@ -10,6 +10,7 @@ import { SInputComponent } from './s-input/s-input.component';
 import { SModalActionsComponent } from './s-modal-actions/s-modal-actions.component';
 import { STableComponent } from './s-table/s-table.component';
 import { STextComponent } from './s-text/s-text.component';
+import { SUploadFileComponent } from './s-upload-file/s-upload-file.component';
 import { SpinComponent } from './spin/spin.component';
 
 export const SHARED_COMPONENTS = [
@@ -26,4 +27,5 @@ export const SHARED_COMPONENTS = [
     SColorPickerComponent,
     SInputCouponCodeComponent,
     SEditorComponent,
+    SUploadFileComponent,
 ];
