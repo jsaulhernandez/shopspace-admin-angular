@@ -20,6 +20,21 @@ export class AdminApiService {
 
     constructor(private httpClient: HttpClient) {}
 
+    downloadFiles(
+        path: string,
+        params: Record<string, string>
+    ): Observable<Blob> {
+        return this.httpClient
+            .request('GET', `${this.URL}/${path}`, {
+                responseType: 'blob',
+                params: new HttpParams({ fromObject: params }),
+            })
+            .pipe(
+                map((response) => new Blob([response])),
+                catchError(this.handleError)
+            );
+    }
+
     request<T = unknown>(req: OptionRequest<T>): Observable<CustomResponse<T>> {
         const httpOptions = {
             body: req.data,
