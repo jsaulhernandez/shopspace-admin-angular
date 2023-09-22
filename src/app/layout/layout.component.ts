@@ -21,13 +21,9 @@ export class LayoutComponent implements OnInit, OnDestroy {
     title: string = '';
     navigationSubscription: any;
 
-    isLoading = this.loader$.loading$;
+    isLoading = false;
 
-    constructor(
-        protected auth: AuthService,
-        private router: Router,
-        private loader$: LoaderService
-    ) {}
+    constructor(protected auth: AuthService, private router: Router) {}
     ngOnInit(): void {
         // this.navigationSubscription = this.getTitlePage();
     }
@@ -63,17 +59,17 @@ export class LayoutComponent implements OnInit, OnDestroy {
     }
 
     onLogOut() {
-        this.loader$.show();
+        this.isLoading = true;
         this.auth.logout().subscribe({
             next: (c) => {
                 this.auth.clearDataInSessionStorage();
             },
             error: (e) => {
                 console.error('[Error] ' + e);
-                this.loader$.hide();
+                this.isLoading = false;
             },
             complete: () => {
-                this.loader$.hide();
+                this.isLoading = false;
                 this.router.navigate(['/auth/login']);
             },
         });

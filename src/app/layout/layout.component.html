@@ -109,7 +109,7 @@
                 <li nz-menu-item (click)="onLogOut()">
                     <span
                         nz-icon
-                        [nzType]="(isLoading | async) ? 'loading' : 'logout'"
+                        [nzType]="isLoading ? 'loading' : 'logout'"
                         nzTheme="outline"
                     ></span>
                     Logout
