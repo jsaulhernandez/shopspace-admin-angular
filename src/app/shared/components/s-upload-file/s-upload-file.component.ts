@@ -5,6 +5,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NzUploadFile, NzUploadXHRArgs } from 'ng-zorro-antd/upload';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
+import { AdminApiService } from 'src/app/data/services/core/admin-api.service';
+
 import { FileUtils } from 'src/app/core/utils/file.utils';
 
 @Component({
@@ -26,8 +28,7 @@ export class SUploadFileComponent implements ControlValueAccessor {
     disabled = false;
     dataFile?: string | null;
 
-    constructor(private msg: NzMessageService) {}
-
+    constructor(private msg: NzMessageService, private api$: AdminApiService) {}
     //omit external request
     onCustomRequest(item: NzUploadXHRArgs) {
         return new Observable((subscriber) => {
@@ -103,7 +104,11 @@ export class SUploadFileComponent implements ControlValueAccessor {
     onTouch: any = () => {};
 
     writeValue(obj: any): void {
-        this.dataFile = obj;
+        if (!FileUtils.isBase64(obj)) {
+            this.onDownload(obj);
+        } else {
+            this.dataFile = obj;
+        }
     }
 
     registerOnChange(fn: any): void {
@@ -116,5 +121,26 @@ export class SUploadFileComponent implements ControlValueAccessor {
 
     setDisabledState?(isDisabled: boolean): void {
         this.disabled = isDisabled;
+    }
+
+    onDownload(path: string) {
+        this.loading = true;
+
+        this.api$
+            .downloadFiles('file/download', {
+                path: encodeURIComponent(path ?? ''),
+            })
+            .subscribe({
+                next: (file) => {
+                    this.dataFile = URL.createObjectURL(file);
+                    this.onChange(path);
+                },
+                error: (e) => {
+                    this.loading = false;
+                    this.onChange((this.dataFile = null));
+                    console.error('Error occurred when getting image');
+                },
+                complete: () => (this.loading = false),
+            });
     }
 }
