@@ -105,7 +105,7 @@ export class SUploadFileComponent implements ControlValueAccessor {
 
     writeValue(obj: any): void {
         if (!FileUtils.isBase64(obj)) {
-            this.onDownload(obj);
+            if (obj && obj.trim() !== '') this.onDownload(obj);
         } else {
             this.dataFile = obj;
         }
