@@ -30,6 +30,7 @@ import { FormUtils } from 'src/app/core/utils/form.util';
 import { CustomHeader } from 'src/app/core/utils/components.util';
 import { NumberUtils } from 'src/app/core/utils/number.utils';
 import { OnlyNumbersRegEx } from 'src/app/core/utils/RegEx.utils';
+import { FileUtils } from 'src/app/core/utils/file.utils';
 
 import { UserActions } from 'src/app/data/constants/constants';
 
@@ -401,6 +402,12 @@ export class ProductFormComponent implements OnInit, OnDestroy {
                 );
                 return;
             }
+
+            //validation to images
+            this.viewsProduct = this.viewsProduct.map((p) => {
+                if (!FileUtils.isBase64(p.image)) p.image = 'default';
+                return p;
+            });
 
             const main: ProductModel = {
                 ...this.validateForm.getRawValue(),
