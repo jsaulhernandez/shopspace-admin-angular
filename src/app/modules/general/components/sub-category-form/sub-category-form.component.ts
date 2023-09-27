@@ -70,7 +70,7 @@ export class SubCategoryFormComponent implements OnInit, OnDestroy {
     getCategories() {
         this.loader$.show();
         this.subscriber = this.categoryService$
-            .request<SubcategoryModel[]>({
+            .request<CategoryModel[]>({
                 method: 'GET',
                 path: 'category/active',
             })
