@@ -27,6 +27,7 @@ export class SPreviewImageComponent implements OnInit {
     ngOnInit(): void {
         if (!FileUtils.isBase64(this.path)) {
             if (this.path && this.path.trim() !== '') this.onDownload();
+            else this.dataFile = '/assets/default/default.webp';
         } else {
             this.dataFile = this.path;
         }
