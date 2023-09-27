@@ -31,12 +31,23 @@
                             formControlName="status"
                             nzButtonStyle="solid"
                         >
-                            <label nz-radio-button nzValue="1">ACTIVE</label>
-                            <label nz-radio-button nzValue="0">INACTIVE</label>
+                            <label nz-radio-button [nzValue]="1">ACTIVE</label>
+                            <label nz-radio-button [nzValue]="0"
+                                >INACTIVE</label
+                            >
                         </nz-radio-group>
                     </nz-form-control>
                 </nz-form-item>
             </div>
+        </div>
+
+        <div class="ss-column">
+            <nz-form-item>
+                <nz-form-label nzRequired>Image</nz-form-label>
+                <nz-form-control nzErrorTip="Please add image!">
+                    <app-s-upload-file formControlName="image" />
+                </nz-form-control>
+            </nz-form-item>
         </div>
 
         <div class="flex justify-center g-20">

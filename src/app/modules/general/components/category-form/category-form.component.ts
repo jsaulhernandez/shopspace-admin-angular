@@ -25,16 +25,11 @@ export class CategoryFormComponent implements OnInit {
 
     ngOnInit(): void {
         this.validateForm = this.fb.group({
-            id: [null],
-            name: [null, [Validators.required]],
-            status: ['1', [Validators.required]],
+            id: [this.categoryData?.id ?? null],
+            name: [this.categoryData?.name ?? null, [Validators.required]],
+            image: [this.categoryData?.image ?? null, [Validators.required]],
+            status: [this.categoryData?.status ?? 1, [Validators.required]],
         });
-
-        if (this.categoryData)
-            this.validateForm.patchValue({
-                ...this.categoryData,
-                status: this.categoryData?.status.toString() ?? '1',
-            });
     }
 
     submitForm(): void {

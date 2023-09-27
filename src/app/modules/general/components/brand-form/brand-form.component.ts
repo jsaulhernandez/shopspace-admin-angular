@@ -25,16 +25,11 @@ export class BrandFormComponent implements OnInit {
 
     ngOnInit(): void {
         this.validateForm = this.fb.group({
-            id: [null],
-            name: [null, [Validators.required]],
-            status: ['1', [Validators.required]],
+            id: [this.data?.id ?? null],
+            name: [this.data?.name ?? null, [Validators.required]],
+            image: [this.data?.image ?? null, [Validators.required]],
+            status: [this.data?.status ?? 1, [Validators.required]],
         });
-
-        if (this.data)
-            this.validateForm.patchValue({
-                ...this.data,
-                status: this.data?.status.toString() ?? '1',
-            });
     }
 
     submitForm(): void {

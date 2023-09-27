@@ -38,6 +38,11 @@ export class BrandComponent implements OnInit {
 
     customHeader: CustomHeader<BrandModel>[] = [
         {
+            title: 'Image',
+            dataIndex: 'image',
+            element: 'image',
+        },
+        {
             title: 'Name',
             dataIndex: 'name',
         },

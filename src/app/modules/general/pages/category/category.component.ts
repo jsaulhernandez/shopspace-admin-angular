@@ -38,6 +38,11 @@ export class CategoryComponent implements OnInit {
 
     customHeader: CustomHeader<CategoryModel>[] = [
         {
+            title: 'Image',
+            dataIndex: 'image',
+            element: 'image',
+        },
+        {
             title: 'Name',
             dataIndex: 'name',
         },
