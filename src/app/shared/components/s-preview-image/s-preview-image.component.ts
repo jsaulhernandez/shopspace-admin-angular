@@ -20,7 +20,6 @@ export class SPreviewImageComponent implements OnInit {
 
     isLoading: boolean = false;
     dataFile?: string | null;
-    URL: string = environment.apiUrl;
 
     constructor(private api$: AdminApiService) {}
 
